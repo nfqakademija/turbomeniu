@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '../css/app.scss';
+import Header from './Header.js';
 
 class App extends React.Component {
     constructor() {
@@ -11,12 +11,10 @@ class App extends React.Component {
         };
     }
 
-
     render() {
-
-
-        console.log('hello world');
-        return <div className="test"> Hello world </div>
+        return (<div>
+        <Header />
+    </div>)
     }
 }
 
