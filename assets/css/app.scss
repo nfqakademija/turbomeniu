@@ -1,9 +1,7 @@
-.test {
-  color: red;
-  margin: 8px;
+* {
+  box-sizing: border-box;
 }
 
-div {
-  color: blue;
+.container-fluid {
+  padding: 0px;
 }
-
