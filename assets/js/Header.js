@@ -11,10 +11,9 @@ export default class Header extends Component {
 
     render () {
         return (<header className="container-fluid header">
-                        <nav className="nav navbar row">
+                        <nav className="nav navbar">
                             <div className="col order-first">
                                 <a className="nav-link active navbar-brand" href="#"><i className="fas fa-utensils fa-2x"></i></a>
-
                             </div>
                             <div className="col order-last">
                                 <div>
@@ -22,10 +21,7 @@ export default class Header extends Component {
                                     <a className="register" href="#">Register</a>
                                 </div>
                             </div>
-
-
                         </nav>
-
         </header>)
     }
 }
