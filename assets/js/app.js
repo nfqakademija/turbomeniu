@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Header.js';
 import SearchFilter from './SearchFilter.js';
+import Listings from './Listings.js'
 
 class App extends React.Component {
     constructor() {
@@ -16,6 +17,15 @@ class App extends React.Component {
         return (<div>
         <Header />
             <SearchFilter/>
+            <div className="container">
+
+                <div className="col-lg-6">
+                    <Listings />
+                </div>
+
+
+            </div>
+
     </div>)
     }
 }
