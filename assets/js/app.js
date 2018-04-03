@@ -16,24 +16,26 @@ class App extends React.Component {
 
     render() {
         return (<div>
-        <Header />
-            <SearchFilter/>
+
+
+                             <Header/>
+                            <SearchFilter/>
+
             <div className="container">
-<div className="row">
-    <div className="col-xl-6 col-lg-6 col-md-6 col-xs-6">
-        <Listings />
-    </div>
+                <div className="row">
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-xs-6">
+                        <Listings/>
+                    </div>
 
-    <div className="col-xl-6 col-lg-6 col-md-6 col-xs-6">
-        <Map />
-    </div>
-</div>
-
+                    <div className="col-xl-6 col-lg-6 col-md-6 col-xs-6">
+                      <Map />
+                    </div>
+                </div>
 
 
             </div>
 
-    </div>)
+        </div>)
     }
 }
 
