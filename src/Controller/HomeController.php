@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
         $data = new RestaurantData();
         $data->getRestaurantList();
-        return $this->render('home/blank.html.twig', [
+        return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
