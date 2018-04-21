@@ -12,10 +12,10 @@ class Map extends Component {
 
         };
 
-        // this.center = {
-        //         lat: 54.89,
-        //         lng: 23.90
-        //     };
+        this.center = {
+                lat: this.props.coords.latitude,
+                lng: this.props.coords.longitude
+            };
         this.zoom = 10;
 
         this.props = {
