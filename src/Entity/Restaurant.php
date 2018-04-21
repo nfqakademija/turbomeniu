@@ -17,49 +17,41 @@ class Restaurant
     private $id;
 
     /**
-     * @ORM\fbId()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="fbId")
      */
     private $fbId;
 
     /**
-     * @ORM\name()
      * @ORM\Column(type="string", length=50)
      */
     private $name;
 
     /**
-     * @ORM\logo()
      * @ORM\Column(type="string", length=2083)
      */
     private $logo;
 
     /**
-     * @ORM\contactPhone()
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, name="contactPhone")
      */
     private $contactPhone;
 
     /**
-     * @ORM\fbLink()
-     * @ORM\Column(type="string", length=2083)
+     * @ORM\Column(type="string", length=2083, name="fbLink")
      */
     private $fbLink;
 
     /**
-     * @ORM\address()
      * @ORM\Column(type="string", length=100)
      */
     private $address;
 
     /**
-     * @ORM\latitude()
      * @ORM\Column(type="decimal", precision=10, scale=8)
      */
     private $latitude;
 
     /**
-     * @ORM\longitude()
      * @ORM\Column(type="decimal", precision=11, scale=8)
      */
     private $longitude;
