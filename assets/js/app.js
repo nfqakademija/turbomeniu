@@ -4,7 +4,6 @@ import Header from './Header.js';
 import Listings from './Listings.js';
 import Map from './Map.js';
 import Togglebuton from './Togglebutton.js';
-import {geolocated} from 'react-geolocated';
 import listingsData from './sampleData/listingsData.json';
 
 class App extends React.Component {
@@ -22,9 +21,10 @@ class App extends React.Component {
         return (<div>
             <Header />
             <div className="container-fluid body">
-                <div className="ro">
+                <div className="row">
                     <Togglebuton />
                 </div>
+
 <div className="row">
                     <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <Listings listingsData={this.state.listingsData}/>
