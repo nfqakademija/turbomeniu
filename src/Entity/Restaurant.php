@@ -220,5 +220,4 @@ class Restaurant
     {
         return $this->updated_at;
     }
-
 }
