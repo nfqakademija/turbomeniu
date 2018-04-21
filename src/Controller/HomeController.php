@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use App\FacebookApi\RestaurantData;
 
 class HomeController extends Controller
 {
@@ -12,7 +13,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return $this->render('home/index.html.twig', [
+        $data = new RestaurantData();
+        $data->getRestaurantList();
+        return $this->render('home/blank.html.twig', [
             'controller_name' => 'HomeController',
         ]);
     }
