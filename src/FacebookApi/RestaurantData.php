@@ -27,10 +27,11 @@ class RestaurantData extends Controller
             'default_graph_version' => 'v2.12',
         ]);
 
-        $fb->setDefaultAccessToken('EAAOEVyj4HugBAJf8yRvhlZCQDHL5q68D3mrdEZB46oKaG6OqVzpWZA0zXFZBm2s1uGLPAiIUEWgoGvpK4jh1dr4mZBBrG1h9e6WuLOG9ZCJeQ3xQW3alQcluiSZB6UczZB6R6aCZBx7ngXYEXBDf4sftFclzEQfLC4nHYCQfri9NmJcoJgs3N2XpZA6oMFDU23wNMZD');
+//        TODO Solve issue - Graph returned an error: Bad signature.
+        $fb->setDefaultAccessToken('');
 
         try {
-            $query = $fb->request('GET', 'search?q=restaurant&type=place&center=54.872996, 23.903980&distance=2000');
+            $request = $fb->get('GET', 'search?q=restaurant&type=place&center=54.872996, 23.903980&distance=2000', $fb->getDefaultAccessToken());
         } catch (FacebookResponseException $e) {
             // When Graph returns an error
             echo 'Graph returned an error: ' . $e->getMessage();
@@ -40,10 +41,12 @@ class RestaurantData extends Controller
             echo 'Facebook SDK returned an error: ' . $e->getMessage();
             exit;
         }
-        var_dump($query);
+        $list = $request->getRequest();
+        var_dump($list);
     }
 
-    public function saveRestaurantList($query)
+//    TODO Finish saveRestaurantList method.
+    public function saveRestaurantList($list)
     {
         $restaurant = new Restaurant();
         $entityManager = $this->getDoctrine()->getManager();
