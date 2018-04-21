@@ -1,0 +1,33 @@
+.listing {
+  margin-bottom: 20px;
+}
+
+.listings{
+  padding-left: 20px;
+}
+
+.listingImg{
+  width: 100px;
+  height: 100px;
+
+  img{
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.restName, .restAddress, .foodType, .menuTime, .dayMenuHeader {
+  padding-bottom: 10px;
+}
+
+.extra {
+  font-size: 0.7rem;
+
+  ul{
+    padding-left: 0px;
+  }
+  li {
+    list-style-type: none;
+  }
+}
+

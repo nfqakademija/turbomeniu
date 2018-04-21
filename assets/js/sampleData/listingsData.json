@@ -1,0 +1,414 @@
+[    {
+  "restaurant_id": 1,
+  "restaurant_type": "Kinų virtuvė",
+  "food_type": "Mėsa",
+  "daymeal_price": "$282.77",
+  "logo": "https://picsum.photos/200/?random",
+  "menu_date": "Thu Jun 22 2000 04:17:53 GMT+0200 (MSK)",
+  "restaurant_name": "Atgen",
+  "menu_text": "Officia minim fugiat commodo quis reprehenderit enim occaecat elit adipisicing enim. Commodo in culpa proident sint veniam laboris esse qui qui cillum ut. Nulla culpa in duis ad laborum eiusmod velit irure magna eiusmod duis. Labore excepteur veniam velit tempor incididunt eu cillum id elit sit ipsum pariatur. Labore occaecat veniam incididunt nisi culpa ea proident excepteur duis ex labore sunt.",
+  "email": "jacklynswanson@atgen.com",
+  "facebook_link": "facebook.com/asasd/adsadasdad",
+  "phone": "+370 (981) 543-2438",
+  "address": "968 Wortman Avenue, Ladera, Arkansas, 693, Zambia",
+  "coordinates": {
+    "lat": -47.681208,
+    "lng": -29.357818
+  }
+},
+  {
+    "restaurant_id": 2,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Žuvis",
+    "daymeal_price": "$64.88",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Thu May 28 1981 10:40:27 GMT+0300 (EEST)",
+    "restaurant_name": "Eclipsent",
+    "menu_text": "Irure ullamco ullamco incididunt sunt sint. Nulla aliquip cillum non veniam esse enim et. Nisi deserunt dolor eu fugiat Lorem ex culpa adipisicing. Exercitation commodo ad eiusmod incididunt velit duis quis fugiat amet. Et consectetur aliqua exercitation nisi.",
+    "email": "jacklynswanson@eclipsent.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (957) 504-2288",
+    "address": "861 Knight Court, Rowe, Nebraska, 3217, Laos",
+    "coordinates": {
+      "lat": -68.750269,
+      "lng": 55.324013
+    }
+  },
+  {
+    "restaurant_id": 3,
+    "restaurant_type": "Kita",
+    "food_type": "Vegan",
+    "daymeal_price": "$229.72",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sat Sep 11 1971 12:25:32 GMT+0200 (MSK)",
+    "restaurant_name": "Zilphur",
+    "menu_text": "Magna consequat ad ullamco reprehenderit nostrud consequat aute dolor sunt tempor. Commodo minim commodo voluptate elit. Ex ad nulla et consectetur eiusmod ut elit in ex cillum quis aliqua aliqua. Ea adipisicing proident excepteur consequat eiusmod ut esse enim ipsum voluptate sunt ea cillum enim. Dolore nostrud fugiat eiusmod qui occaecat reprehenderit pariatur magna.",
+    "email": "jacklynswanson@zilphur.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (935) 415-2937",
+    "address": "737 Madoc Avenue, Buxton, Tennessee, 7658, Angola",
+    "coordinates": {
+      "lat": 12.205778,
+      "lng": -46.70805
+    }
+  },
+  {
+    "restaurant_id": 4,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$127.32",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Wed Jan 10 2001 19:46:01 GMT+0200 (MSK)",
+    "restaurant_name": "Zentury",
+    "menu_text": "Officia laboris culpa ullamco consequat sit nisi commodo. Dolore enim voluptate excepteur velit consectetur fugiat culpa voluptate enim commodo irure ex. Incididunt nulla ea id ipsum occaecat in tempor labore sit non elit. Id minim ex voluptate aliquip id esse sunt qui voluptate et. Cupidatat aute consequat irure ad cupidatat aute laboris aute eiusmod ullamco ipsum deserunt consequat.",
+    "email": "jacklynswanson@zentury.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (810) 410-2652",
+    "address": "955 Beverley Road, Longoria, Oklahoma, 328, Australia",
+    "coordinates": {
+      "lat": -72.034521,
+      "lng": 85.160663
+    }
+  },
+  {
+    "restaurant_id": 5,
+    "restaurant_type": "Lietuviška virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$32.46",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Mon Feb 10 1986 20:29:40 GMT+0200 (MSK)",
+    "restaurant_name": "Opticom",
+    "menu_text": "Dolore culpa esse laboris aliqua consequat et officia sunt occaecat amet laborum eu duis nulla. Aliquip nulla occaecat nulla dolore proident ut pariatur laborum commodo et labore quis laborum. Ipsum quis fugiat fugiat fugiat aute dolore qui aliquip mollit esse sint amet elit nostrud. Qui Lorem quis proident nisi laborum aliquip eiusmod nulla dolore Lorem minim veniam. Aliqua ullamco culpa deserunt occaecat enim nostrud esse nostrud do quis qui tempor in veniam.",
+    "email": "jacklynswanson@opticom.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (998) 567-2552",
+    "address": "747 Reed Street, Williamson, Colorado, 5918, Falkland Islands (Malvinas)",
+    "coordinates": {
+      "lat": -6.579693,
+      "lng": -10.396443
+    }
+  },
+  {
+    "restaurant_id": 6,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$158.62",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Thu Mar 13 1997 17:33:02 GMT+0200 (MSK)",
+    "restaurant_name": "Quailcom",
+    "menu_text": "Sunt eiusmod exercitation enim in id dolore ea excepteur irure magna Lorem exercitation. Incididunt adipisicing non consequat do cillum velit velit proident. Ipsum incididunt occaecat nulla anim nulla reprehenderit eu dolore laborum velit occaecat eiusmod officia. Proident consequat anim minim adipisicing. Incididunt elit irure deserunt officia consectetur incididunt do.",
+    "email": "jacklynswanson@quailcom.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (985) 467-2640",
+    "address": "319 Schaefer Street, Dexter, Pennsylvania, 175, Lithuania",
+    "coordinates": {
+      "lat": -5.796486,
+      "lng": -52.297411
+    }
+  },
+  {
+    "restaurant_id": 7,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$76.86",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Tue Mar 26 2002 22:22:41 GMT+0200 (MSK)",
+    "restaurant_name": "Netplax",
+    "menu_text": "Aute commodo cillum non quis mollit tempor irure. Nisi in proident qui magna consectetur. Eu mollit aute dolore consectetur aliqua fugiat dolore eu adipisicing incididunt velit. Nulla ea duis ipsum laborum excepteur aliqua mollit. Voluptate dolor adipisicing occaecat nulla laborum consectetur excepteur aliquip eiusmod commodo labore.",
+    "email": "jacklynswanson@netplax.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (867) 498-3491",
+    "address": "489 Halleck Street, Sexton, Ohio, 3458, Bouvet Island",
+    "coordinates": {
+      "lat": 44.223634,
+      "lng": -160.714689
+    }
+  },
+  {
+    "restaurant_id": 8,
+    "restaurant_type": "Kinų virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$197.51",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Wed Apr 25 2001 20:11:20 GMT+0200 (MSK)",
+    "restaurant_name": "Ovolo",
+    "menu_text": "Tempor eiusmod consequat velit nostrud ullamco irure minim et anim. Tempor labore sit proident qui irure eu duis do laborum et officia eiusmod culpa. Sunt nisi aliquip exercitation enim veniam labore veniam irure veniam deserunt. Nostrud commodo deserunt amet Lorem. Enim in sint eiusmod magna culpa cupidatat ullamco eiusmod magna tempor.",
+    "email": "jacklynswanson@ovolo.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (969) 401-2273",
+    "address": "997 Jerome Avenue, Brooktrails, Rhode Island, 9098, Oman",
+    "coordinates": {
+      "lat": 38.776509,
+      "lng": -47.423883
+    }
+  },
+  {
+    "restaurant_id": 9,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Mėsa",
+    "daymeal_price": "$190.37",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sun Mar 09 2003 18:02:22 GMT+0200 (MSK)",
+    "restaurant_name": "Zappix",
+    "menu_text": "Pariatur cupidatat Lorem ad dolore. Deserunt est commodo sit qui quis sit quis minim deserunt magna adipisicing voluptate pariatur. Consequat veniam mollit consequat consectetur cupidatat id officia pariatur. Labore sit tempor enim ipsum incididunt duis occaecat et in adipisicing. Exercitation consectetur laborum magna veniam ut in duis.",
+    "email": "jacklynswanson@zappix.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (944) 427-3002",
+    "address": "860 Brightwater Court, Ebro, Delaware, 5418, Ukraine",
+    "coordinates": {
+      "lat": -79.321596,
+      "lng": 22.241175
+    }
+  },
+  {
+    "restaurant_id": 10,
+    "restaurant_type": "Lietuviška virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$38.49",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Wed Oct 14 2009 12:51:26 GMT+0300 (EEST)",
+    "restaurant_name": "Ezentia",
+    "menu_text": "Do eiusmod nostrud in duis eiusmod eu adipisicing elit officia adipisicing officia qui. Minim fugiat anim dolore est veniam adipisicing minim ut ex aliqua dolore velit Lorem. Officia nostrud minim officia cupidatat. Excepteur consectetur ipsum in veniam ullamco eu eu aute dolore ipsum. Excepteur sint laboris officia magna elit commodo.",
+    "email": "jacklynswanson@ezentia.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (953) 408-3191",
+    "address": "756 Lawn Court, Grantville, Marshall Islands, 3707, Belgium",
+    "coordinates": {
+      "lat": -28.508366,
+      "lng": -24.632488
+    }
+  },
+  {
+    "restaurant_id": 11,
+    "restaurant_type": "Lietuviška virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$36.42",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sun Jan 15 2012 10:38:46 GMT+0200 (MSK)",
+    "restaurant_name": "Isodrive",
+    "menu_text": "Ut commodo non eiusmod sint non in duis excepteur culpa consequat et velit veniam. Exercitation aliqua esse officia mollit do. In eu do elit culpa aliqua. Culpa irure consectetur sint dolore laborum proident ex esse aliquip mollit cillum. Nostrud dolor quis cupidatat cillum deserunt dolore amet labore esse anim magna proident sit consectetur.",
+    "email": "jacklynswanson@isodrive.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (847) 502-2518",
+    "address": "352 Lester Court, Moraida, Oregon, 2169, Korea (South)",
+    "coordinates": {
+      "lat": 23.97597,
+      "lng": -91.203982
+    }
+  },
+  {
+    "restaurant_id": 12,
+    "restaurant_type": "Kinų virtuvė",
+    "food_type": "Žuvis",
+    "daymeal_price": "$13.83",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Mon Mar 01 1976 08:41:23 GMT+0200 (MSK)",
+    "restaurant_name": "Housedown",
+    "menu_text": "Enim aliquip veniam eiusmod voluptate ex exercitation sit ex fugiat ad anim irure aliquip. Amet incididunt nisi culpa ad incididunt qui labore ea aute Lorem ad ut. Tempor esse amet ut voluptate voluptate elit aliqua proident sit eiusmod. Elit do sunt aliqua voluptate enim. Lorem aliquip fugiat eu consequat duis duis cupidatat adipisicing.",
+    "email": "jacklynswanson@housedown.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (867) 522-2930",
+    "address": "328 Forest Place, Vale, District Of Columbia, 1911, Georgia",
+    "coordinates": {
+      "lat": 42.486882,
+      "lng": 139.464476
+    }
+  },
+  {
+    "restaurant_id": 13,
+    "restaurant_type": "Kinų virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$166.52",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sat Jul 21 2007 11:04:33 GMT+0300 (EEST)",
+    "restaurant_name": "Dreamia",
+    "menu_text": "Occaecat est proident et velit elit officia voluptate ipsum sunt officia. Ex commodo fugiat deserunt cupidatat commodo non dolore cupidatat id. Sit irure anim incididunt consequat ad dolore enim ex sit. Dolor consequat aute do est esse eu magna et eiusmod occaecat non. Culpa elit qui occaecat est velit elit Lorem Lorem.",
+    "email": "jacklynswanson@dreamia.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (818) 539-2572",
+    "address": "582 Lee Avenue, Williston, Connecticut, 6885, Lebanon",
+    "coordinates": {
+      "lat": -26.154129,
+      "lng": 130.822215
+    }
+  },
+  {
+    "restaurant_id": 14,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$141.28",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sat Sep 25 2010 00:42:05 GMT+0300 (EEST)",
+    "restaurant_name": "Turnabout",
+    "menu_text": "Et anim occaecat occaecat fugiat aute aliquip Lorem esse. Sit quis adipisicing et sit incididunt do elit elit dolor sint velit do aliqua occaecat. Esse aute ex occaecat mollit deserunt et ut. Cupidatat laboris exercitation id exercitation officia. Cillum pariatur magna laboris velit sit excepteur id officia non.",
+    "email": "jacklynswanson@turnabout.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (877) 516-3659",
+    "address": "414 Fairview Place, Hiseville, Arizona, 3326, Mauritania",
+    "coordinates": {
+      "lat": -24.128651,
+      "lng": -63.323298
+    }
+  },
+  {
+    "restaurant_id": 15,
+    "restaurant_type": "Kinų virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$180.72",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Thu Feb 06 1975 06:57:29 GMT+0200 (MSK)",
+    "restaurant_name": "Elpro",
+    "menu_text": "Reprehenderit tempor sunt ad voluptate cupidatat consectetur pariatur nisi veniam esse. Officia eiusmod ea nostrud excepteur nisi tempor. Est ipsum in esse labore aliqua irure. Cillum cupidatat reprehenderit sunt amet ipsum sunt ex Lorem tempor cupidatat mollit non duis esse. Incididunt cillum amet ad proident proident.",
+    "email": "jacklynswanson@elpro.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (857) 559-2410",
+    "address": "897 Clay Street, Alafaya, Illinois, 3290, Portugal",
+    "coordinates": {
+      "lat": 52.13619,
+      "lng": 77.573187
+    }
+  },
+  {
+    "restaurant_id": 16,
+    "restaurant_type": "Itališka virtuvė",
+    "food_type": "Mėsa",
+    "daymeal_price": "$9.34",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Thu Jul 10 2008 01:21:21 GMT+0300 (EEST)",
+    "restaurant_name": "Parleynet",
+    "menu_text": "In proident elit commodo consectetur velit velit quis ullamco officia. Proident dolor aute cupidatat in qui ut id nisi adipisicing Lorem id voluptate. Aliquip amet occaecat consequat occaecat occaecat est. Do proident ex amet eu ad qui sit nisi veniam. Fugiat id ullamco ea officia.",
+    "email": "jacklynswanson@parleynet.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (973) 597-2066",
+    "address": "810 Maple Avenue, Tetherow, North Dakota, 4040, British Indian Ocean Territory",
+    "coordinates": {
+      "lat": 5.618786,
+      "lng": -0.385353
+    }
+  },
+  {
+    "restaurant_id": 17,
+    "restaurant_type": "Lietuviška virtuvė",
+    "food_type": "Mėsa",
+    "daymeal_price": "$89.58",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Wed Jan 30 1980 02:01:02 GMT+0200 (MSK)",
+    "restaurant_name": "Cowtown",
+    "menu_text": "In esse dolor aute cupidatat mollit labore amet. Proident duis consequat aliquip est dolor mollit eiusmod ipsum dolor esse occaecat do cillum magna. Dolor quis dolor proident culpa. Id magna culpa eu ut cillum ex minim est. Elit consectetur quis et cupidatat eiusmod voluptate elit cupidatat.",
+    "email": "jacklynswanson@cowtown.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (984) 557-2112",
+    "address": "318 Flatbush Avenue, Washington, South Carolina, 7294, Libya",
+    "coordinates": {
+      "lat": 59.803763,
+      "lng": -159.995992
+    }
+  },
+  {
+    "restaurant_id": 18,
+    "restaurant_type": "Lietuviška virtuvė",
+    "food_type": "Vegan",
+    "daymeal_price": "$238.86",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Wed Jun 01 1977 04:25:13 GMT+0200 (MSK)",
+    "restaurant_name": "Bitendrex",
+    "menu_text": "Magna commodo amet pariatur deserunt proident aliqua duis sunt adipisicing voluptate. Quis elit Lorem tempor consectetur proident id ea occaecat aliquip dolor cupidatat et. Nulla duis nisi reprehenderit excepteur duis pariatur Lorem adipisicing anim laboris Lorem et officia adipisicing. Officia elit quis proident dolor eu consequat excepteur minim aliqua fugiat cillum dolor duis cillum. Veniam amet et qui velit fugiat amet nostrud ex Lorem deserunt amet.",
+    "email": "jacklynswanson@bitendrex.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (952) 596-2050",
+    "address": "408 Bayview Avenue, Barstow, California, 5351, Malta",
+    "coordinates": {
+      "lat": 83.343664,
+      "lng": 135.064392
+    }
+  },
+  {
+    "restaurant_id": 19,
+    "restaurant_type": "Kinų virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$285.83",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Mon Nov 12 1973 17:32:44 GMT+0200 (MSK)",
+    "restaurant_name": "Extremo",
+    "menu_text": "Incididunt reprehenderit dolor sunt duis ullamco fugiat dolor excepteur et aliqua aliquip est. Minim laboris sit do dolore duis cupidatat eiusmod dolor magna enim qui laboris. Deserunt proident non cupidatat Lorem nisi aute ipsum do culpa qui aliqua mollit ut qui. Anim do cupidatat occaecat culpa consectetur Lorem sint aliqua ut laboris. Irure excepteur dolor esse ex culpa ad sit aute veniam irure aute qui.",
+    "email": "jacklynswanson@extremo.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (955) 566-3777",
+    "address": "541 Maple Street, Templeton, Mississippi, 4603, Gabon",
+    "coordinates": {
+      "lat": 15.545861,
+      "lng": 96.446126
+    }
+  },
+  {
+    "restaurant_id": 20,
+    "restaurant_type": "Kita",
+    "food_type": "Višta",
+    "daymeal_price": "$265.26",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Fri Nov 15 1991 14:44:54 GMT+0200 (MSK)",
+    "restaurant_name": "Suremax",
+    "menu_text": "Consectetur magna mollit velit Lorem dolore culpa cupidatat dolor ut nostrud consequat. Labore amet ullamco proident laboris commodo laborum consectetur aliqua qui ex ea elit occaecat ea. Incididunt dolore fugiat est elit non ipsum Lorem nostrud anim quis quis amet id. Irure aliqua Lorem mollit officia officia sit ea tempor mollit. Quis excepteur est cillum nisi nisi eiusmod duis id ullamco labore minim proident.",
+    "email": "jacklynswanson@suremax.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (874) 514-2158",
+    "address": "790 Nolans Lane, Woodburn, Wisconsin, 7266, Indonesia",
+    "coordinates": {
+      "lat": 66.432332,
+      "lng": -160.714999
+    }
+  },
+  {
+    "restaurant_id": 21,
+    "restaurant_type": "Kinų virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$257.67",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sun May 28 2000 00:47:59 GMT+0200 (MSK)",
+    "restaurant_name": "Kraggle",
+    "menu_text": "Pariatur exercitation ad eiusmod excepteur ad. Lorem cillum quis eu dolor culpa. Incididunt qui dolor ad laboris eu nulla esse nulla elit mollit ad qui sit. Exercitation esse sint ut quis elit. Culpa mollit tempor duis anim qui.",
+    "email": "jacklynswanson@kraggle.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (987) 600-3442",
+    "address": "197 Channel Avenue, Bartonsville, Alaska, 2400, Turkmenistan",
+    "coordinates": {
+      "lat": 55.340488,
+      "lng": -157.068158
+    }
+  },
+  {
+    "restaurant_id": 22,
+    "restaurant_type": "Kita",
+    "food_type": "Žuvis",
+    "daymeal_price": "$15.37",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Tue Aug 19 1980 01:26:54 GMT+0200 (MSK)",
+    "restaurant_name": "Musanpoly",
+    "menu_text": "Minim adipisicing sunt labore exercitation elit aute enim ut magna. Fugiat non anim amet quis sint aute et aliquip do. Consequat velit in sit duis eiusmod laboris ex cillum Lorem veniam minim et ut nisi. Consequat incididunt quis quis ullamco magna consectetur pariatur esse aliqua occaecat culpa id esse. Et veniam mollit ullamco consectetur aute anim irure reprehenderit velit culpa duis voluptate.",
+    "email": "jacklynswanson@musanpoly.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (835) 437-3605",
+    "address": "168 Hinsdale Street, Sena, Federated States Of Micronesia, 7352, United States",
+    "coordinates": {
+      "lat": -54.312425,
+      "lng": -170.774508
+    }
+  },
+  {
+    "restaurant_id": 23,
+    "restaurant_type": "Lietuviška virtuvė",
+    "food_type": "Višta",
+    "daymeal_price": "$221.99",
+    "logo": "https://picsum.photos/200/?random",
+    "menu_date": "Sun Mar 28 1982 18:36:48 GMT+0200 (MSK)",
+    "restaurant_name": "Valpreal",
+    "menu_text": "Sit magna aliquip velit consectetur sit et. Reprehenderit veniam duis elit incididunt sunt cupidatat non commodo voluptate do voluptate enim. Ea adipisicing nulla et sit cillum dolor in nisi deserunt enim dolore laboris nulla. Do culpa nulla ad laborum commodo voluptate esse ex incididunt ipsum ea anim. Consectetur do exercitation velit in.",
+    "email": "jacklynswanson@valpreal.com",
+    "facebook_link": "facebook.com/asasd/adsadasdad",
+    "phone": "+370 (975) 598-3944",
+    "address": "784 Williams Court, Morgandale, Idaho, 5449, Singapore",
+    "coordinates": {
+      "lat": 32.31268,
+      "lng": -158.224546
+    }
+  }]
