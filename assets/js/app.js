@@ -32,7 +32,7 @@ class App extends React.Component {
                     </div>
 
                     <div className="fixedMap col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                        <Map />
+                        <Map listingsData={this.state.listingsData}/>
                     </div>
 </div>
             </div>

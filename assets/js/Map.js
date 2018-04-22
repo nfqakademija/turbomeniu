@@ -20,7 +20,8 @@ class Map extends Component {
             lat: 54.89,
             lng: 23.90
         };
-        this.zoom = 10
+        this.zoom = 10;
+        this.loopMapComponents = this.loopMapComponents.bind(this)
 
     }
 
@@ -32,6 +33,18 @@ class Map extends Component {
             error => console.log(error)
         );
     }
+
+    loopMapComponents() {
+        const {listingsData} = this.props;
+        return listingsData.map((listing, index) => {
+            return (<Restaurant
+                lat={listing.coordinates.lat}
+                lng={listing.coordinates.lng}
+                text={listing.restaurant_name}
+                key={index}
+            />)
+               })
+                }
 
     // static defaultProps = {
     //     center: {
@@ -58,12 +71,8 @@ console.log(this.state.center);
                         lng={this.state.center.lng}
                         text={'Hello World'}
                     />
+{this.loopMapComponents()}
 
-                    <Restaurant
-                        lat={54.77}
-                        lng={23.9}
-                        text={'Hello World'}
-                    />
                 </GoogleMapReact>
             </div>
         );
