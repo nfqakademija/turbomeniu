@@ -4445,6 +4445,10 @@ react-geolocated@^2.3.1:
   dependencies:
     prop-types "^15.5.8"
 
+react-geolocation@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-geolocation/-/react-geolocation-1.0.3.tgz#6a962d6b436561f34e5462121e69d68c9edf3d36"
+
 react@^16.3.2:
   version "16.3.2"
   resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"

@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x"></i>{text}</div>;
+const Restaurant = ({ text }) => <div><i className="fas fa-utensils 2x"></i>{text}</div>;
 
 class Map extends Component {
     constructor() {
         super();
 
         this.state = {
+            center: {
+                lat: null,
+                lng: null
+            }
 
         };
 
@@ -19,21 +24,44 @@ class Map extends Component {
 
     }
 
+    componentWillMount() {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                this.setState({ center: {lat: position.coords.latitude, lng: position.coords.longitude}});
+            },
+            error => console.log(error)
+        );
+    }
 
+    // static defaultProps = {
+    //     center: {
+    //         lat: 59.95,
+    //         lng: 30.33
+    //     },
+    //     zoom: 11
+    // };
 
 
     render() {
+console.log(this.state.center);
         return (
             // Important! Always set the container height explicitly
             <div className="d-none d-sm-block" style={{ height: '90vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyDM7BLuRsCEe1pt_vwfbbVslNd7gWQbj14' }}
-                    defaultCenter={this.center}
+                    center={this.state.center}
                     defaultZoom={this.zoom}
                 >
-                    <AnyReactComponent
-                        lat={59.955413}
-                        lng={30.337844}
+
+                    <UserLocation
+                        lat={this.state.center.lat}
+                        lng={this.state.center.lng}
+                        text={'Hello World'}
+                    />
+
+                    <Restaurant
+                        lat={54.77}
+                        lng={23.9}
                         text={'Hello World'}
                     />
                 </GoogleMapReact>
@@ -43,3 +71,5 @@ class Map extends Component {
 }
 
 export default Map;
+
+
