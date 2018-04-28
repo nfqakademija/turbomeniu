@@ -56,6 +56,8 @@ class Restaurant
      */
     private $longitude;
 
+//    Getters and setters.
+
     /**
      * @return mixed
      */
