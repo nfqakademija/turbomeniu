@@ -18,11 +18,6 @@ class Restaurant
     private $id;
 
     /**
-     * @ORM\Column(type="integer", name="fbId")
-     */
-    private $fbId;
-
-    /**
      * @ORM\Column(type="string", length=50)
      */
     private $name;
@@ -33,19 +28,24 @@ class Restaurant
     private $logo;
 
     /**
-     * @ORM\Column(type="string", length=20, name="contactPhone")
+     * @ORM\Column(type="string", length=70, name="restaurantType")
      */
-    private $contactPhone;
+    private $restaurantType;
 
     /**
-     * @ORM\Column(type="string", length=2083, name="fbLink")
+     * @ORM\Column(type="string", length=20, name="phoneNumber")
      */
-    private $fbLink;
+    private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length=2083, name="webPage")
      */
-    private $address;
+    private $webPage;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
@@ -58,39 +58,11 @@ class Restaurant
     private $longitude;
 
     /**
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     */
-    private $created_at;
-
-    /**
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     */
-    private $updated_at;
-
-    /**
      * @return mixed
      */
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFbId()
-    {
-        return $this->fbId;
-    }
-
-    /**
-     * @param mixed $fbId
-     */
-    public function setFbId($fbId): void
-    {
-        $this->fbId = $fbId;
     }
 
     /**
@@ -128,49 +100,65 @@ class Restaurant
     /**
      * @return mixed
      */
-    public function getContactPhone()
+    public function getRestaurantType()
     {
-        return $this->contactPhone;
+        return $this->restaurantType;
     }
 
     /**
-     * @param mixed $contactPhone
+     * @param mixed $restaurantType
      */
-    public function setContactPhone($contactPhone): void
+    public function setRestaurantType($restaurantType): void
     {
-        $this->contactPhone = $contactPhone;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFbLink()
-    {
-        return $this->fbLink;
-    }
-
-    /**
-     * @param mixed $fbLink
-     */
-    public function setFbLink($fbLink): void
-    {
-        $this->fbLink = $fbLink;
+        $this->restaurantType = $restaurantType;
     }
 
     /**
      * @return mixed
      */
-    public function getAddress()
+    public function getPhoneNumber()
     {
-        return $this->address;
+        return $this->phoneNumber;
     }
 
     /**
-     * @param mixed $address
+     * @param mixed $phoneNumber
      */
-    public function setAddress($address): void
+    public function setPhoneNumber($phoneNumber): void
     {
-        $this->address = $address;
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWebPage()
+    {
+        return $this->webPage;
+    }
+
+    /**
+     * @param mixed $webPage
+     */
+    public function setWebPage($webPage): void
+    {
+        $this->webPage = $webPage;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param mixed $email
+     */
+    public function setEmail($email): void
+    {
+        $this->email = $email;
     }
 
     /**
@@ -203,21 +191,5 @@ class Restaurant
     public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCreatedAt()
-    {
-        return $this->created_at;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updated_at;
     }
 }
