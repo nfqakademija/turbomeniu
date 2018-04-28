@@ -43,6 +43,9 @@ class Review
 
 //    Getters and setters.
 
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;

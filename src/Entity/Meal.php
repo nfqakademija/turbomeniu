@@ -46,12 +46,15 @@ class Meal
      */
     private $date;
 
+//    Getters and setters.
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
-
-//    Getters and setters.
 
     /**
      * @return mixed
