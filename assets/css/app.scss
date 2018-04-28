@@ -5,8 +5,18 @@
 @import 'header';
 @import 'listings';
 @import 'map';
+@import 'suggestions';
 
-.body {
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   padding-top: 80px !important;
   background: linear-gradient(128deg, #40e0d0, #97f271, #e76060, #eaeb7f);
   background-size: 800% 800%;

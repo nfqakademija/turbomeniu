@@ -13,7 +13,7 @@ export default class Header extends Component {
                 <a className="navbar-brand" href="#"><i className="fas fa-utensils fa-2x"></i> TURBOMENIU</a>
 
                 <form className="form-inline my-2 my-lg-0 col col-md-4 col-lg-6 col-xl-7">
-                    <input className="form-control mr-sm-2 searchbar" type="search" placeholder="Search" aria-label="Search"/>
+                    <input className="form-control mr-sm-2 searchbar" type="search" placeholder="Search" aria-label="Search" onChange={this.props.search}/>
                 </form>
 
                 <button className="navbar-toggler" type="button" data-toggle="collapse"

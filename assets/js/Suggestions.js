@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-export default class Sugestions extends Component {
+export default class Suggestions extends Component {
     constructor() {
         super();
         this.state = {}
@@ -8,7 +8,7 @@ export default class Sugestions extends Component {
 
     render() {
         return (
-            <div>
+            <div className="carousel-element">
                 <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                     <ol className="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
