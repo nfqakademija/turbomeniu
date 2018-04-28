@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Header from './Header.js';
 import Listings from './Listings.js';
 import Map from './Map.js';
+import Suggestions from './Suggestions.js'
 import Togglebuton from './Togglebutton.js';
 import listingsData from './sampleData/listingsData.json';
 
@@ -22,8 +23,16 @@ class App extends React.Component {
         return (<div>
             <Header />
             <div className="container-fluid body">
+
                 <div className="row">
+                    <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                    <Suggestions />
+                </div>
+                </div>
+                <div className="row">
+
                     <Togglebuton />
+
                 </div>
 
 <div className="row">
@@ -32,7 +41,7 @@ class App extends React.Component {
                     </div>
 
                     <div className="fixedMap col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                        <Map />
+                        <Map listingsData={this.state.listingsData}/>
                     </div>
 </div>
             </div>

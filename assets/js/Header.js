@@ -27,7 +27,7 @@ export default class Header extends Component {
                 <div className="collapse navbar-collapse col" id="navbarSupportedContent">
                     <ul className="navbar-nav mr-auto">
                         <li className="nav-item active">
-                            <a className="nav-link" href="#">Atitinkantys</a>
+                            <a className="nav-link" href="#">Artimiausi</a>
                         </li>
                         <li className="nav-item active">
                             <a className="nav-link" href="#">Geriausia kaina</a>
