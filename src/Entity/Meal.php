@@ -30,7 +30,7 @@ class Meal
      * @ORM\Column(type="decimal", precision=3, scale=2)
      */
     private $price;
-
+//TODO Remove foodType & regen DB.
     /**
      * @ORM\Column(type="string", length=50)
      */
