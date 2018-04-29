@@ -7,7 +7,7 @@ export default class Header extends Component {
     }
 
     render() {
-        return (<nav className="navbar navbar-expand-md navbar-expand-lg navbar-expand-xl navbar-light bg-light fixed-top header row">
+        return (<nav className="navbar navbar-expand-md navbar-expand-lg navbar-expand-xl navbar-dark bg-dark fixed-top header row">
 
 
                 <a className="navbar-brand" href="#"><i className="fas fa-utensils fa-2x"></i> TURBOMENIU</a>

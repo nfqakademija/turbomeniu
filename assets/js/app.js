@@ -21,6 +21,7 @@ class App extends React.Component {
 
     }
 
+
     search(event) {
         event.preventDefault();
         var filteredData = this.state.listingsData;
