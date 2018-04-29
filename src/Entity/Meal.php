@@ -10,12 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Meal
 {
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="meals")
-     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")
-     */
-    private $restaurant;
-
-    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -23,9 +17,10 @@ class Meal
     private $id;
 
     /**
-     * @ORM\Column(type="integer", name="restaurantId")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="meals")
+     * @ORM\JoinColumn(name="restaurantId", referencedColumnName="id")
      */
-    private $restaurantId;
+    private $restaurant;
 
     /**
      * @ORM\Column(type="string", length=50, name="foodName")
