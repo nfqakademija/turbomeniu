@@ -3,12 +3,24 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RestaurantRepository")
  */
 class Restaurant
 {
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Meal", mappedBy="restaurant")
+     */
+    private $meals;
+
+    public function __construct()
+    {
+        $this->meals = new ArrayCollection();
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -57,6 +69,14 @@ class Restaurant
     private $longitude;
 
 //    Getters and setters.
+
+    /**
+     * @return Collection|Meal[]
+     */
+    public function getMeals(): Collection
+    {
+        return $this->meals;
+    }
 
     /**
      * @return mixed
