@@ -71,22 +71,6 @@ class Meal
     /**
      * @return mixed
      */
-    public function getRestaurantId()
-    {
-        return $this->restaurantId;
-    }
-
-    /**
-     * @param mixed $restaurantId
-     */
-    public function setRestaurantId($restaurantId): void
-    {
-        $this->restaurantId = $restaurantId;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getFoodName()
     {
         return $this->foodName;

@@ -17,7 +17,8 @@ class MealFixture extends Fixture
 
         for ($i=0; $i < 1000; $i++) {
             $meal = new Meal();
-            $meal->setRestaurantId($faker->numberBetween(0, 200));
+//            TODO Fix error: Expected value of type "App\Entity\Restaurant" for association field "App\Entity\Meal#$restaurant", got "integer" instead.
+            $meal->setRestaurant($faker->numberBetween(0, 200));
             $meal->setDate(new \DateTime('now'));
             $meal->setFoodName($faker->foodName());
             $meal->setPrice($faker->randomFloat(2, 4, 8));
