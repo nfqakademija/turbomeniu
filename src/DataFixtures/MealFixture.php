@@ -17,8 +17,8 @@ class MealFixture extends Fixture
 
         for ($i=0; $i < 1000; $i++) {
             $meal = new Meal();
-            $meal->setRestaurantId($faker->numberBetween(1800, 2000));
-            $meal->setDate(new \DateTime("now"));
+            $meal->setRestaurantId($faker->numberBetween(2000, 2200));
+            $meal->setDate(new \DateTime('now'));
             $meal->setFoodName($faker->foodName());
             $meal->setFoodType($faker->randomElement(['1','2','3']));
             $meal->setPrice($faker->randomFloat(2, 4, 8));
