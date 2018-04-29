@@ -11,7 +11,7 @@ class Meal
 {
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="meals")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(name="restaurant_id", referencedColumnName="id")
      */
     private $restaurant;
 
@@ -23,12 +23,12 @@ class Meal
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="restaurantId")
      */
     private $restaurantId;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, name="foodName")
      */
     private $foodName;
 
@@ -36,11 +36,6 @@ class Meal
      * @ORM\Column(type="decimal", precision=3, scale=2)
      */
     private $price;
-//TODO Remove foodType & regen DB.
-    /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $foodType;
 
     /**
      * @ORM\Column(type="string", length=2083)
@@ -124,22 +119,6 @@ class Meal
     public function setPrice($price): void
     {
         $this->price = $price;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getFoodType()
-    {
-        return $this->foodType;
-    }
-
-    /**
-     * @param mixed $foodType
-     */
-    public function setFoodType($foodType): void
-    {
-        $this->foodType = $foodType;
     }
 
     /**
