@@ -10,6 +10,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Review
 {
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="reviews")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $restaurant;
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
@@ -42,6 +48,22 @@ class Review
     private $date;
 
 //    Getters and setters.
+
+    /**
+     * @return mixed
+     */
+    public function getRestaurant()
+    {
+        return $this->restaurant;
+    }
+
+    /**
+     * @param mixed $restaurant
+     */
+    public function setRestaurant($restaurant): void
+    {
+        $this->restaurant = $restaurant;
+    }
 
     /**
      * @return mixed

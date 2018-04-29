@@ -16,9 +16,15 @@ class Restaurant
      */
     private $meals;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="restaurant")
+     */
+    private $reviews;
+
     public function __construct()
     {
         $this->meals = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
     }
 
     /**
@@ -69,6 +75,14 @@ class Restaurant
     private $longitude;
 
 //    Getters and setters.
+
+    /**
+     * @return Collection|Review[]
+     */
+    public function getReviews(): Collection
+    {
+        return $this->reviews;
+    }
 
     /**
      * @return Collection|Meal[]
