@@ -15,5 +15,7 @@
         {{ dump(meal.foodName) }}
     {% endfor %}
     <hr>
-    {{ dump(restaurants) }}
+    {% for singleRestaurant in restaurants %}
+        {{ dump(singleRestaurant.name) }}
+    {% endfor %}
 {% endblock %}
