@@ -30,7 +30,7 @@ class ReactController extends AbstractController
         $normalizer->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
         });
-        $serializer = new Serializer([$normalizer, $dateTimeNorm], [$encoder]);
+        $serializer = new Serializer([$dateTimeNorm, $normalizer], [$encoder]);
         $serialized = $serializer->serialize($restaurant, 'json');
 
         return $this->render('home/blank.html.twig', ['serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
