@@ -18,15 +18,17 @@ class ReactController extends AbstractController
      */
     public function index()
     {
-        $id = 402;
+        $id = 403;
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAll();
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
         $jsonresponse = new JsonResponse($restaurant);
 
-        $encoder = [new JsonEncoder()];
-        $normalizer = [new ObjectNormalizer()];
-//        $normalizer->setCircularReferenceLimit(5);
-        $serializer = new Serializer($normalizer, $encoder);
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($restarant) {
+            return [$restarant->getMeals(), $restarant->getReviews()];
+        });
+        $serializer = new Serializer([$normalizer], [$encoder]);
         $serialized = $serializer->serialize($restaurant, 'json');
 
         return $this->render('home/blank.html.twig', ['serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
