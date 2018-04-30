@@ -23,9 +23,10 @@ class ReactController extends AbstractController
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
         $jsonresponse = new JsonResponse($restaurant);
 
-        $encoder = new JsonEncoder();
-        $normalizer = new ObjectNormalizer();
-        $serializer = new Serializer([$normalizer, $encoder]);
+        $encoder = [new JsonEncoder()];
+        $normalizer = [new ObjectNormalizer()];
+//        $normalizer->setCircularReferenceLimit(5);
+        $serializer = new Serializer($normalizer, $encoder);
         $serialized = $serializer->serialize($restaurant, 'json');
 
         return $this->render('home/blank.html.twig', ['serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
