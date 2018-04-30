@@ -5,34 +5,31 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker;
-use FakerRestaurant\Provider\en_US\Restaurant as FakerRestaurant;
-use App\Entity\Restaurant;
-use App\Entity\Meal;
-use App\Entity\Review;
+use FakerRestaurant\Provider\en_US\Restaurant;
 
 class MainFixture extends Fixture
 {
     public function load(ObjectManager $manager)
     {
         $generator = Faker\Factory::create();
-        $generator->addProvider(new FakerRestaurant($generator));
-        $populator = new Faker\ORM\Propel\Populator($generator);
+        $generator->addProvider(new Restaurant($generator));
+        $populator = new Faker\ORM\Doctrine\Populator($generator, $manager);
 
 //        Add Restaurant Entities
-        $populator->addEntity('Restaurant', 200, [
+        $populator->addEntity('App:Restaurant', 200, [
             'name' => function () use ($generator) {
                 return $generator->company;
             },
             'logo' => function () use ($generator) {
                 return $generator->imageUrl('100', '100');
             },
-            'restaurant_type' => function () use ($generator) {
+            'restaurantType' => function () use ($generator) {
                 return $generator->randomElement(['a','b','c']);
             },
-            'phone_number' => function () use ($generator) {
+            'phoneNumber' => function () use ($generator) {
                 return $generator->e164PhoneNumber;
             },
-            'web_page' => function () use ($generator) {
+            'webPage' => function () use ($generator) {
                 return $generator->domainName;
             },
             'email' => function () use ($generator) {
@@ -47,11 +44,11 @@ class MainFixture extends Fixture
         ]);
 
 //        Add Meal Entities
-        $populator->addEntity('Meal', 1000, [
+        $populator->addEntity('App:Meal', 1000, [
             'date' => function () use ($generator) {
                 return new \DateTime('now');
             },
-            'food_name' => function () use ($generator) {
+            'foodName' => function () use ($generator) {
                 return $generator->foodName();
             },
             'image' => function () use ($generator) {
@@ -63,7 +60,7 @@ class MainFixture extends Fixture
         ]);
 
 //        Add Review Entities
-        $populator->addEntity('Review', 10000, [
+        $populator->addEntity('App:Review', 10000, [
             'name' => function () use ($generator) {
                 return $generator->firstName();
             },
@@ -79,7 +76,5 @@ class MainFixture extends Fixture
         ]);
 
         $populator->execute();
-
-        $manager->flush();
     }
 }
