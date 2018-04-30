@@ -25,7 +25,6 @@ class ReactController extends AbstractController
 
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
-        $normalizer -> setCircularReferenceLimit(2);
         $serializer = new Serializer([$normalizer, $encoder]);
         $serialized = $serializer->serialize($restaurant, 'json');
 
