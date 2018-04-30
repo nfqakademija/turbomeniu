@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -25,10 +26,11 @@ class ReactController extends AbstractController
 
         $encoder = new JsonEncoder();
         $normalizer = new ObjectNormalizer();
+        $dateTimeNorm = new DateTimeNormalizer();
         $normalizer->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
         });
-        $serializer = new Serializer([$normalizer], [$encoder]);
+        $serializer = new Serializer([$normalizer, $dateTimeNorm], [$encoder]);
         $serialized = $serializer->serialize($restaurant, 'json');
 
         return $this->render('home/blank.html.twig', ['serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
