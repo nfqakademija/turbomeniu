@@ -15,7 +15,6 @@ class ReviewFixture extends Fixture
 
         for ($i=0; $i < 10000; $i++) {
             $review = new Review();
-//            TODO Fix error: Expected value of type "App\Entity\Restaurant" for association field "App\Entity\Meal#$restaurant", got "integer" instead.
             $review->setRestaurant($faker->numberBetween(0, 200));
             $review->setDate($faker->dateTime('now', '+2'));
             $review->setName($faker->firstName());
