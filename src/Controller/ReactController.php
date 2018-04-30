@@ -7,6 +7,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 class ReactController extends AbstractController
 {
     /**
@@ -18,6 +22,13 @@ class ReactController extends AbstractController
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAll();
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
         $jsonresponse = new JsonResponse($restaurant);
-        return $this->render('home/blank.html.twig', ['restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
+
+        $encoder = new JsonEncoder();
+        $normalizer = new ObjectNormalizer();
+        $normalizer -> setCircularReferenceLimit(2);
+        $serializer = new Serializer([$normalizer, $encoder]);
+        $serialized = $serializer->serialize($restaurant, 'json');
+
+        return $this->render('home/blank.html.twig', ['serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
     }
 }
