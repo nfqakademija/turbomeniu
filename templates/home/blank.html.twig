@@ -7,4 +7,13 @@
 {% endblock %}
 
 {% block body %}
+    {% for review in restaurant.reviews %}
+        {{ dump(review.comment) }}
+    {% endfor %}
+    <hr>
+    {% for meal in restaurant.meals %}
+        {{ dump(meal.foodName) }}
+    {% endfor %}
+    <hr>
+    {{ dump(restaurants) }}
 {% endblock %}
