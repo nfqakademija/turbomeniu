@@ -18,12 +18,12 @@ class Meal
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="meals")
-     * @ORM\JoinColumn(name="restaurantId", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $restaurant;
 
     /**
-     * @ORM\Column(type="string", length=50, name="foodName")
+     * @ORM\Column(type="string", length=50)
      */
     private $foodName;
 

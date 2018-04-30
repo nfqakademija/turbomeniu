@@ -21,12 +21,6 @@ class Restaurant
      */
     private $reviews;
 
-    public function __construct()
-    {
-        $this->meals = new ArrayCollection();
-        $this->reviews = new ArrayCollection();
-    }
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -45,17 +39,17 @@ class Restaurant
     private $logo;
 
     /**
-     * @ORM\Column(type="string", length=70, name="restaurantType")
+     * @ORM\Column(type="string", length=70)
      */
     private $restaurantType;
 
     /**
-     * @ORM\Column(type="string", length=20, name="phoneNumber")
+     * @ORM\Column(type="string", length=20)
      */
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=2083, name="webPage")
+     * @ORM\Column(type="string", length=2083)
      */
     private $webPage;
 
@@ -74,7 +68,16 @@ class Restaurant
      */
     private $longitude;
 
+//    Constructor
+
+    public function __construct()
+    {
+        $this->meals = new ArrayCollection();
+        $this->reviews = new ArrayCollection();
+    }
+
 //    Getters and setters.
+
 
     /**
      * @return Collection|Review[]

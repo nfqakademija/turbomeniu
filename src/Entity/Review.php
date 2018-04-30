@@ -18,7 +18,7 @@ class Review
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Restaurant", inversedBy="reviews")
-     * @ORM\JoinColumn(name="restaurantId", referencedColumnName="id")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $restaurant;
 
