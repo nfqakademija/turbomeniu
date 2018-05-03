@@ -35,10 +35,11 @@ class ReactController extends AbstractController
         $serializer = new Serializer([$dateTimeNorm, $normalizer], [$encoder]);
         $serialized = $serializer->serialize($restaurant, 'json');
         // JsonResponse normalized test
-        $normalized = $serializer->normalize($restaurant, null);
+        $normalized = $serializer->normalize($restaurant);
         $jsonresponse = new JsonResponse($normalized);
+        // Alternative
+        $jsonresponse2 = JsonResponse::fromJsonString($serialized);
 
-
-        return $this->render('home/blank.html.twig', ['jsonresponse' => $jsonresponse, 'serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant, 'jsonresponse' => $jsonresponse]);
+        return $this->render('home/blank.html.twig', ['jsonresponse' => $jsonresponse, 'serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant]);
     }
 }
