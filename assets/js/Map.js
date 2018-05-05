@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
-const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x"></i>{text}</div>;
+const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x userIcon"></i>{text}</div>;
 const Restaurant = ({ text }) => <div><i className="fas fa-utensils 2x"></i>{text}</div>;
 
 class Map extends Component {
@@ -46,7 +46,6 @@ class Map extends Component {
 
 
     render() {
-console.log(this.state.center);
         return (
             // Important! Always set the container height explicitly
             <div className="d-none d-sm-block" style={{ height: '90vh', width: '100%' }}>
@@ -59,7 +58,7 @@ console.log(this.state.center);
                     <UserLocation
                         lat={this.props.center.lat}
                         lng={this.props.center.lng}
-                        text={'Hello World'}
+                        text={'You are here'}
                     />
 {this.loopMapComponents()}
 

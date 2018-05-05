@@ -20,6 +20,7 @@ class App extends React.Component {
                 lat: null,
                 lng: null
             },
+            modalInfo: [],
             person: []
         }
         ;
@@ -27,6 +28,7 @@ class App extends React.Component {
         this.search = this.search.bind(this);
         this.renderModal = this.renderModal.bind(this);
         this.restaurantList = this.restaurantList.bind(this);
+        this.onMouseOver = this.onMouseOver.bind(this);
     }
 
     componentWillMount() {
@@ -43,7 +45,7 @@ class App extends React.Component {
         console.log(this.state.person);
     }
 
-
+    // Api call to get the data from server
     restaurantList() {
         $.getJSON("http://127.0.0.1:8000/index")
             .then(({ serialized }) => this.setState({ person: serialized }));
@@ -62,14 +64,22 @@ class App extends React.Component {
             this.setState({filteredData: filteredData});
     }
 
-
-    renderModal(){
-        console.log('you clicked modal')
-        this.setState({
-            isOpen: !this.state.isOpen
+    onMouseOver(event){
+        var restaurantId = event.currentTarget.getAttribute("restaurantid");
+        var modalInfo = this.state.filteredData.filter(function(restaurant){
+            return restaurant.restaurant_id === Number(restaurantId);
         });
 
-        console.log(this.state.isOpen);
+        this.setState({
+            modalInfo: modalInfo
+            })
+    }
+
+    renderModal(){
+
+        this.setState({
+            isOpen: !this.state.isOpen
+        })
     }
 
     render() {
@@ -85,7 +95,8 @@ class App extends React.Component {
                     </div>
 
                     <Modal show={this.state.isOpen}
-                           onClose={this.renderModal}/>
+                           onClose={this.renderModal}
+                            modalInfo={this.state.modalInfo}/>
                     {/*</div>*/}
                     {/*<div className="row">*/}
 
@@ -98,6 +109,7 @@ class App extends React.Component {
                         <Listings
                             listingsData={this.state.filteredData}
                             renderModal={this.renderModal}
+                            onMouseOver={this.onMouseOver}
                         />
                     </div>
 
