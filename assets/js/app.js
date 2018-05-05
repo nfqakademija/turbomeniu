@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import Header from './Header.js';
 import Listings from './Listings.js';
 import Map from './Map.js';
-import Suggestions from './Suggestions.js'
+import Suggestions from './Suggestions.js';
+import Modal from './Modal.js';
 import Togglebuton from './Togglebutton.js';
 import listingsData from './sampleData/listingsData.json';
 
@@ -14,32 +15,64 @@ class App extends React.Component {
         this.state = {
             listingsData,
             filteredData: listingsData,
-
-        };
+            isOpen: false,
+            center: {
+                lat: null,
+                lng: null
+            },
+            person: []
+        }
+        ;
 
         this.search = this.search.bind(this);
+        this.renderModal = this.renderModal.bind(this);
+        this.restaurantList = this.restaurantList.bind(this);
+    }
 
+    componentWillMount() {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                this.setState({ center: {lat: position.coords.latitude, lng: position.coords.longitude}});
+            },
+            error => console.log(error)
+        );
+    }
+
+    componentDidMount() {
+        this.restaurantList();
+        console.log(this.state.person);
+    }
+
+
+    restaurantList() {
+        $.getJSON("http://127.0.0.1:8000/index")
+            .then(({ serialized }) => this.setState({ person: serialized }));
     }
 
 
     search(event) {
         event.preventDefault();
+
         var filteredData = this.state.listingsData;
         filteredData = filteredData.filter(function (item) {
             return item.menu_text.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1;
-
         });
 
             this.setState({filteredData: filteredData});
-
-        console.log(filteredData);
-        ;
     }
 
 
-    render() {
+    renderModal(){
+        console.log('you clicked modal')
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
 
+        console.log(this.state.isOpen);
+    }
+
+    render() {
         return (<div>
             <Header
                 search={this.search}
@@ -50,6 +83,9 @@ class App extends React.Component {
                     <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <Suggestions/>
                     </div>
+
+                    <Modal show={this.state.isOpen}
+                           onClose={this.renderModal}/>
                     {/*</div>*/}
                     {/*<div className="row">*/}
 
@@ -61,12 +97,13 @@ class App extends React.Component {
                     <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <Listings
                             listingsData={this.state.filteredData}
-
+                            renderModal={this.renderModal}
                         />
                     </div>
 
                     <div className="fixedMap col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                        <Map listingsData={this.state.filteredData}/>
+                        <Map listingsData={this.state.filteredData}
+                        center={this.state.center}/>
                     </div>
                 </div>
             </div>

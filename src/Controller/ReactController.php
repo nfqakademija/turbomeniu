@@ -19,7 +19,7 @@ class ReactController extends AbstractController
      */
     public function index()
     {
-        $id = 403;
+        $id = 1;
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAll();
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
         $jsonresponse = new JsonResponse($restaurant);

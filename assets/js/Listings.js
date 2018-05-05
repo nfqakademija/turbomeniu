@@ -16,7 +16,7 @@ export default class Listings extends Component {
         }
         return listingsData.map((listing, index) => {
             return (<div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" key={index}>
-                <div className="listing">
+                <div className="listing" onClick={this.props.renderModal} >
                     <div className="row restName">
                         <div className="col">
                             <strong>{listing.restaurant_name}</strong>

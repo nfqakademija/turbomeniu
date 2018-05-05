@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-    Serializer test
+    {#Serializer test#}
     {{ dump(serialized) }}
     <hr>
     Json Response test
@@ -15,7 +15,7 @@
     <hr>
     Meals relation test
     {% for meal in restaurant.meals %}
-        {{ dump(meal.foodName) }}
+        {{ dump(meal.foodname) }}
     {% endfor %}
     <hr>
     Review relation test

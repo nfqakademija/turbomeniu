@@ -6,46 +6,22 @@
 @import 'listings';
 @import 'map';
 @import 'suggestions';
+@import 'modal';
 
 html {
   height: 100%;
+
 }
+
 
 body {
   height: 100%;
   margin: 0;
+  padding-top: 80px !important;
+
+  background: linear-gradient(10deg, #55a7e1d2, #559499cd, #55dca091), url("https://chinesenewyear.imgix.net/assets/images/food/chinese-new-year-food-feast.jpg?q=50&w=1280&h=720&fit=crop&auto=format") ;
   background-repeat: no-repeat;
   background-attachment: fixed;
-
-  padding-top: 80px !important;
-  background: linear-gradient(128deg, #40e0d0, #97f271, #e76060, #eaeb7f);
-  background-size: 800% 800%;
-
-  -webkit-animation: AnimationName 30s ease infinite;
-  -moz-animation: AnimationName 30s ease infinite;
-  -o-animation: AnimationName 30s ease infinite;
-  animation: AnimationName 30s ease infinite;
-
-  @-webkit-keyframes AnimationName {
-    0%{background-position:0% 5%}
-    50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
-  }
-  @-moz-keyframes AnimationName {
-    0%{background-position:0% 5%}
-    50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
-  }
-  @-o-keyframes AnimationName {
-    0%{background-position:0% 5%}
-    50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
-  }
-  @keyframes AnimationName {
-    0%{background-position:0% 5%}
-    50%{background-position:100% 96%}
-    100%{background-position:0% 5%}
-  }
 }
 
 

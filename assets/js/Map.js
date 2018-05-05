@@ -9,10 +9,7 @@ class Map extends Component {
         super();
 
         this.state = {
-            center: {
-                lat: null,
-                lng: null
-            }
+
 
         };
 
@@ -25,14 +22,7 @@ class Map extends Component {
 
     }
 
-    componentWillMount() {
-        navigator.geolocation.getCurrentPosition(
-            position => {
-                this.setState({ center: {lat: position.coords.latitude, lng: position.coords.longitude}});
-            },
-            error => console.log(error)
-        );
-    }
+
 
     loopMapComponents() {
         const {listingsData} = this.props;
@@ -62,13 +52,13 @@ console.log(this.state.center);
             <div className="d-none d-sm-block" style={{ height: '90vh', width: '100%' }}>
                 <GoogleMapReact
                     bootstrapURLKeys={{ key: 'AIzaSyDM7BLuRsCEe1pt_vwfbbVslNd7gWQbj14' }}
-                    center={this.state.center}
+                    center={this.props.center}
                     defaultZoom={this.zoom}
                 >
 
                     <UserLocation
-                        lat={this.state.center.lat}
-                        lng={this.state.center.lng}
+                        lat={this.props.center.lat}
+                        lng={this.props.center.lng}
                         text={'Hello World'}
                     />
 {this.loopMapComponents()}
