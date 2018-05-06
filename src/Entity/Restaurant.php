@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RestaurantRepository")
@@ -13,11 +14,13 @@ class Restaurant
 {
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Meal", mappedBy="restaurant")
+     * @Groups({"group1"})
      */
     private $meals;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="restaurant")
+     * @Groups({"group1"})
      */
     private $reviews;
 
@@ -25,19 +28,22 @@ class Restaurant
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"group1"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
+     * @Groups({"group1"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=2083)
+     * @Groups({"group1"})
      */
     private $logo;
-
+//TODO Remove restaurant type
     /**
      * @ORM\Column(type="string", length=70)
      */
@@ -60,11 +66,13 @@ class Restaurant
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
+     * @Groups({"group1"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
+     * @Groups({"group1"})
      */
     private $longitude;
 

@@ -19,6 +19,13 @@ class RestaurantRepository extends ServiceEntityRepository
         parent::__construct($registry, Restaurant::class);
     }
 
+    /**
+     * @param $minLat
+     * @param $maxLat
+     * @param $minLon
+     * @param $maxLon
+     * @return array
+     */
     public function findAllClose($minLat, $maxLat, $minLon, $maxLon): array
     {
         $parameters = ['minLat' => $minLat, 'maxLat' =>$maxLat, 'minLon' => $minLon, 'maxLon' => $maxLon];

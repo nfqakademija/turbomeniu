@@ -10,6 +10,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+// For annotations
+use Doctrine\Common\Annotations\AnnotationReader;
+use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
 class ReactController extends AbstractController
 {
@@ -20,8 +24,9 @@ class ReactController extends AbstractController
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose($minLat, $maxLat, $minLon, $maxLon);
 
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         // Call normalizer
-        $normalizer = new ObjectNormalizer();
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
         $dateTimeNorm = new DateTimeNormalizer();
         $normalizer->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
@@ -29,7 +34,7 @@ class ReactController extends AbstractController
         $serializer = new Serializer([$dateTimeNorm, $normalizer]);
 
         //        Normalize datetime and object
-        $normalized = $serializer->normalize($restaurants);
+        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
     }
