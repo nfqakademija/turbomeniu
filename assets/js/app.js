@@ -21,7 +21,7 @@ class App extends React.Component {
                 lng: null
             },
             modalInfo: [],
-            person: []
+            restaurants: []
         }
         ;
 
@@ -42,14 +42,22 @@ class App extends React.Component {
 
     componentDidMount() {
         this.restaurantList();
-        console.log(this.state.person);
+        console.log(this.state.restaurants, 'restaurant value');
     }
 
     // Api call to get the data from server
     restaurantList() {
-        $.getJSON("http://127.0.0.1:8000/index")
-            .then(({ serialized }) => this.setState({ person: serialized }));
-    }
+
+        $.get( "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts%7Cinfo&generator=search&formatversion=2&exsentences=1&exintro=1&explaintext=1&inprop=url&gsrsearch=${textInputForGet}&gsrwhat=text", function( data ) {
+           console.log(data)
+        });
+
+        // $.getJSON("https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts%7Cinfo&generator=search&formatversion=2&exsentences=1&exintro=1&explaintext=1&inprop=url&gsrsearch=${textInputForGet}&gsrwhat=text")
+        //     .then(({ jsonresponse }) => this.setState({ restaurants: jsonresponse }));
+
+    };
+
+
 
 
     search(event) {

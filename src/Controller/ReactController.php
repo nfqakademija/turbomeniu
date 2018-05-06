@@ -20,7 +20,7 @@ class ReactController extends AbstractController
     public function index()
     {
         // Set id of test object.
-        $id = 403;
+        $id = 1;
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAll();
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
