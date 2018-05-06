@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class ReactController extends AbstractController
@@ -19,27 +18,40 @@ class ReactController extends AbstractController
      */
     public function index()
     {
-        // Set id of test object.
-        $id = 403;
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAll();
-        $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
-        $encoder = new JsonEncoder();
-        // Normalizer
+        // Call normalizer
         $normalizer = new ObjectNormalizer();
         $dateTimeNorm = new DateTimeNormalizer();
         $normalizer->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
         });
-        // Serialized string
-        $serializer = new Serializer([$dateTimeNorm, $normalizer], [$encoder]);
-        $serialized = $serializer->serialize($restaurant, 'json');
-        // JsonResponse normalized test
-        $normalized = $serializer->normalize($restaurant);
-        $jsonresponse = new JsonResponse($normalized);
-        // Alternative
-        $jsonresponse2 = JsonResponse::fromJsonString($serialized);
+        $serializer = new Serializer([$dateTimeNorm, $normalizer]);
 
-        return $this->render('home/blank.html.twig', ['jsonresponse' => $jsonresponse, 'serialized' => $serialized, 'restaurants' => $restaurants, 'restaurant' => $restaurant]);
+        //        Normalize datetime and object
+        $normalized = $serializer->normalize($restaurants);
+
+        return JsonResponse::create($normalized);
+    }
+
+    /**
+     * @Route("/modal/{id}", name="modal")
+     */
+    public function modal($id)
+    {
+        $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
+
+        // Call normalizer
+        $normalizer = new ObjectNormalizer();
+        $dateTimeNorm = new DateTimeNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($restaurant) {
+            return $restaurant->getId();
+        });
+        $serializer = new Serializer([$dateTimeNorm, $normalizer]);
+
+        //        Normalize datetime and object
+        $normalized = $serializer->normalize($restaurant);
+
+        return JsonResponse::create($normalized);
     }
 }

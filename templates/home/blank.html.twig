@@ -10,21 +10,4 @@
     Json Response test
     {{ dump(jsonresponse)}}
     <hr>
-    Serializer test
-    {{ dump(serialized) }}
-    <hr>
-    Meals relation test
-    {% for meal in restaurant.meals %}
-        {{ dump(meal.foodName) }}
-    {% endfor %}
-    <hr>
-    Review relation test
-    {% for review in restaurant.reviews %}
-        {{ dump(review.comment) }}
-    {% endfor %}
-    <hr>
-    All restaurants name test
-    {% for singleRestaurant in restaurants %}
-        {{ dump(singleRestaurant.name) }}
-    {% endfor %}
 {% endblock %}
