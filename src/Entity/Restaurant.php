@@ -20,7 +20,7 @@ class Restaurant
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="restaurant")
-     * @Groups({"group1", "group2"})
+     * @Groups({"group2"})
      */
     private $reviews;
 
