@@ -14,7 +14,7 @@ class Review
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"group1", "group2"})
+     * @Groups({"group2"})
      */
     private $id;
 
@@ -32,7 +32,7 @@ class Review
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"group1", "group2"})
+     * @Groups({"group2"})
      */
     private $rating;
 
