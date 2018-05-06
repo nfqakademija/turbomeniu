@@ -14,11 +14,11 @@ use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 class ReactController extends AbstractController
 {
     /**
-     * @Route("/index", name="index")
+     * @Route("/index/{minLat}/{maxLat}/{minLon}/{maxLon}", name="index")
      */
-    public function index()
+    public function index($minLat, $maxLat, $minLon, $maxLon)
     {
-        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAll();
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose($minLat, $maxLat, $minLon, $maxLon);
 
         // Call normalizer
         $normalizer = new ObjectNormalizer();
