@@ -46,8 +46,9 @@ class ReactController extends AbstractController
     {
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         // Call normalizer
-        $normalizer = new ObjectNormalizer();
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
         $dateTimeNorm = new DateTimeNormalizer();
         $normalizer->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
@@ -55,7 +56,7 @@ class ReactController extends AbstractController
         $serializer = new Serializer([$dateTimeNorm, $normalizer]);
 
         //        Normalize datetime and object
-        $normalized = $serializer->normalize($restaurant);
+        $normalized = $serializer->normalize($restaurant, null, ['groups' => ['group2']]);
 
         return JsonResponse::create($normalized);
     }

@@ -14,13 +14,13 @@ class Restaurant
 {
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Meal", mappedBy="restaurant")
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $meals;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="restaurant")
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $reviews;
 
@@ -28,19 +28,19 @@ class Restaurant
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=2083)
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $logo;
 //TODO Remove restaurant type
@@ -51,16 +51,19 @@ class Restaurant
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Groups({"group2"})
      */
     private $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=2083)
+     * @Groups({"group2"})
      */
     private $webPage;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"group2"})
      */
     private $email;
 

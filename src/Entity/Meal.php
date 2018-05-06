@@ -14,6 +14,7 @@ class Meal
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"group1", "group2"})
      */
     private $id;
 
@@ -25,18 +26,19 @@ class Meal
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $foodName;
 
     /**
      * @ORM\Column(type="decimal", precision=3, scale=2)
-     * @Groups({"group1"})
+     * @Groups({"group1", "group2"})
      */
     private $price;
 
     /**
      * @ORM\Column(type="string", length=2083)
+     * @Groups({"group2"})
      */
     private $image;
 
