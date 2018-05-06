@@ -14,76 +14,83 @@ class App extends React.Component {
 
         this.state = {
             listingsData,
-            filteredData: listingsData,
+            restaurants: [],
+            filteredData: 'loading',
             isOpen: false,
             center: {
-                lat: null,
-                lng: null
+                lat: undefined,
+                lng: undefined,
+                minLat: undefined,
+                maxLat: undefined,
+                minLng: undefined,
+                maxLng: undefined
             },
             modalInfo: [],
-            restaurants: []
+
         }
         ;
 
         this.search = this.search.bind(this);
         this.renderModal = this.renderModal.bind(this);
-        this.restaurantList = this.restaurantList.bind(this);
+        // this.restaurantList = this.restaurantList.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
     }
 
     componentWillMount() {
         navigator.geolocation.getCurrentPosition(
             position => {
-                this.setState({ center: {lat: position.coords.latitude, lng: position.coords.longitude}});
-            },
-            error => console.log(error)
-        );
+                this.setState({
+                    center: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude,
+                        minLat: position.coords.latitude - 0.1,
+                        maxLat: position.coords.latitude + 0.1,
+                        minLng: position.coords.longitude - 0.2,
+                        maxLng: position.coords.longitude + 0.2
+                    }
+                });
+
+                var that = this
+                fetch(`http://127.0.0.1:8000/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (myJson) {
+                        that.setState({filteredData: myJson})
+                    })
+            }
+        )
     }
-
-    componentDidMount() {
-        this.restaurantList();
-        console.log(this.state.restaurants, 'restaurant value');
-    }
-
-    // Api call to get the data from server
-    restaurantList() {
-
-        $.get( "https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts%7Cinfo&generator=search&formatversion=2&exsentences=1&exintro=1&explaintext=1&inprop=url&gsrsearch=${textInputForGet}&gsrwhat=text", function( data ) {
-           console.log(data)
-        });
-
-        // $.getJSON("https://en.wikipedia.org/w/api.php?action=query&origin=*&format=json&prop=extracts%7Cinfo&generator=search&formatversion=2&exsentences=1&exintro=1&explaintext=1&inprop=url&gsrsearch=${textInputForGet}&gsrwhat=text")
-        //     .then(({ jsonresponse }) => this.setState({ restaurants: jsonresponse }));
-
-    };
-
-
 
 
     search(event) {
         event.preventDefault();
 
-        var filteredData = this.state.listingsData;
+        var filteredData = this.state.filteredData;
         filteredData = filteredData.filter(function (item) {
             return item.menu_text.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1;
         });
 
-            this.setState({filteredData: filteredData});
+        this.setState({filteredData: filteredData});
     }
 
-    onMouseOver(event){
+    onMouseOver(event) {
         var restaurantId = event.currentTarget.getAttribute("restaurantid");
-        var modalInfo = this.state.filteredData.filter(function(restaurant){
-            return restaurant.restaurant_id === Number(restaurantId);
+        var modalInfo = this.state.filteredData.filter(function (restaurant) {
+            return restaurant.id === Number(restaurantId);
         });
+
+
 
         this.setState({
             modalInfo: modalInfo
-            })
+        })
+
+        console.log(this.state.modalInfo)
     }
 
-    renderModal(){
+    renderModal() {
 
         this.setState({
             isOpen: !this.state.isOpen
@@ -104,7 +111,7 @@ class App extends React.Component {
 
                     <Modal show={this.state.isOpen}
                            onClose={this.renderModal}
-                            modalInfo={this.state.modalInfo}/>
+                           modalInfo={this.state.modalInfo}/>
                     {/*</div>*/}
                     {/*<div className="row">*/}
 
@@ -123,7 +130,7 @@ class App extends React.Component {
 
                     <div className="fixedMap col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
                         <Map listingsData={this.state.filteredData}
-                        center={this.state.center}/>
+                             center={this.state.center}/>
                     </div>
                 </div>
             </div>

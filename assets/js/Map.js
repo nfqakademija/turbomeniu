@@ -26,11 +26,15 @@ class Map extends Component {
 
     loopMapComponents() {
         const {listingsData} = this.props;
+
+        if (listingsData === 'loading') {
+            return undefined;
+        }
         return listingsData.map((listing, index) => {
             return (<Restaurant
-                lat={listing.coordinates.lat}
-                lng={listing.coordinates.lng}
-                text={listing.restaurant_name}
+                lat={listing.latitude}
+                lng={listing.longitude}
+                text={listing.name}
                 key={index}
             />)
                })

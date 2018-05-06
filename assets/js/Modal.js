@@ -3,7 +3,20 @@ import React, {Component} from 'react'
 export default class Modal extends Component {
     constructor() {
         super();
-        this.state = {}
+        this.state = {};
+
+        this.loopMeals = this.loopMeals.bind(this);
+    }
+
+    loopMeals(restaurant) {
+ var meals = restaurant;
+
+
+        return meals.map((meal, index) =>{
+            return ( <div key={index}>
+                {meal.foodName} - {meal.price}
+            </div>)
+        })
     }
 
     render() {
@@ -16,7 +29,7 @@ export default class Modal extends Component {
                     <div className="listing" >
                         <div className="row restName">
                             <div className="col">
-                                <strong>{this.props.modalInfo[0].restaurant_name}</strong>
+                                <strong>{this.props.modalInfo[0].name}</strong>
                             </div>
 
                         </div>
@@ -47,7 +60,7 @@ export default class Modal extends Component {
                             </div>
 
                             <div className="col-8">
-                                {this.props.modalInfo[0].menu_text}
+                                {this.loopMeals(this.props.modalInfo[0].meals)}
                             </div>
                         </div>
                     </div>
