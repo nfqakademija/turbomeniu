@@ -26,6 +26,7 @@ class App extends React.Component {
                 maxLng: undefined
             },
             modalInfo: [],
+            currentRestaurantId: undefined,
 
         }
         ;
@@ -50,8 +51,8 @@ class App extends React.Component {
                     }
                 });
 
-                var that = this
-                fetch(`https://turbomeniu.projektai.nfqakademija.lt/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
+                var that = this;
+                fetch(`http://127.0.0.1:8000/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
                     .then(function (response) {
                         return response.json();
                     })
@@ -77,24 +78,45 @@ class App extends React.Component {
 
     onMouseOver(event) {
         var restaurantId = event.currentTarget.getAttribute("restaurantid");
-        var modalInfo = this.state.filteredData.filter(function (restaurant) {
-            return restaurant.id === Number(restaurantId);
-        });
+        this.setState({currentRestaurantId: restaurantId});
+
+        console.log(this.state.currentRestaurantId)
 
 
 
-        this.setState({
-            modalInfo: modalInfo
-        })
 
-        console.log(this.state.modalInfo)
+
+
+
+
+        // var modalInfo = this.state.filteredData.filter(function (restaurant) {
+        //     return restaurant.id === Number(restaurantId);
+        // });
+
+
+
+        // this.setState({
+        //     modalInfo: modalInfo
+        // })
+        //
+        // console.log(this.state.modalInfo)
     }
 
     renderModal() {
 
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
+        var that = this
+        fetch(`http://127.0.0.1:8000/modal/${this.state.currentRestaurantId}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                that.setState({modalInfo: myJson,
+                    isOpen: !that.state.isOpen});
+
+                console.log(that.state.modalInfo.name, 'onMouseOver')
+            })
+
+
     }
 
     render() {

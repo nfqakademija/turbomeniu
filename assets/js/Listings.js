@@ -81,7 +81,6 @@ export default class Listings extends Component {
     }
 
     render() {
-        console.log(this.props.listingsData, 'listings listingsData')
         return (
             <div className="listings row">
                 {this.loopListings()}
