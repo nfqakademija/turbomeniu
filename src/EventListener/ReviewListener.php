@@ -28,7 +28,7 @@ class ReviewListener
             $id = $entity->getRestaurant()->getId();
             $repo = $entityManager->getRepository('App:Review');
             $query = $repo->createQueryBuilder('r')
-                ->select("avg(r.rating) as score_avg")
+                ->select("avg(r.rating) as avg_rating")
                 ->where('r.restaurant = :restaurant')
                 ->setParameter('restaurant', $id)
                 ->getQuery();
