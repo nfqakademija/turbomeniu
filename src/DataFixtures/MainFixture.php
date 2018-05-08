@@ -23,9 +23,6 @@ class MainFixture extends Fixture
             'logo' => function () use ($generator) {
                 return $generator->imageUrl('100', '100');
             },
-            'restaurantType' => function () use ($generator) {
-                return $generator->randomElement(['a','b','c']);
-            },
             'phoneNumber' => function () use ($generator) {
                 return $generator->e164PhoneNumber;
             },

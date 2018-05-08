@@ -43,11 +43,11 @@ class Restaurant
      * @Groups({"group1", "group2"})
      */
     private $logo;
-//TODO Remove restaurant type
+
     /**
-     * @ORM\Column(type="string", length=70)
+     * @ORM\Column(type="integer")
      */
-    private $restaurantType;
+    private $avgRating;
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -149,17 +149,17 @@ class Restaurant
     /**
      * @return mixed
      */
-    public function getRestaurantType()
+    public function getAvgRating()
     {
-        return $this->restaurantType;
+        return $this->avgRating;
     }
 
     /**
-     * @param mixed $restaurantType
+     * @param mixed $avgRating
      */
-    public function setRestaurantType($restaurantType): void
+    public function setAvgRating($avgRating): void
     {
-        $this->restaurantType = $restaurantType;
+        $this->avgRating = $avgRating;
     }
 
     /**
