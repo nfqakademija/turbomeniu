@@ -22,6 +22,7 @@ class ReviewListener
         if ($entity instanceof Review) {
             $id = $entity->getRestaurant()->getId();
             $restaurant = $entityManager->getRepository(Restaurant::class)->find($id);
+
         }
     }
 }
