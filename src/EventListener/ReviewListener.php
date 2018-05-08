@@ -21,8 +21,13 @@ class ReviewListener
 
         if ($entity instanceof Review) {
             $id = $entity->getRestaurant()->getId();
-            $restaurant = $entityManager->getRepository(Restaurant::class)->find($id);
-
+            $repo = $entityManager->getRepository('App:Review');
+            $query = $repo->createQueryBuilder('r')
+                ->select("avg(r.rating) as score_avg")
+                ->where('r.restaurant = :restaurant')
+                ->setParameter('restaurant', $id)
+                ->getQuery();
+            $avgRating = $query->getResult();
         }
     }
 }
