@@ -9,6 +9,7 @@
 namespace App\EventListener;
 
 use App\Entity\Review;
+use App\Entity\Restaurant;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ReviewListener
@@ -19,7 +20,8 @@ class ReviewListener
         $entityManager = $args->getEntityManager();
 
         if ($entity instanceof Review) {
-            $restaurant = $entity->getRestaurant();
+            $id = $entity->getRestaurant()->getId();
+            $restaurant = $entityManager->getRepository(Restaurant::class)->find($id);
         }
     }
 }
