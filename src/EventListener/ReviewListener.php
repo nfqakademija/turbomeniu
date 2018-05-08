@@ -13,7 +13,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ReviewListener
 {
-    public function postUpdate(LifecycleEventArgs $args)
+    public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
         $entityManager = $args->getEntityManager();
