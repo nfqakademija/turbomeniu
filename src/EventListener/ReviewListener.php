@@ -8,11 +8,17 @@
 
 namespace App\EventListener;
 
+use App\Entity\Restaurant;
 use App\Entity\Review;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ReviewListener
 {
+    /**
+     * @param LifecycleEventArgs $args
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
     public function postPersist(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -27,6 +33,10 @@ class ReviewListener
                 ->setParameter('restaurant', $id)
                 ->getQuery();
             $avgRating = $query->getResult();
+
+            $restaurant = $entityManager->getRepository(Restaurant::class)->find($id);
+            $restaurant->setAvgRating($avgRating);
+            $entityManager->flush();
         }
     }
 }
