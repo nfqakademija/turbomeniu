@@ -9,7 +9,6 @@
 namespace App\EventListener;
 
 use App\Entity\Review;
-use App\Entity\Restaurant;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ReviewListener
