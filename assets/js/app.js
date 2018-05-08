@@ -52,7 +52,7 @@ class App extends React.Component {
                 });
 
                 var that = this;
-                fetch(`https://turbomeniu.projektai.nfqakademija.lt/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
+                fetch(`https://turbomeniu.projektai.nfqakademija.lt/index${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
                     .then(function (response) {
                         return response.json();
                     })
