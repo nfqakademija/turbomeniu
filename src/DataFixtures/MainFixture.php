@@ -38,6 +38,7 @@ class MainFixture extends Fixture
             'longitude' => function () use ($generator) {
                 return $generator->randomFloat($nbMaxDecimals = null, $min = 23.754923, $max = 24.099604);
             },
+            'avgRating' => null
         ]);
 
 //        Add Meal Entities
