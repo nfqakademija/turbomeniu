@@ -29,7 +29,6 @@ class RestaurantRepository extends ServiceEntityRepository
     public function findAllClose($minLat, $maxLat, $minLon, $maxLon): array
     {
         $parameters = ['minLat' => $minLat, 'maxLat' =>$maxLat, 'minLon' => $minLon, 'maxLon' => $maxLon];
-//TODO add avg rating to this.
         $qb = $this->createQueryBuilder('r')
             ->where('r.latitude >= :minLat')
             ->andWhere('r.latitude <= :maxLat')

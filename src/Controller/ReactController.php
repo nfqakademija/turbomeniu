@@ -20,6 +20,7 @@ class ReactController extends AbstractController
 {
     /**
      * @Route("/index/{minLat}/{maxLat}/{minLon}/{maxLon}", name="index")
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function index($minLat, $maxLat, $minLon, $maxLon)
     {
@@ -42,6 +43,7 @@ class ReactController extends AbstractController
 
     /**
      * @Route("/modal/{id}", name="modal")
+     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function modal($id)
     {

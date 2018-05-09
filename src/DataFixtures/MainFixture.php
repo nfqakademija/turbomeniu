@@ -23,9 +23,6 @@ class MainFixture extends Fixture
             'logo' => function () use ($generator) {
                 return $generator->imageUrl('100', '100');
             },
-            'restaurantType' => function () use ($generator) {
-                return $generator->randomElement(['a','b','c']);
-            },
             'phoneNumber' => function () use ($generator) {
                 return $generator->e164PhoneNumber;
             },
@@ -41,6 +38,7 @@ class MainFixture extends Fixture
             'longitude' => function () use ($generator) {
                 return $generator->randomFloat($nbMaxDecimals = null, $min = 23.754923, $max = 24.099604);
             },
+            'avgRating' => null
         ]);
 
 //        Add Meal Entities
