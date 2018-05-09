@@ -3,7 +3,8 @@
 parameters:
 
 services:
-    App\EventListener\ReviewListener:
+    app.event_listener.review_listener:
+        class: App\EventListener\ReviewListener
         tags:
             - { name: doctrine.event_listener, event: postPersist, method: postPersist }
     # default configuration for services in *this* file
