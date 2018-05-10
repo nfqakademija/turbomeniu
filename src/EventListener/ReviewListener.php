@@ -36,7 +36,9 @@ class ReviewListener
 
             $restaurant = $entityManager->getRepository(Restaurant::class)->find($id);
             $restaurant->setAvgRating($avgRating);
-            $entityManager->flush();
+            $entityManager->flush($restaurant);
+            $entityManager->detach($restaurant);
+            $entityManager->detach($entity);
         }
     }
 }
