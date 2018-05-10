@@ -17,7 +17,7 @@ class Map extends Component {
             lat: 54.89,
             lng: 23.90
         };
-        this.zoom = 10;
+        this.zoom = 13;
         this.loopMapComponents = this.loopMapComponents.bind(this)
 
     }

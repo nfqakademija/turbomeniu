@@ -6,6 +6,7 @@ export default class Modal extends Component {
         this.state = {};
 
         this.loopMeals = this.loopMeals.bind(this);
+        this.loopReviews = this.loopReviews.bind(this);
     }
 
     loopMeals(restaurant) {
@@ -19,13 +20,28 @@ export default class Modal extends Component {
         })
     }
 
+    loopReviews(){
+        var reviews = this.props.modalInfo.reviews;
+
+
+        return reviews.map((review, index) =>{
+            return ( <div key={index}>
+                {review.name}, {review.rating} - {review.comment}
+            </div>)
+        })
+    }
+
     render() {
         if(!this.props.show) {
             return null;
         }
 
         return (<div className="backdropStyle" >
+
                 <div className="modalStyle" >
+                    <div className="modal-header col-12">
+                        <i className="fas fa-times" onClick={this.props.onClose}></i>
+                    </div>
                     <div className="listing" >
                         <div className="row restName">
                             <div className="col">
@@ -36,7 +52,7 @@ export default class Modal extends Component {
 
                         <div className="row">
 
-                            <div className="col-4 col-md-3 col-lg-4 col-xl-4">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
 
                                 <div className="listingImg row">
                                     <div className="col">
@@ -46,31 +62,27 @@ export default class Modal extends Component {
 
                                 <div className="extra row">
                                     <div className="col">
-                                        <ul>
-                                            {/*<li><i className="fa fa-cutlery"*/}
-                                                   {/*aria-hidden="true"></i> {this.props.modalInfo.restaurant_type}</li>*/}
-                                            {/*<li><i className="fas fa-lemon"></i> {this.props.modalInfo[0].food_type}</li>*/}
-                                            {/*<li><a href={this.props.modalInfo[0].facebook_link} target="blank"><i*/}
-                                                {/*className="fab fa-facebook-square"></i></a></li>*/}
-                                        </ul>
+                                        <i className="fas fa-at"></i> {this.props.modalInfo.email}<br/>
+                                        <i className="fas fa-phone"></i> {this.props.modalInfo.phoneNumber}<br/>
+                                        <a href={this.props.modalInfo.webPage}>{this.props.modalInfo.webPage}</a>
                                     </div>
 
                                 </div>
 
                             </div>
 
-                            <div className="col-8">
+                            <div className="col-4">
                                 {this.loopMeals(this.props.modalInfo.meals)}
+                            </div>
+
+                            <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                {this.loopReviews()}
+
                             </div>
                         </div>
                     </div>
 
-                    <div className="footer">
 
-                        <button onClick={this.props.onClose}>
-                            Close
-                        </button>
-                    </div>
                 </div>
             </div>
 
