@@ -38,7 +38,6 @@ class ReviewListener
             $restaurant->setAvgRating($avgRating);
             $entityManager->flush($restaurant);
             $entityManager->detach($restaurant);
-            $entityManager->detach($entity);
         }
     }
 }
