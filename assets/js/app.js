@@ -33,7 +33,7 @@ class App extends React.Component {
 
         this.search = this.search.bind(this);
         this.renderModal = this.renderModal.bind(this);
-        // this.restaurantList = this.restaurantList.bind(this);
+        this.getInitialData = this.getInitialData.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
     }
 
@@ -51,18 +51,22 @@ class App extends React.Component {
                     }
                 });
 
-                var that = this;
-                fetch(`http://127.0.0.1:8000/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
-                    .then(function (response) {
-                        return response.json();
-                    })
-                    .then(function (myJson) {
-                        that.setState({filteredData: myJson})
-                    })
+                this.getInitialData()
             }
         )
     }
 
+    getInitialData(){
+        var that = this;
+        fetch(`/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                console.log(myJson)
+                that.setState({filteredData: myJson})
+            })
+    }
 
     search(event) {
         event.preventDefault();
@@ -72,7 +76,6 @@ class App extends React.Component {
             return item.menu_text.toLowerCase().search(
                 event.target.value.toLowerCase()) !== -1;
         });
-
         this.setState({filteredData: filteredData});
     }
 
@@ -81,31 +84,11 @@ class App extends React.Component {
         this.setState({currentRestaurantId: restaurantId});
 
         console.log(this.state.currentRestaurantId)
-
-
-
-
-
-
-
-
-        // var modalInfo = this.state.filteredData.filter(function (restaurant) {
-        //     return restaurant.id === Number(restaurantId);
-        // });
-
-
-
-        // this.setState({
-        //     modalInfo: modalInfo
-        // })
-        //
-        // console.log(this.state.modalInfo)
     }
 
     renderModal() {
-
         var that = this
-        fetch(`http://127.0.0.1:8000/modal/${this.state.currentRestaurantId}`)
+        fetch(`/modal/${this.state.currentRestaurantId}`)
             .then(function (response) {
                 return response.json();
             })
@@ -113,10 +96,8 @@ class App extends React.Component {
                 that.setState({modalInfo: myJson,
                     isOpen: !that.state.isOpen});
 
-                console.log(that.state.modalInfo.name, 'onMouseOver')
+                console.log(that.state.modalInfo, 'modalinfo')
             })
-
-
     }
 
     render() {

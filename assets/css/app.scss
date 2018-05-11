@@ -19,7 +19,10 @@ body {
   margin: 0;
   padding-top: 80px !important;
 
-  background: linear-gradient(10deg, #55a7e1d2, #559499cd, #55dca091), url("https://chinesenewyear.imgix.net/assets/images/food/chinese-new-year-food-feast.jpg?q=50&w=1280&h=720&fit=crop&auto=format") ;
+
+  background: -webkit-linear-gradient(to right, #6A82FB90, #FC5C7D90);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB90, #FC5C7D90), url("https://pune365.com/wp-content/uploads/2017/02/30287438_l.jpg"); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

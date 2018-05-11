@@ -4,7 +4,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0,0,0,0.3);
+  background: -webkit-linear-gradient(to right, #6A82FB90, #FC5C7D90);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #6A82FB90, #FC5C7D90);
+  //background-color: rgba(0,0,0,0.3);
   padding: 50px;
   z-index: 1031;
 }
@@ -12,9 +14,14 @@
 .modalStyle {
   background-color: #fff;
   border-radius: 5px;
-  max-width: 800px;
+  max-width: 1000px;
   min-height: 500px;
   margin: 0 auto;
   padding: 30px;
   z-index: 1032;
+}
+
+.modal-header {
+  color: black;
+  text-align: right;
 }
