@@ -33,9 +33,10 @@ class ReviewListener
                 ->setParameter('restaurant', $id)
                 ->getQuery();
             $avgRating = $query->getResult();
+            $insert = $avgRating['0'];
 
             $restaurant = $entityManager->getRepository(Restaurant::class)->find($id);
-            $restaurant->setAvgRating($avgRating);
+            $restaurant->setAvgRating($insert['avg_rating']);
             $entityManager->flush($restaurant);
             $entityManager->detach($restaurant);
         }
