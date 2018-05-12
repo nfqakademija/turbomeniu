@@ -28,13 +28,24 @@ class RestaurantRepository extends ServiceEntityRepository
      */
     public function findAllClose($minLat, $maxLat, $minLon, $maxLon): array
     {
-        $parameters = ['minLat' => $minLat, 'maxLat' =>$maxLat, 'minLon' => $minLon, 'maxLon' => $maxLon];
+        $parameters = ['minLat' => $minLat, 'maxLat' => $maxLat, 'minLon' => $minLon, 'maxLon' => $maxLon];
         $qb = $this->createQueryBuilder('r')
             ->where('r.latitude >= :minLat')
             ->andWhere('r.latitude <= :maxLat')
             ->andWhere('r.longitude >= :minLon')
             ->andWhere('r.longitude <= :maxLon')
             ->setParameters($parameters)
+            ->getQuery();
+        return $qb->execute();
+    }
+
+    public function searchAll($query): array
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->innerJoin('r.meals', 'm')
+            ->where('r.name = :query')
+            ->orWhere('m.foodName = :query')
+            ->setParameter('query', '%'.$query.'%')
             ->getQuery();
         return $qb->execute();
     }
