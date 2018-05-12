@@ -39,6 +39,10 @@ class RestaurantRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
+    /**
+     * @param $query
+     * @return array
+     */
     public function searchAll($query): array
     {
         $qb = $this->createQueryBuilder('r')
