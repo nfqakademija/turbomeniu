@@ -24,7 +24,12 @@ class ReactController extends AbstractController
      */
     public function index($minLat, $maxLat, $minLon, $maxLon)
     {
-        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose($minLat, $maxLat, $minLon, $maxLon);
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose(
+            $minLat,
+            $maxLat,
+            $minLon,
+            $maxLon
+        );
 
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         // Call normalizer
@@ -60,6 +65,29 @@ class ReactController extends AbstractController
 
         //        Normalize datetime and object
         $normalized = $serializer->normalize($restaurant, null, ['groups' => ['group2']]);
+
+        return JsonResponse::create($normalized);
+    }
+
+    /**
+     * @Route("/search/{query}", name="search")
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     */
+    public function search($query)
+    {
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->searchAll($query);
+
+        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
+        // Call normalizer
+        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $dateTimeNorm = new DateTimeNormalizer();
+        $normalizer->setCircularReferenceHandler(function ($restaurant) {
+            return $restaurant->getId();
+        });
+        $serializer = new Serializer([$dateTimeNorm, $normalizer]);
+
+        //        Normalize datetime and object
+        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
     }
