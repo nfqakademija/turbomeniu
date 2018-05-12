@@ -43,8 +43,8 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('r')
             ->innerJoin('r.meals', 'm')
-            ->where('r.name = :query')
-            ->orWhere('m.foodName = :query')
+            ->where('r.name LIKE :query')
+            ->orWhere('m.foodName LIKE :query')
             ->setParameter('query', '%'.$query.'%')
             ->getQuery();
         return $qb->execute();
