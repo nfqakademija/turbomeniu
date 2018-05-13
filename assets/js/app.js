@@ -71,15 +71,28 @@ class App extends React.Component {
     search(event) {
         event.preventDefault();
 
-        var that = this;
-        fetch(`/search/${event.target.value.toLowerCase()}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                console.log(myJson)
-                that.setState({filteredData: myJson})
-            })
+        if (event.target.value){
+            var that = this;
+            fetch(`/search/${event.target.value.toLowerCase()}`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    console.log(myJson)
+                    that.setState({filteredData: myJson})
+                })
+        } else if (!event.target.value){
+            var that = this;
+            fetch(`/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    console.log(myJson)
+                    that.setState({filteredData: myJson})
+                })
+        }
+
     }
 
     onMouseOver(event) {
