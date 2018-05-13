@@ -82,15 +82,7 @@ class App extends React.Component {
                     that.setState({filteredData: myJson})
                 })
         } else if (!event.target.value){
-            var that = this;
-            fetch(`/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (myJson) {
-                    console.log(myJson)
-                    that.setState({filteredData: myJson})
-                })
+            this.getInitialData();
         }
 
     }
