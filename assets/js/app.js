@@ -71,12 +71,20 @@ class App extends React.Component {
     search(event) {
         event.preventDefault();
 
-        var filteredData = this.state.filteredData;
-        filteredData = filteredData.filter(function (item) {
-            return item.menu_text.toLowerCase().search(
-                event.target.value.toLowerCase()) !== -1;
-        });
-        this.setState({filteredData: filteredData});
+        if (event.target.value){
+            var that = this;
+            fetch(`/search/${event.target.value.toLowerCase()}`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    console.log(myJson)
+                    that.setState({filteredData: myJson})
+                })
+        } else if (!event.target.value){
+            this.getInitialData();
+        }
+
     }
 
     onMouseOver(event) {

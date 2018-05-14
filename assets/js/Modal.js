@@ -15,6 +15,7 @@ export default class Modal extends Component {
 
         return meals.map((meal, index) =>{
             return ( <div key={index}>
+
                 {meal.foodName} - {meal.price}
             </div>)
         })
@@ -23,10 +24,34 @@ export default class Modal extends Component {
     loopReviews(){
         var reviews = this.props.modalInfo.reviews;
 
-
         return reviews.map((review, index) =>{
             return ( <div key={index}>
-                {review.name}, {review.rating} - {review.comment}
+                <div className="reviewName col-12">{review.name}</div>
+                <div className="date col-12">{review.date}</div>
+                <div className="col-12">{(() => {switch(review.rating){
+                    case 0:
+                    return <i className="far fa-star-half"></i>;
+                    break;
+                    case 1:
+                    return <i className="far fa-star"></i>;
+                    break;
+                    case 2:
+                    return <div><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                    break;
+                    case 3:
+                    return <div><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                    break;
+                    case 4:
+                    return <div><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                    break;
+                    case 5:
+                    return <div><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>
+                    break;
+                }
+                })()}
+                </div>
+                <div className="col-12">{review.comment}</div>
+                 <hr/>
             </div>)
         })
     }
@@ -72,11 +97,16 @@ export default class Modal extends Component {
                             </div>
 
                             <div className="col-4">
+
                                 {this.loopMeals(this.props.modalInfo.meals)}
                             </div>
 
                             <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
-                                {this.loopReviews()}
+
+                                <div className="reviewDiv">
+                                    {this.loopReviews()}
+
+                                </div>
 
                             </div>
                         </div>
