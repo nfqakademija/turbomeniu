@@ -17,7 +17,7 @@ class ReactController extends AbstractController
      * @param $minLon
      * @param $maxLon
      * @param NormalizerCallService $normalizerCallService
-     * @return static
+     * @return JsonResponse
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function index($minLat, $maxLat, $minLon, $maxLon, NormalizerCallService $normalizerCallService)
@@ -41,7 +41,7 @@ class ReactController extends AbstractController
      * @Route("/modal/{id}", name="modal")
      * @param $id
      * @param NormalizerCallService $normalizerCallService
-     * @return static
+     * @return JsonResponse
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function modal($id, NormalizerCallService $normalizerCallService)
@@ -60,7 +60,7 @@ class ReactController extends AbstractController
      * @Route("/search/{query}", name="search")
      * @param $query
      * @param NormalizerCallService $normalizerCallService
-     * @return static
+     * @return JsonResponse
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
     public function search($query, NormalizerCallService $normalizerCallService)
