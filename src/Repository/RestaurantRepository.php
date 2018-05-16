@@ -30,10 +30,22 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         $parameters = ['minLat' => $minLat, 'maxLat' => $maxLat, 'minLon' => $minLon, 'maxLon' => $maxLon];
         $qb = $this->createQueryBuilder('r')
+            ->select('r')
             ->where('r.latitude >= :minLat')
             ->andWhere('r.latitude <= :maxLat')
             ->andWhere('r.longitude >= :minLon')
             ->andWhere('r.longitude <= :maxLon')
+//            ->addSelect(
+//                '( 3959 * acos(cos(radians(' . $minLat . '))' .
+//                '* cos( radians( r.latitude ) )' .
+//                '* cos( radians( r.longitude )' .
+//                '- radians(' . $minLon . ') )' .
+//                '+ sin( radians(' . $minLat . ') )' .
+//                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
+//            )
+//            ->having('distance < :distance')
+//            ->setParameter('distance', '1')
+//            ->orderBy('distance', 'ASC')
             ->setParameters($parameters)
             ->getQuery();
         return $qb->execute();

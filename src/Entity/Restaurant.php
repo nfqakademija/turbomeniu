@@ -14,12 +14,14 @@ class Restaurant
 {
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Meal", mappedBy="restaurant")
+     * @ORM\OrderBy({"price" = "ASC"})
      * @Groups({"group1", "group2"})
      */
     private $meals;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="restaurant")
+     * @ORM\OrderBy({"date" = "DESC"})
      * @Groups({"group2"})
      */
     private $reviews;
