@@ -6,23 +6,21 @@ use App\Entity\Restaurant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
-
-use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-// Serializer groups
-use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-// For serializer group annotations
-use Doctrine\Common\Annotations\AnnotationReader;
-use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
+use App\Services\NormalizerCallService;
 
 class ReactController extends AbstractController
 {
     /**
      * @Route("/index/{minLat}/{maxLat}/{minLon}/{maxLon}", name="index")
+     * @param $minLat
+     * @param $maxLat
+     * @param $minLon
+     * @param $maxLon
+     * @param NormalizerCallService $normalizerCallService
+     * @return static
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function index($minLat, $maxLat, $minLon, $maxLon)
+    public function index($minLat, $maxLat, $minLon, $maxLon, NormalizerCallService $normalizerCallService)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose(
             $minLat,
@@ -31,63 +29,48 @@ class ReactController extends AbstractController
             $maxLon
         );
 
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        // Call normalizer
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
-        $dateTimeNorm = new DateTimeNormalizer();
-        $normalizer->setCircularReferenceHandler(function ($restaurant) {
-            return $restaurant->getId();
-        });
-        $serializer = new Serializer([$dateTimeNorm, $normalizer]);
+        $normalizer = $normalizerCallService->callNormalizer();
 
         //        Normalize datetime and object
-        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['group1']]);
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
      * @Route("/modal/{id}", name="modal")
+     * @param $id
+     * @param NormalizerCallService $normalizerCallService
+     * @return static
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function modal($id)
+    public function modal($id, NormalizerCallService $normalizerCallService)
     {
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        // Call normalizer
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
-        $dateTimeNorm = new DateTimeNormalizer();
-        $normalizer->setCircularReferenceHandler(function ($restaurant) {
-            return $restaurant->getId();
-        });
-        $serializer = new Serializer([$dateTimeNorm, $normalizer]);
+        $normalizer = $normalizerCallService->callNormalizer();
 
         //        Normalize datetime and object
-        $normalized = $serializer->normalize($restaurant, null, ['groups' => ['group2']]);
+        $normalized = $normalizer->normalize($restaurant, null, ['groups' => ['group2']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
      * @Route("/search/{query}", name="search")
+     * @param $query
+     * @param NormalizerCallService $normalizerCallService
+     * @return static
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function search($query)
+    public function search($query, NormalizerCallService $normalizerCallService)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->searchAll($query);
 
-        $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        // Call normalizer
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
-        $dateTimeNorm = new DateTimeNormalizer();
-        $normalizer->setCircularReferenceHandler(function ($restaurant) {
-            return $restaurant->getId();
-        });
-        $serializer = new Serializer([$dateTimeNorm, $normalizer]);
+        $normalizer = $normalizerCallService->callNormalizer();
 
         //        Normalize datetime and object
-        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['group1']]);
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
     }
