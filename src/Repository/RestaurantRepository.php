@@ -20,15 +20,13 @@ class RestaurantRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param $minLat
-     * @param $maxLat
-     * @param $minLon
-     * @param $maxLon
+     * @param $latitude
+     * @param $longitude
+     * @param $distance
      * @return array
      */
     public function findAllClose($latitude, $longitude, $distance): array
     {
-//        $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->addSelect(
