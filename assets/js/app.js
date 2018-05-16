@@ -81,11 +81,12 @@ class App extends React.Component {
 
     search(event) {
         event.preventDefault();
-        localStorage.setItem('search', event.target.value)
+        localStorage.setItem('search', event.target.value);
+
         if (event.target.value){
 
             var that = this;
-            fetch(`/search/${event.target.value.toLowerCase()}`)
+            fetch(`/search/${event.target.value.toLowerCase()}/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
                 .then(function (response) {
                     return response.json();
                 })
