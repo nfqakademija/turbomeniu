@@ -11,22 +11,20 @@ use App\Services\NormalizerCallService;
 class ReactController extends AbstractController
 {
     /**
-     * @Route("/index/{minLat}/{maxLat}/{minLon}/{maxLon}", name="index")
-     * @param $minLat
-     * @param $maxLat
-     * @param $minLon
-     * @param $maxLon
+     * @Route("/index/{latitude}/{longitude}/{distance}", name="index")
+     * @param $latitude
+     * @param $longitude
+     * @param $distance
      * @param NormalizerCallService $normalizerCallService
      * @return JsonResponse
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function index($minLat, $maxLat, $minLon, $maxLon, NormalizerCallService $normalizerCallService)
+    public function index($latitude, $longitude, $distance, NormalizerCallService $normalizerCallService)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose(
-            $minLat,
-            $maxLat,
-            $minLon,
-            $maxLon
+            $latitude,
+            $longitude,
+            $distance
         );
 
         $normalizer = $normalizerCallService->callNormalizer();

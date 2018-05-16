@@ -26,27 +26,22 @@ class RestaurantRepository extends ServiceEntityRepository
      * @param $maxLon
      * @return array
      */
-    public function findAllClose($minLat, $maxLat, $minLon, $maxLon): array
+    public function findAllClose($latitude, $longitude, $distance): array
     {
-        $parameters = ['minLat' => $minLat, 'maxLat' => $maxLat, 'minLon' => $minLon, 'maxLon' => $maxLon];
+//        $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $qb = $this->createQueryBuilder('r')
             ->select('r')
-            ->where('r.latitude >= :minLat')
-            ->andWhere('r.latitude <= :maxLat')
-            ->andWhere('r.longitude >= :minLon')
-            ->andWhere('r.longitude <= :maxLon')
-//            ->addSelect(
-//                '( 3959 * acos(cos(radians(' . $minLat . '))' .
-//                '* cos( radians( r.latitude ) )' .
-//                '* cos( radians( r.longitude )' .
-//                '- radians(' . $minLon . ') )' .
-//                '+ sin( radians(' . $minLat . ') )' .
-//                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
-//            )
-//            ->having('distance < :distance')
-//            ->setParameter('distance', '1')
-//            ->orderBy('distance', 'ASC')
-            ->setParameters($parameters)
+            ->addSelect(
+                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                '* cos( radians( r.latitude ) )' .
+                '* cos( radians( r.longitude )' .
+                '- radians(' . $longitude . ') )' .
+                '+ sin( radians(' . $latitude . ') )' .
+                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
+            )
+            ->having('distance < :distance')
+            ->setParameter('distance', $distance)
+            ->orderBy('distance', 'ASC')
             ->getQuery();
         return $qb->execute();
     }
