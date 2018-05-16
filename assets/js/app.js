@@ -20,11 +20,12 @@ class App extends React.Component {
             center: {
                 lat: undefined,
                 lng: undefined,
-                minLat: undefined,
-                maxLat: undefined,
-                minLng: undefined,
-                maxLng: undefined
+                // minLat: undefined,
+                // maxLat: undefined,
+                // minLng: undefined,
+                // maxLng: undefined
             },
+            mapZoom: 10,
             modalInfo: [],
             currentRestaurantId: undefined,
 
@@ -32,25 +33,35 @@ class App extends React.Component {
         ;
 
         this.search = this.search.bind(this);
+        this.getUserLocation = this.getUserLocation.bind(this)
         this.renderModal = this.renderModal.bind(this);
         this.getInitialData = this.getInitialData.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
+        this.getLocalStorage = this.getLocalStorage.bind(this);
     }
 
     componentWillMount() {
+        this.getUserLocation();
+        this.getLocalStorage()
+    }
+
+    getLocalStorage(){
+        console.log(localStorage, "localstorage");
+    }
+
+    getUserLocation(){
         navigator.geolocation.getCurrentPosition(
             position => {
                 this.setState({
                     center: {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
-                        minLat: position.coords.latitude - 0.1,
-                        maxLat: position.coords.latitude + 0.1,
-                        minLng: position.coords.longitude - 0.2,
-                        maxLng: position.coords.longitude + 0.2
+                        // minLat: position.coords.latitude - 0.1,
+                        // maxLat: position.coords.latitude + 0.1,
+                        // minLng: position.coords.longitude - 0.2,
+                        // maxLng: position.coords.longitude + 0.2
                     }
                 });
-
                 this.getInitialData()
             }
         )
@@ -58,7 +69,7 @@ class App extends React.Component {
 
     getInitialData(){
         var that = this;
-        fetch(`/index/${this.state.center.minLat}/${this.state.center.maxLat}/${this.state.center.minLng}/${this.state.center.maxLng}`)
+        fetch(`/index/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
             .then(function (response) {
                 return response.json();
             })
@@ -70,8 +81,9 @@ class App extends React.Component {
 
     search(event) {
         event.preventDefault();
-
+        localStorage.setItem('search', event.target.value)
         if (event.target.value){
+
             var that = this;
             fetch(`/search/${event.target.value.toLowerCase()}`)
                 .then(function (response) {
