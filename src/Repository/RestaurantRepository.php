@@ -46,15 +46,30 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param $query
+     * @param $latitude
+     * @param $longitude
+     * @param $distance
      * @return array
      */
-    public function searchAll($query): array
+    public function searchAll($query, $latitude, $longitude, $distance): array
     {
         $qb = $this->createQueryBuilder('r')
+            ->select('r')
             ->innerJoin('r.meals', 'm')
             ->where('r.name LIKE :query')
             ->orWhere('m.foodName LIKE :query')
             ->setParameter('query', '%'.$query.'%')
+            ->addSelect(
+                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                '* cos( radians( r.latitude ) )' .
+                '* cos( radians( r.longitude )' .
+                '- radians(' . $longitude . ') )' .
+                '+ sin( radians(' . $latitude . ') )' .
+                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
+            )
+            ->having('distance < :distance')
+            ->setParameter('distance', $distance)
+            ->orderBy('distance', 'ASC')
             ->getQuery();
         return $qb->execute();
     }

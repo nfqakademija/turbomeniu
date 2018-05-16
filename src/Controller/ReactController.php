@@ -55,15 +55,23 @@ class ReactController extends AbstractController
     }
 
     /**
-     * @Route("/search/{query}", name="search")
+     * @Route("/search/{query}/{latitude}/{longitude}/{distance}", name="search")
      * @param $query
+     * @param $latitude
+     * @param $longitude
+     * @param $distance
      * @param NormalizerCallService $normalizerCallService
      * @return JsonResponse
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function search($query, NormalizerCallService $normalizerCallService)
+    public function search($query, $latitude, $longitude, $distance, NormalizerCallService $normalizerCallService)
     {
-        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->searchAll($query);
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->searchAll(
+            $query,
+            $latitude,
+            $longitude,
+            $distance
+        );
 
         $normalizer = $normalizerCallService->callNormalizer();
 
