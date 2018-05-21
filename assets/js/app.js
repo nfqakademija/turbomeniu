@@ -17,9 +17,10 @@ class App extends React.Component {
             restaurants: [],
             filteredData: 'loading',
             isOpen: false,
+            isToggleOn: true,
             center: {
-                lat: undefined,
-                lng: undefined,
+                lat: 54.898521,
+                lng: 23.903597,
                 // minLat: undefined,
                 // maxLat: undefined,
                 // minLng: undefined,
@@ -38,11 +39,18 @@ class App extends React.Component {
         this.getInitialData = this.getInitialData.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
         this.getLocalStorage = this.getLocalStorage.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentWillMount() {
         this.getUserLocation();
         this.getLocalStorage()
+    }
+
+    handleClick() {
+        this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+        }));
     }
 
     getLocalStorage(){
@@ -62,7 +70,8 @@ class App extends React.Component {
                         // maxLng: position.coords.longitude + 0.2
                     }
                 });
-                this.getInitialData()
+
+               this.getInitialData()
             }
         )
     }
@@ -136,14 +145,20 @@ class App extends React.Component {
                     <Modal show={this.state.isOpen}
                            onClose={this.renderModal}
                            modalInfo={this.state.modalInfo}/>
-                    {/*</div>*/}
-                    {/*<div className="row">*/}
+                    </div>
+                    <div className="row">
 
-                    {/*<Togglebuton />*/}
+                    <div>
+                        <Togglebuton
+                            handleClick={this.handleClick}
+                            isToggleOn={this.state.isToggleOn}
+                        />
+                    </div>
 
-                    {/*</div>*/}
 
-                    {/*<div className="row">*/}
+                    </div>
+
+                    <div className="row">
                     <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
                         <Listings
                             listingsData={this.state.filteredData}
@@ -152,9 +167,11 @@ class App extends React.Component {
                         />
                     </div>
 
-                    <div className="fixedMap col-xs-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                    <div className={this.state.isToggleOn ? 'fixedMap col-xs-12  d-none d-sm-block col-sm-4 col-md-4 col-lg-4 col-xl-4 map' : 'fixedMap col-xs-12  col-sm-4 col-md-4 col-lg-4 col-xl-4 map'}>
                         <Map listingsData={this.state.filteredData}
-                             center={this.state.center}/>
+                             center={this.state.center}
+                             isToggleOn={this.state.isToggleOn}
+                        />
                     </div>
                 </div>
             </div>
