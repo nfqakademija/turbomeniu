@@ -44,7 +44,7 @@ class App extends React.Component {
 
     componentWillMount() {
         this.getUserLocation();
-        this.getLocalStorage()
+        this.getLocalStorage();
     }
 
     handleClick() {
@@ -55,6 +55,12 @@ class App extends React.Component {
 
     getLocalStorage(){
         console.log(localStorage, "localstorage");
+
+        if (localStorage.search === undefined){
+            localStorage.setItem('TurboMeniuSearchHistory', '')
+        } else {
+            return JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
+        }
     }
 
     getUserLocation(){
@@ -90,7 +96,11 @@ class App extends React.Component {
 
     search(event) {
         event.preventDefault();
-        localStorage.setItem('search', event.target.value);
+
+//todo try implementing this strategy https://medium.com/collaborne-engineering/how-to-avoid-local-storage-from-overrunning-4c9702681290
+        var lastSearchOfTheDay = {`${new Date}`: `${event.target.value}`}
+        localStorage.setItem(JSON.stringify(lastSearchOfTheDay))
+
 
         if (event.target.value){
 
