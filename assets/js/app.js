@@ -98,8 +98,8 @@ class App extends React.Component {
         event.preventDefault();
 
 //todo try implementing this strategy https://medium.com/collaborne-engineering/how-to-avoid-local-storage-from-overrunning-4c9702681290
-        var lastSearchOfTheDay = {`${new Date}`: `${event.target.value}`}
-        localStorage.setItem(JSON.stringify(lastSearchOfTheDay))
+//         var lastSearchOfTheDay = {`${new Date}`: `${event.target.value}`}
+//         localStorage.setItem(JSON.stringify(lastSearchOfTheDay))
 
 
         if (event.target.value){
