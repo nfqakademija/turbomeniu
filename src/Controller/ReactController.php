@@ -89,4 +89,14 @@ class ReactController extends AbstractController
     {
         return $this->render('home/blank.html.twig');
     }
+
+    public function differentSuggestions($foodName)
+    {
+        return $this->render('home/blank.html.twig');
+    }
+
+    public function favoriteRestaurants($restaurantName)
+    {
+        return $this->render('home/blank.html.twig');
+    }
 }

@@ -15,3 +15,13 @@ similar_suggestions:
     controller: App\Controller\ReactController::similarSuggestions
     defaults:
         foodName: 'put past searches here'
+different_suggestions:
+    path: different
+    controller: App\Controller\ReactController::differentSuggestions
+    defaults:
+        foodName: 'put past searches here'
+favorite_restaurants:
+    path: different
+    controller: App\Controller\ReactController::favoriteRestaurants
+    defaults:
+        restaurantName: 'put past searches here'
