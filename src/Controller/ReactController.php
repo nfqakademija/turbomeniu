@@ -4,14 +4,20 @@ namespace App\Controller;
 
 use App\Entity\Restaurant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Services\NormalizerCallService;
 
 class ReactController extends AbstractController
 {
     /**
-     * @Route("/index/{latitude}/{longitude}/{distance}", name="index")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function home()
+    {
+        return $this->render('home/index.html.twig');
+    }
+
+    /**
      * @param $latitude
      * @param $longitude
      * @param $distance
@@ -28,15 +34,12 @@ class ReactController extends AbstractController
         );
 
         $normalizer = $normalizerCallService->callNormalizer();
-
-        //        Normalize datetime and object
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
-     * @Route("/modal/{id}", name="modal")
      * @param $id
      * @param NormalizerCallService $normalizerCallService
      * @return JsonResponse
@@ -47,15 +50,12 @@ class ReactController extends AbstractController
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
         $normalizer = $normalizerCallService->callNormalizer();
-
-        //        Normalize datetime and object
         $normalized = $normalizer->normalize($restaurant, null, ['groups' => ['group2']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
-     * @Route("/search/{query}/{latitude}/{longitude}/{distance}", name="search")
      * @param $query
      * @param $latitude
      * @param $longitude
@@ -74,10 +74,28 @@ class ReactController extends AbstractController
         );
 
         $normalizer = $normalizerCallService->callNormalizer();
-
-        //        Normalize datetime and object
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
+    }
+
+    public function differentSuggestions($foodName, $latitude, $longitude, $distance, NormalizerCallService $normalizerCallService)
+    {
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan(
+            $foodName,
+            $latitude,
+            $longitude,
+            $distance
+        );
+
+        $normalizer = $normalizerCallService->callNormalizer();
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
+
+        return JsonResponse::create($normalized);
+    }
+
+    public function favoriteRestaurants($restaurantName)
+    {
+        return $this->render('home/blank.html.twig');
     }
 }
