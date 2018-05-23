@@ -10,6 +10,14 @@ use App\Services\NormalizerCallService;
 class ReactController extends AbstractController
 {
     /**
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function home()
+    {
+        return $this->render('home/index.html.twig');
+    }
+
+    /**
      * @param $latitude
      * @param $longitude
      * @param $distance
