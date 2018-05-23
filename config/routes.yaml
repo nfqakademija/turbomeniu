@@ -1,3 +1,6 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\HomeController::index
+index:
+    path: index/{latitude}/{longitude}/{distance}
+    controller: App\Controller\ReactController::index

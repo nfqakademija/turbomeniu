@@ -11,7 +11,6 @@ use App\Services\NormalizerCallService;
 class ReactController extends AbstractController
 {
     /**
-     * @Route("/index/{latitude}/{longitude}/{distance}", name="index")
      * @param $latitude
      * @param $longitude
      * @param $distance
