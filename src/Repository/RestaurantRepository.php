@@ -77,11 +77,12 @@ class RestaurantRepository extends ServiceEntityRepository
     public function differentThan($foodName, $latitude, $longitude, $distance)
     {
         $searches = explode(',', $foodName);
+//        TODO make query use each search record.
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->innerJoin('r.meals', 'm')
-            ->where('m.foodName LIKE :searches')
-            ->setParameter('searches', '%'.$searches.'%')
+            ->where('m.foodName != :searches')
+            ->setParameter('searches', $searches)
             ->addSelect(
                 '( 3959 * acos(cos(radians(' . $latitude . '))' .
                 '* cos( radians( r.latitude ) )' .

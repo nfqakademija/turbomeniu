@@ -79,7 +79,7 @@ class ReactController extends AbstractController
         return JsonResponse::create($normalized);
     }
 
-    public function differentSuggestions($foodName, $latitude, $longitude, $distance)
+    public function differentSuggestions($foodName, $latitude, $longitude, $distance, NormalizerCallService $normalizerCallService)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan(
             $foodName,
@@ -87,7 +87,11 @@ class ReactController extends AbstractController
             $longitude,
             $distance
         );
-        return $restaurants;
+
+        $normalizer = $normalizerCallService->callNormalizer();
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
+
+        return JsonResponse::create($normalized);
     }
 
     public function favoriteRestaurants($restaurantName)
