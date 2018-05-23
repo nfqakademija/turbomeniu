@@ -79,9 +79,15 @@ class ReactController extends AbstractController
         return JsonResponse::create($normalized);
     }
 
-    public function differentSuggestions($foodName)
+    public function differentSuggestions($foodName, $latitude, $longitude, $distance)
     {
-        return $this->render('home/blank.html.twig');
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan(
+            $foodName,
+            $latitude,
+            $longitude,
+            $distance
+        );
+        return $restaurants;
     }
 
     public function favoriteRestaurants($restaurantName)

@@ -74,6 +74,29 @@ class RestaurantRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
+    public function differentThan($foodName, $latitude, $longitude, $distance)
+    {
+        $searches = explode(',', $foodName);
+        $qb = $this->createQueryBuilder('r')
+            ->select('r')
+            ->innerJoin('r.meals', 'm')
+            ->where('m.foodName LIKE :searches')
+            ->setParameter('searches', '%'.$searches.'%')
+            ->addSelect(
+                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                '* cos( radians( r.latitude ) )' .
+                '* cos( radians( r.longitude )' .
+                '- radians(' . $longitude . ') )' .
+                '+ sin( radians(' . $latitude . ') )' .
+                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
+            )
+            ->having('distance < :distance')
+            ->setParameter('distance', $distance)
+            ->orderBy('distance', 'ASC')
+            ->getQuery();
+        return $qb->execute();
+    }
+
 //    /**
 //     * @return Restaurant[] Returns an array of Restaurant objects
 //     */
