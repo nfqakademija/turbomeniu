@@ -66,7 +66,7 @@ class App extends React.Component {
 
         var entries = [];
         for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage..key(i);
+            var key = localStorage.key(i);
             var entryStr = localStorage.getItem(key);
             var entry = JSON.parse(entryStr);
             entries.push({ key: 'search', timestamp: entry.timestamp });
