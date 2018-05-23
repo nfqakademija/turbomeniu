@@ -17,7 +17,7 @@ export default class Listings extends Component {
 
         return elements.map((element, index) =>{
             return ( <div key={index}>
-                {element.foodName} - {element.price}
+                {element.foodName} - {element.price}&euro;
             </div>)
         })
 

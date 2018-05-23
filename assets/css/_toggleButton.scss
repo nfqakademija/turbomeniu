@@ -1,0 +1,11 @@
+.toggleButton{
+  position: fixed;
+  bottom: 0px;
+  left:0px;
+  z-index: 1000;
+
+  button{
+    background-color: rgba(0, 0, 0, 0.6)!important;
+    border: none;
+  }
+}
