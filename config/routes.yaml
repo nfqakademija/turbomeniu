@@ -10,3 +10,8 @@ modal:
 search:
     path: search/{query}/{latitude}/{longitude}/{distance}
     controller: App\Controller\ReactController::search
+similar_suggestions:
+    path: similar
+    controller: App\Controller\ReactController::similarSuggestions
+    defaults:
+        foodName: 'put past searches here'

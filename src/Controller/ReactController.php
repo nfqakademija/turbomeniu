@@ -84,4 +84,9 @@ class ReactController extends AbstractController
 
         return JsonResponse::create($normalized);
     }
+
+    public function similarSuggestions($foodName)
+    {
+        return $this->render('home/blank.html.twig');
+    }
 }
