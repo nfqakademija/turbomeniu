@@ -34,8 +34,6 @@ class ReactController extends AbstractController
         );
 
         $normalizer = $normalizerCallService->callNormalizer();
-
-        //        Normalize datetime and object
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
@@ -52,8 +50,6 @@ class ReactController extends AbstractController
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
         $normalizer = $normalizerCallService->callNormalizer();
-
-        //        Normalize datetime and object
         $normalized = $normalizer->normalize($restaurant, null, ['groups' => ['group2']]);
 
         return JsonResponse::create($normalized);
@@ -78,16 +74,9 @@ class ReactController extends AbstractController
         );
 
         $normalizer = $normalizerCallService->callNormalizer();
-
-        //        Normalize datetime and object
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
 
         return JsonResponse::create($normalized);
-    }
-
-    public function similarSuggestions($foodName)
-    {
-        return $this->render('home/blank.html.twig');
     }
 
     public function differentSuggestions($foodName)
