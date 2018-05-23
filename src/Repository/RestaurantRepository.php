@@ -81,7 +81,7 @@ class RestaurantRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->innerJoin('r.meals', 'm')
-            ->where('m.foodName != :searches')
+            ->where('m.foodName NOT LIKE :searches')
             ->setParameter('searches', $searches)
             ->addSelect(
                 '( 3959 * acos(cos(radians(' . $latitude . '))' .
