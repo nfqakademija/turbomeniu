@@ -21,7 +21,7 @@ different_suggestions:
     defaults:
         foodName: 'put past searches here'
 favorite_restaurants:
-    path: different
+    path: favorite
     controller: App\Controller\ReactController::favoriteRestaurants
     defaults:
         restaurantName: 'put past searches here'
