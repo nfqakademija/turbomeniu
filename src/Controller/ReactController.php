@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Restaurant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Services\NormalizerCallService;
 
@@ -35,7 +34,6 @@ class ReactController extends AbstractController
     }
 
     /**
-     * @Route("/modal/{id}", name="modal")
      * @param $id
      * @param NormalizerCallService $normalizerCallService
      * @return JsonResponse
@@ -54,7 +52,6 @@ class ReactController extends AbstractController
     }
 
     /**
-     * @Route("/search/{query}/{latitude}/{longitude}/{distance}", name="search")
      * @param $query
      * @param $latitude
      * @param $longitude
