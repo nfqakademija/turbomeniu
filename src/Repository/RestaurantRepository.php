@@ -27,18 +27,19 @@ class RestaurantRepository extends ServiceEntityRepository
      */
     public function findAllClose($latitude, $longitude, $distance): array
     {
+        $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->addSelect(
-                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
                 '* cos( radians( r.longitude )' .
-                '- radians(' . $longitude . ') )' .
-                '+ sin( radians(' . $latitude . ') )' .
+                '- radians( :longitude ) )' .
+                '+ sin( radians( :latitude ) )' .
                 '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
             )
             ->having('distance < :distance')
-            ->setParameter('distance', $distance)
+            ->setParameters($parameters)
             ->orderBy('distance', 'ASC')
             ->getQuery();
         return $qb->execute();
@@ -53,22 +54,27 @@ class RestaurantRepository extends ServiceEntityRepository
      */
     public function searchAll($query, $latitude, $longitude, $distance): array
     {
+        $parameters = [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'distance' => $distance,
+            'query' => '%' . $query . '%'
+        ];
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->innerJoin('r.meals', 'm')
             ->where('r.name LIKE :query')
             ->orWhere('m.foodName LIKE :query')
-            ->setParameter('query', '%'.$query.'%')
             ->addSelect(
-                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
                 '* cos( radians( r.longitude )' .
-                '- radians(' . $longitude . ') )' .
-                '+ sin( radians(' . $latitude . ') )' .
+                '- radians( :longitude ) )' .
+                '+ sin( radians( :latitude ) )' .
                 '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
             )
             ->having('distance < :distance')
-            ->setParameter('distance', $distance)
+            ->setParameters($parameters)
             ->orderBy('distance', 'ASC')
             ->getQuery();
         return $qb->execute();
@@ -77,22 +83,27 @@ class RestaurantRepository extends ServiceEntityRepository
     public function differentThan($foodName, $latitude, $longitude, $distance)
     {
         $searches = explode(',', $foodName);
+        $parameters = [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'distance' => $distance,
+            'searches' => '%' . $searches . '%'
+        ];
 //        TODO make query use each search record.
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->innerJoin('r.meals', 'm')
             ->where('m.foodName NOT LIKE :searches')
-            ->setParameter('searches', $searches)
             ->addSelect(
-                '( 3959 * acos(cos(radians(' . $latitude . '))' .
+                '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
                 '* cos( radians( r.longitude )' .
-                '- radians(' . $longitude . ') )' .
-                '+ sin( radians(' . $latitude . ') )' .
+                '- radians( :longitude ) )' .
+                '+ sin( radians( :latitude ) )' .
                 '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
             )
             ->having('distance < :distance')
-            ->setParameter('distance', $distance)
+            ->setParameters($parameters)
             ->orderBy('distance', 'ASC')
             ->getQuery();
         return $qb->execute();
