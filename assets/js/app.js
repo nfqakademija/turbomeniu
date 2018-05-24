@@ -1,3 +1,4 @@
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Header from './Header.js';
@@ -42,6 +43,7 @@ class App extends React.Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
+
     componentWillMount() {
         this.getUserLocation();
         this.getLocalStorage();
@@ -56,11 +58,27 @@ class App extends React.Component {
     getLocalStorage(){
         console.log(localStorage, "localstorage");
 
-        if (localStorage.search === undefined){
-            localStorage.setItem('TurboMeniuSearchHistory', '')
-        } else {
-            return JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
+        // if (localStorage.search === undefined){
+        //     localStorage.setItem('TurboMeniuSearchHistory', '')
+        // } else {
+        //     return JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
+        // }
+
+        var entries = [];
+        for (var i = 0; i < localStorage.length; i++) {
+            var key = localStorage.key(i);
+            var entryStr = localStorage.getItem(key);
+            var entry = JSON.parse(entryStr);
+            entries.push({ key: 'search', timestamp: entry.timestamp });
         }
+// Sort newest first (we want to keep the first newest)
+        entries.sort((entry1, entry2) => {
+        return entry1.timestamp < entry2.timestamp;
+    });
+// Remove oldest entries
+    for (var i = 50; i < entries.length; i++) {
+    localStorage.removeItem(entries[i].key);
+}
     }
 
     getUserLocation(){
@@ -100,6 +118,11 @@ class App extends React.Component {
 //todo try implementing this strategy https://medium.com/collaborne-engineering/how-to-avoid-local-storage-from-overrunning-4c9702681290
 //         var lastSearchOfTheDay = {`${new Date}`: `${event.target.value}`}
 //         localStorage.setItem(JSON.stringify(lastSearchOfTheDay))
+
+        window.localStorage.setItem('search', JSON.stringify({
+            searched: event.target.value,
+            timestamp: Date.now()
+        }));
 
 
         if (event.target.value){
