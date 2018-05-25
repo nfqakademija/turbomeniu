@@ -22,7 +22,7 @@ different_suggestions:
     path: different/{foodName}/{latitude}/{longitude}/{distance}
     controller: App\Controller\ReactController::differentSuggestions
     defaults:
-        foodName: 'pasta'
+        foodName: 'pasta,burger,burger'
         latitude: '54.898152'
         longitude: '23.904320'
         distance: '10'

@@ -87,13 +87,17 @@ class RestaurantRepository extends ServiceEntityRepository
             'latitude' => $latitude,
             'longitude' => $longitude,
             'distance' => $distance,
-            'searches' => '%' . $searches . '%'
+            'search1' => '%' . $searches[0] . '%',
+            'search2' => '%' . $searches[1] . '%',
+            'search3' => '%' . $searches[2] . '%',
         ];
 //        TODO make query use each search record.
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->innerJoin('r.meals', 'm')
-            ->where('m.foodName NOT LIKE :searches')
+            ->where('m.foodName NOT LIKE :search1')
+            ->andWhere('m.foodName NOT LIKE :search2')
+            ->andWhere('m.foodName NOT LIKE :search3')
             ->addSelect(
                 '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
