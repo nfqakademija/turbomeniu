@@ -86,18 +86,12 @@ class RestaurantRepository extends ServiceEntityRepository
         $parameters = [
             'latitude' => $latitude,
             'longitude' => $longitude,
-            'distance' => $distance,
-            'search1' => '%' . $searches[0] . '%',
-            'search2' => '%' . $searches[1] . '%',
-            'search3' => '%' . $searches[2] . '%',
+            'distance' => $distance
         ];
 //        TODO make query use each search record.
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->innerJoin('r.meals', 'm')
-            ->where('m.foodName NOT LIKE :search1')
-            ->andWhere('m.foodName NOT LIKE :search2')
-            ->andWhere('m.foodName NOT LIKE :search3')
             ->addSelect(
                 '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
@@ -107,9 +101,18 @@ class RestaurantRepository extends ServiceEntityRepository
                 '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
             )
             ->having('distance < :distance')
-            ->setParameters($parameters)
-            ->orderBy('distance', 'ASC')
-            ->getQuery();
+            ->setParameters($parameters);
+        if (count($searches)) {
+            $qb->where('r.meals NOT LIKE :search0');
+            $qb->setParameter('search0', $searches[0]);
+            if ($searches > 1) {
+                foreach ($searches as $search) {
+                    $qb->where('r.meals NOT LIKE :search');
+                    $qb->setParameter('search', $search);
+                }
+            }
+        }
+        $qb->orderBy('distance', 'ASC')->getQuery();
         return $qb->execute();
     }
 
