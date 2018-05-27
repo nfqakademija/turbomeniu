@@ -82,38 +82,22 @@ class RestaurantRepository extends ServiceEntityRepository
 
     public function differentThan($foodName, $latitude, $longitude, $distance)
     {
-        $searches = explode(',', $foodName);
-        $parameters = [
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'distance' => $distance
-        ];
-//        TODO make query use each search record.
-        $qb = $this->createQueryBuilder('r')
-            ->select('r')
+        $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
+        $pastFood = explode(',', $foodName);
+        $similar = $this->createQueryBuilder('r')
+            ->select('r.id')
             ->innerJoin('r.meals', 'm')
-            ->addSelect(
-                '( 3959 * acos(cos(radians( :latitude ))' .
-                '* cos( radians( r.latitude ) )' .
-                '* cos( radians( r.longitude )' .
-                '- radians( :longitude ) )' .
-                '+ sin( radians( :latitude ) )' .
-                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
-            )
-            ->having('distance < :distance')
-            ->setParameters($parameters);
-        if (count($searches)) {
-            $qb->where('r.meals NOT LIKE :search0');
-            $qb->setParameter('search0', $searches[0]);
-            if ($searches > 1) {
-                foreach ($searches as $search) {
-                    $qb->where('r.meals NOT LIKE :search');
-                    $qb->setParameter('search', $search);
-                }
-            }
-        }
-        $qb->orderBy('distance', 'ASC')->getQuery();
-        return $qb->execute();
+            ->where('m.foodName LIKE :pastFood')
+            ->setParameter('pastFood', [$pastFood])
+            ->getQuery()
+            ->execute();
+        $different = $this->createQueryBuilder('r')
+            ->select('r.id')
+            ->where('r.id NOT LIKE :similar')
+            ->setParameter('similar', [$similar])
+            ->getQuery()
+            ->execute();
+        return $different;
     }
 
 //    /**
