@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Internal\Hydration\ArrayHydrator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -90,7 +91,7 @@ class RestaurantRepository extends ServiceEntityRepository
             ->where('m.foodName LIKE :pastFood')
             ->setParameter('pastFood', [$pastFood])
             ->getQuery()
-            ->execute();
+            ->getArrayResult();
         $different = $this->createQueryBuilder('r')
             ->select('r.id')
             ->where('r.id NOT LIKE :similar')
