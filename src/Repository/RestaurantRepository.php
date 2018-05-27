@@ -63,7 +63,7 @@ class RestaurantRepository extends ServiceEntityRepository
         ];
         $qb = $this->createQueryBuilder('r')
             ->select('r')
-            ->innerJoin('r.meals', 'm')
+            ->join('r.meals', 'm')
             ->where('r.name LIKE :query')
             ->orWhere('m.foodName LIKE :query')
             ->addSelect(
@@ -87,7 +87,7 @@ class RestaurantRepository extends ServiceEntityRepository
         $pastFood = explode(',', $foodName);
         $similar = $this->createQueryBuilder('r')
             ->select('r.id')
-            ->innerJoin('r.meals', 'm')
+            ->join('r.meals', 'm')
             ->where('m.foodName LIKE :pastFood')
             ->getQuery()
             ->getDQL();
