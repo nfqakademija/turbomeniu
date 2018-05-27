@@ -5,11 +5,15 @@
    text-decoration: none;
  }
 
+  .searchbutton {
+    background: linear-gradient(to right, #3229ff, #7c34fe, #a844fe, #ca57fe, #e66dff) !important;
+  }
+
+.clearbutton{
+  background: linear-gradient(to right, #e66dff, #ff52d1, #ff3ea2, #ff3c74, #ff4a4a) !important;
+}
  }
 
-.searchbar {
-  width: 100% !important;
-}
 
 .anchor {
   padding-top: 6px;
@@ -17,7 +21,9 @@
 }
 
 .navbar-brand {
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Amatic SC', cursive;
+  font-weight: bold;
+  font-size: 2rem;
   margin-right: 0px !important;
 
 }

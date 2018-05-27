@@ -19,6 +19,7 @@ class App extends React.Component {
             filteredData: 'loading',
             isOpen: false,
             isToggleOn: true,
+            searchValue: '',
             center: {
                 lat: 54.898521,
                 lng: 23.903597,
@@ -41,6 +42,9 @@ class App extends React.Component {
         this.onMouseOver = this.onMouseOver.bind(this);
         this.getLocalStorage = this.getLocalStorage.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.clearSearch = this.clearSearch.bind(this);
+
     }
 
 
@@ -55,30 +59,30 @@ class App extends React.Component {
         }));
     }
 
+    clearSearch(){
+        this.setState({searchValue: ""});
+        this.getInitialData();
+    }
+
     getLocalStorage(){
         console.log(localStorage, "localstorage");
 
-        // if (localStorage.search === undefined){
-        //     localStorage.setItem('TurboMeniuSearchHistory', '')
-        // } else {
-        //     return JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
-        // }
+        if (localStorage.TurboMeniuSearchHistory === undefined){
+            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify([]))
+        } else {
+            var tempArray = JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
 
-        var entries = [];
-        for (var i = 0; i < localStorage.length; i++) {
-            var key = localStorage.key(i);
-            var entryStr = localStorage.getItem(key);
-            var entry = JSON.parse(entryStr);
-            entries.push({ key: 'search', timestamp: entry.timestamp });
+            if(tempArray.length >20){
+                var diff = tempArray.length - 20;
+
+                for (var i=0; i<diff; i++){
+                    tempArray.shift();
+                }
+                localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempArray));
+
+                console.log('more than 20')
+            }
         }
-// Sort newest first (we want to keep the first newest)
-        entries.sort((entry1, entry2) => {
-        return entry1.timestamp < entry2.timestamp;
-    });
-// Remove oldest entries
-    for (var i = 50; i < entries.length; i++) {
-    localStorage.removeItem(entries[i].key);
-}
     }
 
     getUserLocation(){
@@ -113,22 +117,14 @@ class App extends React.Component {
     }
 
     search(event) {
-        event.preventDefault();
+        this.setState({searchValue: event.target.value});
+    }
 
-//todo try implementing this strategy https://medium.com/collaborne-engineering/how-to-avoid-local-storage-from-overrunning-4c9702681290
-//         var lastSearchOfTheDay = {`${new Date}`: `${event.target.value}`}
-//         localStorage.setItem(JSON.stringify(lastSearchOfTheDay))
-
-        window.localStorage.setItem('search', JSON.stringify({
-            searched: event.target.value,
-            timestamp: Date.now()
-        }));
-
-
-        if (event.target.value){
+    handleSearch(event){
+        if (this.state.searchValue){
 
             var that = this;
-            fetch(`/search/${event.target.value.toLowerCase()}/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
+            fetch(`/search/${this.state.searchValue.toLowerCase()}/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
                 .then(function (response) {
                     return response.json();
                 })
@@ -136,10 +132,23 @@ class App extends React.Component {
                     console.log(myJson)
                     that.setState({filteredData: myJson})
                 })
-        } else if (!event.target.value){
+        } else if (!this.state.searchValue){
             this.getInitialData();
         }
 
+        var tempStorage = [];
+        if (localStorage.TurboMeniuSearchHistory === "") {
+            tempStorage = [];
+            tempStorage.push(this.state.searchValue)
+            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempStorage));
+        } else {
+            tempStorage = JSON.parse(localStorage.TurboMeniuSearchHistory);
+            tempStorage.push(this.state.searchValue)
+            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempStorage));
+            }
+
+        event.preventDefault();
+         event.stopPropagation()
     }
 
     onMouseOver(event) {
@@ -167,6 +176,9 @@ class App extends React.Component {
         return (<div>
             <Header
                 search={this.search}
+                searchValue={this.state.searchValue}
+                handleSearch={this.handleSearch}
+                clearSearch={this.clearSearch}
             />
             <div className="container-fluid body">
 
