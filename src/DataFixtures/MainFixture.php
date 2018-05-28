@@ -42,7 +42,7 @@ class MainFixture extends Fixture
         ]);
 
 //        Add Meal Entities
-        $populator->addEntity('App:Meal', 1000, [
+        $populator->addEntity('App:Meal', 600, [
             'date' => function () use ($generator) {
                 return new \DateTime('now');
             },
@@ -58,7 +58,7 @@ class MainFixture extends Fixture
         ]);
 
 //        Add Review Entities
-        $populator->addEntity('App:Review', 10000, [
+        $populator->addEntity('App:Review', 1000, [
             'name' => function () use ($generator) {
                 return $generator->firstName();
             },

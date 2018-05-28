@@ -31,6 +31,8 @@ class RestaurantRepository extends ServiceEntityRepository
         $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $qb = $this->createQueryBuilder('r')
             ->select('r')
+            ->join('r.meals', 'm')
+            ->where('m.foodName IS NOT NULL')
             ->addSelect(
                 '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
@@ -66,6 +68,7 @@ class RestaurantRepository extends ServiceEntityRepository
             ->join('r.meals', 'm')
             ->where('r.name LIKE :query')
             ->orWhere('m.foodName LIKE :query')
+            ->andWhere('m.foodName IS NOT NULL')
             ->addSelect(
                 '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
