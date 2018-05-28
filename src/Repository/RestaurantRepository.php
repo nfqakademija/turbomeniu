@@ -91,7 +91,8 @@ class RestaurantRepository extends ServiceEntityRepository
 //        Find restaurants with similar menu.
         $qbSimilar = $this->createQueryBuilder('r')
             ->select('r.id')
-            ->join('r.meals', 'm');
+            ->join('r.meals', 'm')
+            ->where('m.foodName IS NOT NULL');
         $i = 0;
         foreach ($pastFood as $food) {
             $qbSimilar->orWhere('m.foodName LIKE :food' . $i);
