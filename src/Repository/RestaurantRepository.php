@@ -98,8 +98,7 @@ class RestaurantRepository extends ServiceEntityRepository
 //        Find restaurants with similar menu.
         $qbSimilar = $this->createQueryBuilder('r')
             ->select('r.id')
-            ->join('r.meals', 'm')
-            ->where('m.foodName IS NOT NULL');
+            ->join('r.meals', 'm');
         $i = 0;
         foreach ($pastFood as $food) {
             $qbSimilar->orWhere('m.foodName LIKE :food' . $i);
@@ -122,7 +121,9 @@ class RestaurantRepository extends ServiceEntityRepository
 //        Find different restaurants.
         $qbDifferent = $this->createQueryBuilder('r')
             ->select('r')
+            ->join('r.meals', 'm')
             ->where('r.id NOT IN (:formatted)')
+            ->andWhere('m.foodName IS NOT NULL')
             ->addSelect(
                 '( 3959 * acos(cos(radians( :latitude ))' .
                 '* cos( radians( r.latitude ) )' .
