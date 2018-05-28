@@ -113,7 +113,6 @@ class RestaurantRepository extends ServiceEntityRepository
                 '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
             )
             ->having('distance < :distance')
-            ->setParameters($parameters)
             ->orderBy('distance', 'ASC')
             ->setParameters($parameters)
             ->getQuery()
