@@ -91,8 +91,8 @@ class RestaurantRepository extends ServiceEntityRepository
             ->join('r.meals', 'm');
         $i = 0;
         foreach ($pastFood as $food) {
-            $qbSimilar->orWhere('m.foodName LIKE :food');
-            $qbSimilar->setParameter('food', '%' . $food[$i] . '%');
+            $qbSimilar->orWhere('m.foodName LIKE :food' . $i);
+            $qbSimilar->setParameter('food' . $i, '%' . $food[$i] . '%');
             $i++;
         }
         $resultSimilar = $qbSimilar->distinct('id')->getQuery()->getArrayResult();
