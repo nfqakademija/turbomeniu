@@ -85,23 +85,31 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         $pastFood = explode(',', $foodName);
 
-        $similar = $this->createQueryBuilder('r')
+//        Find restaurants with similar menu.
+        $qbSimilar = $this->createQueryBuilder('r')
             ->select('r.id')
-            ->join('r.meals', 'm')
-            ->where('m.foodName IN (:pastFood)')
-            ->setParameter('pastFood', $pastFood)
-            ->getQuery()
-            ->getArrayResult();
-        $formatted = array_column($similar, 'id');
+            ->join('r.meals', 'm');
+        $i = 0;
+        foreach ($pastFood as $food) {
+            $qbSimilar->orWhere('m.foodName LIKE :food');
+            $qbSimilar->setParameter('food', '%' . $food[$i] . '%');
+            $i++;
+        }
+        $resultSimilar = $qbSimilar->distinct('id')->getQuery()->getArrayResult();
 
+//        Format query result.
+        $formattedResultSimilar = array_column($resultSimilar, 'id');
+
+//        Set parameters.
         $parameters = [
             'latitude' => $latitude,
             'longitude' => $longitude,
             'distance' => $distance,
-            'formatted' => $formatted
+            'formatted' => $formattedResultSimilar
         ];
 
-        $different = $this->createQueryBuilder('r')
+//        Find different restaurants.
+        $qbDifferent = $this->createQueryBuilder('r')
             ->select('r')
             ->where('r.id NOT IN (:formatted)')
             ->addSelect(
@@ -117,7 +125,7 @@ class RestaurantRepository extends ServiceEntityRepository
             ->setParameters($parameters)
             ->getQuery()
             ->getResult();
-        return $different;
+        return $qbDifferent;
     }
 
 //    /**
