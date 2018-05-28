@@ -85,17 +85,23 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $pastFood = explode(',', $foodName);
+
         $similar = $this->createQueryBuilder('r')
             ->select('r.id')
             ->join('r.meals', 'm')
-            ->where('m.foodName LIKE :pastFood')
+            ->where('m.foodName IN (:pastFood)')
+            ->setParameter('pastFood', $pastFood)
             ->getQuery()
-            ->getDQL();
-        $queryBuilder = $this->createQueryBuilder('rr');
-        $queryBuilder->where($queryBuilder->expr()->notIn('rr.id', $similar))->setParameter('pastFood', [$pastFood]);
-        $queryBuilder->getQuery()->getResult();
+            ->getArrayResult();
+        $formatted = array_column($similar, 'id');
 
-        return $queryBuilder;
+        $different = $this->createQueryBuilder('r')
+            ->select('r')
+            ->where('r.id NOT IN (:formatted)')
+            ->setParameter('formatted', $formatted)
+            ->getQuery()
+            ->getResult();
+        return $different;
     }
 
 //    /**
