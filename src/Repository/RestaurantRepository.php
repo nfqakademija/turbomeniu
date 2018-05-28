@@ -84,6 +84,13 @@ class RestaurantRepository extends ServiceEntityRepository
         return $qb->execute();
     }
 
+    /**
+     * @param $foodName
+     * @param $latitude
+     * @param $longitude
+     * @param $distance
+     * @return mixed
+     */
     public function differentThan($foodName, $latitude, $longitude, $distance)
     {
         $pastFood = explode(',', $foodName);
