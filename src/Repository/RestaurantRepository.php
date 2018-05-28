@@ -83,7 +83,6 @@ class RestaurantRepository extends ServiceEntityRepository
 
     public function differentThan($foodName, $latitude, $longitude, $distance)
     {
-        $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $pastFood = explode(',', $foodName);
 
         $similar = $this->createQueryBuilder('r')
@@ -95,10 +94,28 @@ class RestaurantRepository extends ServiceEntityRepository
             ->getArrayResult();
         $formatted = array_column($similar, 'id');
 
+        $parameters = [
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'distance' => $distance,
+            'formatted' => $formatted
+        ];
+
         $different = $this->createQueryBuilder('r')
             ->select('r')
             ->where('r.id NOT IN (:formatted)')
-            ->setParameter('formatted', $formatted)
+            ->addSelect(
+                '( 3959 * acos(cos(radians( :latitude ))' .
+                '* cos( radians( r.latitude ) )' .
+                '* cos( radians( r.longitude )' .
+                '- radians( :longitude ) )' .
+                '+ sin( radians( :latitude ) )' .
+                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
+            )
+            ->having('distance < :distance')
+            ->setParameters($parameters)
+            ->orderBy('distance', 'ASC')
+            ->setParameters($parameters)
             ->getQuery()
             ->getResult();
         return $different;
