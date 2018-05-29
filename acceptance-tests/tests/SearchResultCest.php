@@ -22,7 +22,7 @@ class SearchResultCest
         $I->click('.searchbutton');
 
         $I->waitForElement('.listing');
-        $I->wait(5);
+        $I->wait(60);
         $I->dontSee('Sorry your filter did not match any listing');
         $I->canSee('Burger', '.foodFromMenu');
     }
