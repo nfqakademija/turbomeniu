@@ -94,7 +94,6 @@ class RestaurantRepository extends ServiceEntityRepository
             $pastFood = explode(',', $foodName);
 //        Find restaurants with similar menu.
             $qbSimilar = $this->createQueryBuilder('r')
-                ->select('r.id')
                 ->join('r.meals', 'm');
             $i = 0;
             foreach ($pastFood as $food) {
@@ -104,12 +103,10 @@ class RestaurantRepository extends ServiceEntityRepository
             }
             $resultSimilar = $qbSimilar->distinct('id')->getQuery()->getArrayResult();
 
-//        Format query result.
-            $formattedResultSimilar = array_column($resultSimilar, 'id');
-            return $formattedResultSimilar;
+            return $resultSimilar;
         } else {
-            $formattedResultSimilar = 'null';
-            return $formattedResultSimilar;
+            $resultSimilar = 'null';
+            return $resultSimilar;
         }
     }
     /**
@@ -119,13 +116,15 @@ class RestaurantRepository extends ServiceEntityRepository
     public function findDifferent($foodName)
     {
         $similar = $this->findSimilar($foodName);
+        $formattedSimilar = array_column($similar, 'id');
+
         $qbDifferent = $this->createQueryBuilder('r')
             ->select('r')
             ->join('r.meals', 'm')
             ->where('r.id NOT IN (:similar)')
             ->andWhere('m.foodName IS NOT NULL')
             ->orderBy('r.avgRating', 'DESC')
-            ->setParameter('similar', $similar)
+            ->setParameter('similar', $formattedSimilar)
             ->getQuery()
             ->getResult();
         return $qbDifferent;
