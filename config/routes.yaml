@@ -18,16 +18,9 @@ search:
         latitude: '54.898152'
         longitude: '23.904320'
         distance: '10'
-different_suggestions:
-    path: different/{foodName}/{latitude}/{longitude}/{distance}
-    controller: App\Controller\ReactController::differentSuggestions
-    defaults:
-        foodName: 'pasta,burger'
-        latitude: '54.898152'
-        longitude: '23.904320'
-        distance: '10'
-favorite_restaurants:
-    path: favorite
-    controller: App\Controller\ReactController::favoriteRestaurants
-    defaults:
-        restaurantName: 'put past searches here'
+discover_something_new:
+    path: different
+    controller: App\Controller\ReactController::discoverSomethingNew
+restaurants_you_may_like:
+    path: similar
+    controller: App\Controller\ReactController::restaurantsYouMayLike

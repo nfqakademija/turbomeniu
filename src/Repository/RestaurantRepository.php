@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Internal\Hydration\ArrayHydrator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -86,58 +85,44 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param $foodName
-     * @param $latitude
-     * @param $longitude
-     * @param $distance
-     * @return mixed
+     * @return \Doctrine\ORM\Query
      */
-    public function differentThan($foodName, $latitude, $longitude, $distance)
+    public function findSimilar($foodName)
     {
-        $pastFood = explode(',', $foodName);
-
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.meals', 'm')
+            ->orderBy('r.avgRating', 'DESC')
+            ->distinct('id');
+        if ($foodName) {
+            $pastFood = explode(',', $foodName);
 //        Find restaurants with similar menu.
-        $qbSimilar = $this->createQueryBuilder('r')
-            ->select('r.id')
-            ->join('r.meals', 'm');
-        $i = 0;
-        foreach ($pastFood as $food) {
-            $qbSimilar->orWhere('m.foodName LIKE :food' . $i);
-            $qbSimilar->setParameter('food' . $i, '%' . $food[$i] . '%');
-            $i++;
+            $i = 0;
+            foreach ($pastFood as $food) {
+                $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food[$i] . '%');
+                $i++;
+            }
         }
-        $resultSimilar = $qbSimilar->distinct('id')->getQuery()->getArrayResult();
+        return $qb->getQuery();
+    }
 
-//        Format query result.
-        $formattedResultSimilar = array_column($resultSimilar, 'id');
-
-//        Set parameters.
-        $parameters = [
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'distance' => $distance,
-            'formatted' => $formattedResultSimilar
-        ];
-
-//        Find different restaurants.
-        $qbDifferent = $this->createQueryBuilder('r')
+    /**
+     * @param $foodName
+     * @return \Doctrine\ORM\Query
+     */
+    public function findDifferent($foodName)
+    {
+        $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->join('r.meals', 'm')
-            ->where('r.id NOT IN (:formatted)')
-            ->andWhere('m.foodName IS NOT NULL')
-            ->addSelect(
-                '( 3959 * acos(cos(radians( :latitude ))' .
-                '* cos( radians( r.latitude ) )' .
-                '* cos( radians( r.longitude )' .
-                '- radians( :longitude ) )' .
-                '+ sin( radians( :latitude ) )' .
-                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
-            )
-            ->having('distance < :distance')
-            ->orderBy('distance', 'ASC')
-            ->setParameters($parameters)
-            ->getQuery()
-            ->getResult();
-        return $qbDifferent;
+            ->where('m.foodName IS NOT NULL')
+            ->orderBy('r.avgRating', 'DESC');
+        if ($foodName) {
+            $qbS = $this->findSimilar($foodName);
+            $similar = $qbS->getArrayResult();
+            $formattedSimilar = array_column($similar, 'id');
+            $qb->andWhere('r.id NOT IN (:similar)')->setParameter('similar', $formattedSimilar);
+        }
+        return $qb->getQuery();
     }
 
 //    /**

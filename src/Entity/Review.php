@@ -14,7 +14,7 @@ class Review
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $id;
 
@@ -26,25 +26,25 @@ class Review
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $rating;
 
     /**
      * @ORM\Column(type="text")
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $comment;
 
     /**
      * @ORM\Column(type="date")
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $date;
 
