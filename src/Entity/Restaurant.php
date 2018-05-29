@@ -15,14 +15,14 @@ class Restaurant
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Meal", mappedBy="restaurant")
      * @ORM\OrderBy({"price" = "ASC"})
-     * @Groups({"group1", "group2"})
+     * @Groups({"list", "modal"})
      */
     private $meals;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Review", mappedBy="restaurant")
      * @ORM\OrderBy({"date" = "DESC"})
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $reviews;
 
@@ -30,54 +30,55 @@ class Restaurant
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
-     * @Groups({"group1", "group2"})
+     * @Groups({"list", "modal"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50)
-     * @Groups({"group1", "group2"})
+     * @Groups({"list", "modal"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=2083)
-     * @Groups({"group1", "group2"})
+     * @Groups({"list", "modal"})
      */
     private $logo;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"list", "modal"})
      */
     private $avgRating;
 
     /**
      * @ORM\Column(type="string", length=20)
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $phoneNumber;
 
     /**
      * @ORM\Column(type="string", length=2083)
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $webPage;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"group2"})
+     * @Groups({"modal"})
      */
     private $email;
 
     /**
      * @ORM\Column(type="decimal", precision=10, scale=8)
-     * @Groups({"group1"})
+     * @Groups({"list"})
      */
     private $latitude;
 
     /**
      * @ORM\Column(type="decimal", precision=11, scale=8)
-     * @Groups({"group1"})
+     * @Groups({"list"})
      */
     private $longitude;
 

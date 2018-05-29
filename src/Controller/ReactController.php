@@ -34,7 +34,7 @@ class ReactController extends AbstractController
         );
 
         $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }
@@ -50,7 +50,7 @@ class ReactController extends AbstractController
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
         $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurant, null, ['groups' => ['group2']]);
+        $normalized = $normalizer->normalize($restaurant, null, ['groups' => ['modal']]);
 
         return JsonResponse::create($normalized);
     }
@@ -74,7 +74,7 @@ class ReactController extends AbstractController
         );
 
         $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }
@@ -84,7 +84,7 @@ class ReactController extends AbstractController
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan($foodName);
 
         $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['group1']]);
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }
