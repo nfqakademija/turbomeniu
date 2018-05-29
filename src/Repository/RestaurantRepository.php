@@ -86,7 +86,7 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param $foodName
-     * @return array|string
+     * @return mixed
      */
     public function findSimilar($foodName)
     {
