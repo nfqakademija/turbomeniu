@@ -12,9 +12,9 @@ addons:
     - nginx.symfony
     - selenium.symfony
 
- cache:
-   yarn: true
-   directories:
+cache:
+  yarn: true
+  directories:
    - $HOME/.composer/cache/files
    - node_modules
 
