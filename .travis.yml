@@ -21,6 +21,8 @@ before_script:
   - composer install --no-interaction --prefer-dist
   - yarn
   - yarn run encore production
+  - composer require --dev symfony/browser-kit symfony/css-selector
+  - composer require --dev symfony/phpunit-bridge
 
 script:
   - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
