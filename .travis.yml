@@ -29,7 +29,7 @@ before_install:
 
 install:
   - cd $TRAVIS_BUILD_DIR && composer install --no-interaction --prefer-dist
-  - cd $TRAVIS_BUILD_DIR && npm install
+  - cd $TRAVIS_BUILD_DIR && yarn install
   - cd $TRAVIS_BUILD_DIR/acceptance-tests && composer install
 
 before_script:
