@@ -30,7 +30,7 @@ suites:
                  modules:
                     config:
                         WebDriver:
-                            url: http://nfq180517.realus.website
+                            url: http://turbomeniu.projektai.nfqakademija.lt
                             host: selenium.symfony
                             port: 4444
 
