@@ -20,7 +20,7 @@ search:
         distance: '10'
 discover_something_new:
     path: different/{foodName}
-    controller: App\Controller\ReactController::restaurantsToTry
+    controller: App\Controller\ReactController::discoverSomethingNew
     defaults:
         foodName: 'pasta,burger'
 restaurants_you_may_like:
