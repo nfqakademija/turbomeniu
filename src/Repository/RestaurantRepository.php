@@ -86,12 +86,9 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param $foodName
-     * @param $latitude
-     * @param $longitude
-     * @param $distance
      * @return mixed
      */
-    public function differentThan($foodName, $latitude, $longitude, $distance)
+    public function differentThan($foodName)
     {
         $pastFood = explode(',', $foodName);
 
@@ -110,31 +107,14 @@ class RestaurantRepository extends ServiceEntityRepository
 //        Format query result.
         $formattedResultSimilar = array_column($resultSimilar, 'id');
 
-//        Set parameters.
-        $parameters = [
-            'latitude' => $latitude,
-            'longitude' => $longitude,
-            'distance' => $distance,
-            'formatted' => $formattedResultSimilar
-        ];
-
 //        Find different restaurants.
         $qbDifferent = $this->createQueryBuilder('r')
             ->select('r')
             ->join('r.meals', 'm')
             ->where('r.id NOT IN (:formatted)')
             ->andWhere('m.foodName IS NOT NULL')
-            ->addSelect(
-                '( 3959 * acos(cos(radians( :latitude ))' .
-                '* cos( radians( r.latitude ) )' .
-                '* cos( radians( r.longitude )' .
-                '- radians( :longitude ) )' .
-                '+ sin( radians( :latitude ) )' .
-                '* sin( radians( r.latitude ) ) ) ) AS HIDDEN distance'
-            )
-            ->having('distance < :distance')
-            ->orderBy('distance', 'ASC')
-            ->setParameters($parameters)
+            ->orderBy('r.avgRating', 'DESC')
+            ->setParameter('formatted', $formattedResultSimilar)
             ->getQuery()
             ->getResult();
         return $qbDifferent;
