@@ -102,13 +102,13 @@ class RestaurantRepository extends ServiceEntityRepository
                 $i++;
             }
             $resultSimilar = $qbSimilar->distinct('id')->getQuery()->getArrayResult();
-
             return $resultSimilar;
         } else {
             $resultSimilar = 'null';
             return $resultSimilar;
         }
     }
+
     /**
      * @param $foodName
      * @return mixed

@@ -96,8 +96,19 @@ class ReactController extends AbstractController
         return JsonResponse::create($normalized);
     }
 
+    /**
+     * @param Request $request
+     * @param NormalizerCallService $normalizerCallService
+     * @return JsonResponse
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     */
     public function restaurantsYouMayLike(Request $request, NormalizerCallService $normalizerCallService)
     {
-        return $this->render('home/blank.html.twig');
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findSimilar($request->get('foodName'));
+
+        $normalizer = $normalizerCallService->callNormalizer();
+        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
+
+        return JsonResponse::create($normalized);
     }
 }

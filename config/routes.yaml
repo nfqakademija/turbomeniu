@@ -22,5 +22,5 @@ discover_something_new:
     path: different
     controller: App\Controller\ReactController::discoverSomethingNew
 restaurants_you_may_like:
-    path: favorite
+    path: similar
     controller: App\Controller\ReactController::restaurantsYouMayLike
