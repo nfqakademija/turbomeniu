@@ -18,7 +18,7 @@ search:
         latitude: '54.898152'
         longitude: '23.904320'
         distance: '10'
-restaurants_to_try:
+discover_something_new:
     path: different/{foodName}
     controller: App\Controller\ReactController::restaurantsToTry
     defaults:

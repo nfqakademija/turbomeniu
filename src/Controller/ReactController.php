@@ -79,7 +79,13 @@ class ReactController extends AbstractController
         return JsonResponse::create($normalized);
     }
 
-    public function restaurantsToTry($foodName, NormalizerCallService $normalizerCallService)
+    /**
+     * @param $foodName
+     * @param NormalizerCallService $normalizerCallService
+     * @return JsonResponse
+     * @throws \Doctrine\Common\Annotations\AnnotationException
+     */
+    public function discoverSomethingNew($foodName, NormalizerCallService $normalizerCallService)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan($foodName);
 
