@@ -93,19 +93,19 @@ class RestaurantRepository extends ServiceEntityRepository
         if ($foodName) {
             $pastFood = explode(',', $foodName);
 //        Find restaurants with similar menu.
-            $qbSimilar = $this->createQueryBuilder('r')
+            $qb = $this->createQueryBuilder('r')
                 ->join('r.meals', 'm');
             $i = 0;
             foreach ($pastFood as $food) {
-                $qbSimilar->orWhere('m.foodName LIKE :food' . $i);
-                $qbSimilar->setParameter('food' . $i, '%' . $food[$i] . '%');
+                $qb->orWhere('m.foodName LIKE :food' . $i)
+                    ->setParameter('food' . $i, '%' . $food[$i] . '%');
                 $i++;
             }
-            $resultSimilar = $qbSimilar->distinct('id')->getQuery()->getArrayResult();
-            return $resultSimilar;
+            $result = $qb->distinct('id')->getQuery()->getArrayResult();
+            return $result;
         } else {
-            $resultSimilar = 'null';
-            return $resultSimilar;
+            $result = 'null';
+            return $result;
         }
     }
 
@@ -115,19 +115,26 @@ class RestaurantRepository extends ServiceEntityRepository
      */
     public function findDifferent($foodName)
     {
-        $similar = $this->findSimilar($foodName);
-        $formattedSimilar = array_column($similar, 'id');
-
-        $qbDifferent = $this->createQueryBuilder('r')
+        $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->join('r.meals', 'm')
-            ->where('r.id NOT IN (:similar)')
-            ->andWhere('m.foodName IS NOT NULL')
-            ->orderBy('r.avgRating', 'DESC')
-            ->setParameter('similar', $formattedSimilar)
-            ->getQuery()
-            ->getResult();
-        return $qbDifferent;
+            ->where('m.foodName IS NOT NULL');
+
+        if ($foodName) {
+            $similar = $this->findSimilar($foodName);
+            $formattedSimilar = array_column($similar, 'id');
+            $result = $qb->andWhere('r.id NOT IN (:similar)')
+                ->orderBy('r.avgRating', 'DESC')
+                ->setParameter('similar', $formattedSimilar)
+                ->getQuery()
+                ->getResult();
+            return $result;
+        } else {
+            $result = $qb->orderBy('r.avgRating', 'DESC')
+                ->getQuery()
+                ->getResult();
+            return $result;
+        }
     }
 
 //    /**
