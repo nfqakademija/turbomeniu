@@ -86,13 +86,12 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param $foodName
-     * @return mixed
+     * @return array|string
      */
-    public function differentThan($foodName)
+    public function findSimilar($foodName)
     {
         if ($foodName) {
             $pastFood = explode(',', $foodName);
-
 //        Find restaurants with similar menu.
             $qbSimilar = $this->createQueryBuilder('r')
                 ->select('r.id')
@@ -107,18 +106,26 @@ class RestaurantRepository extends ServiceEntityRepository
 
 //        Format query result.
             $formattedResultSimilar = array_column($resultSimilar, 'id');
+            return $formattedResultSimilar;
         } else {
             $formattedResultSimilar = 'null';
+            return $formattedResultSimilar;
         }
-
-//        Find different restaurants.
+    }
+    /**
+     * @param $foodName
+     * @return mixed
+     */
+    public function findDifferent($foodName)
+    {
+        $similar = $this->findSimilar($foodName);
         $qbDifferent = $this->createQueryBuilder('r')
             ->select('r')
             ->join('r.meals', 'm')
-            ->where('r.id NOT IN (:formatted)')
+            ->where('r.id NOT IN (:similar)')
             ->andWhere('m.foodName IS NOT NULL')
             ->orderBy('r.avgRating', 'DESC')
-            ->setParameter('formatted', $formattedResultSimilar)
+            ->setParameter('similar', $similar)
             ->getQuery()
             ->getResult();
         return $qbDifferent;
