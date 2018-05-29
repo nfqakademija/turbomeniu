@@ -6,6 +6,7 @@ use App\Entity\Restaurant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Services\NormalizerCallService;
+use Symfony\Component\HttpFoundation\Request;
 
 class ReactController extends AbstractController
 {
@@ -80,14 +81,14 @@ class ReactController extends AbstractController
     }
 
     /**
-     * @param $foodName
+     * @param Request $request
      * @param NormalizerCallService $normalizerCallService
      * @return JsonResponse
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function discoverSomethingNew($foodName, NormalizerCallService $normalizerCallService)
+    public function discoverSomethingNew(Request $request, NormalizerCallService $normalizerCallService)
     {
-        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan($foodName);
+        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->differentThan($request->get('foodName'));
 
         $normalizer = $normalizerCallService->callNormalizer();
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
@@ -95,7 +96,7 @@ class ReactController extends AbstractController
         return JsonResponse::create($normalized);
     }
 
-    public function restaurantsYouMayLike($restaurantName)
+    public function restaurantsYouMayLike(Request $request, NormalizerCallService $normalizerCallService)
     {
         return $this->render('home/blank.html.twig');
     }

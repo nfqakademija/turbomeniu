@@ -21,10 +21,6 @@ search:
 discover_something_new:
     path: different
     controller: App\Controller\ReactController::discoverSomethingNew
-    defaults:
-        foodName: 'pasta,burger'
 restaurants_you_may_like:
     path: favorite
     controller: App\Controller\ReactController::restaurantsYouMayLike
-    defaults:
-        foodName: 'pasta,burger'
