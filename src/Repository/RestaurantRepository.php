@@ -95,14 +95,15 @@ class RestaurantRepository extends ServiceEntityRepository
             ->distinct('id');
         if ($foodName) {
             $pastFood = explode(',', $foodName);
-//        Find restaurants with similar menu.
             $i = 0;
             foreach ($pastFood as $food) {
                 $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food[$i] . '%');
                 $i++;
             }
+            return $qb->getQuery();
+        } else {
+            return $qb->orWhere('m.foodName IS NOT NULL')->getQuery();
         }
-        return $qb->getQuery();
     }
 
     /**
