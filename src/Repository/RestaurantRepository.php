@@ -95,7 +95,6 @@ class RestaurantRepository extends ServiceEntityRepository
             ->distinct('id');
         if ($foodName) {
             $pastFood = explode(',', $foodName);
-//        Find restaurants with similar menu.
             $i = 0;
             foreach ($pastFood as $food) {
                 $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food[$i] . '%');
