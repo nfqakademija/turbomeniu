@@ -25,4 +25,4 @@ before_script:
 
 script:
   - vendor/bin/phpcs -p --standard=PSR2 --extensions=php ./src
-  - bin/phpunit
+  - vendor/bin/phpunit
