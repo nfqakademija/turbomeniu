@@ -1,9 +1,9 @@
 sudo: required
- language: php
- php:
-   - 7.2
- services:
-   - mysql
+language: php
+php:
+  - 7.2
+services:
+  - mysql
   - docker
 
 # Simulating local docker setup
@@ -15,12 +15,12 @@ addons:
 cache:
   yarn: true
   directories:
-   - $HOME/.composer/cache/files
-   - node_modules
+    - $HOME/.composer/cache/files
+    - node_modules
 
 before_install:
-   - cp .env.dist .env
-   - echo "DATABASE_URL=mysql://root@127.0.0.1:3306/symfony" >> .env # Last parameter is used. Updated to Travis login
+  - cp .env.dist .env
+  - echo "DATABASE_URL=mysql://root@127.0.0.1:3306/symfony" >> .env # Last parameter is used. Updated to Travis login
 
   # Starting Selenimum container:
   - docker pull selenium/standalone-chrome:3.11.0-dysprosium
