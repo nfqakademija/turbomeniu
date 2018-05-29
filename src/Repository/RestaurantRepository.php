@@ -90,21 +90,22 @@ class RestaurantRepository extends ServiceEntityRepository
      */
     public function findSimilar($foodName)
     {
+        $qb = $this->createQueryBuilder('r')->join('r.meals', 'm');
         if ($foodName) {
             $pastFood = explode(',', $foodName);
 //        Find restaurants with similar menu.
-            $qb = $this->createQueryBuilder('r')
-                ->join('r.meals', 'm');
             $i = 0;
             foreach ($pastFood as $food) {
                 $qb->orWhere('m.foodName LIKE :food' . $i)
                     ->setParameter('food' . $i, '%' . $food[$i] . '%');
                 $i++;
             }
-            $result = $qb->distinct('id')->getQuery()->getArrayResult();
+            $result = $qb->distinct('id')->getQuery()->getResult();
             return $result;
         } else {
-            $result = 'null';
+            $result = $qb->orderBy('r.avgRating', 'DESC')
+                ->getQuery()
+                ->getResult();
             return $result;
         }
     }
