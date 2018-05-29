@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Restaurant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Internal\Hydration\ArrayHydrator;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -86,56 +85,44 @@ class RestaurantRepository extends ServiceEntityRepository
 
     /**
      * @param $foodName
-     * @return mixed
+     * @return \Doctrine\ORM\Query
      */
     public function findSimilar($foodName)
     {
-        $qb = $this->createQueryBuilder('r')->join('r.meals', 'm');
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.meals', 'm')
+            ->orderBy('r.avgRating', 'DESC')
+            ->distinct('id');
         if ($foodName) {
             $pastFood = explode(',', $foodName);
 //        Find restaurants with similar menu.
             $i = 0;
             foreach ($pastFood as $food) {
-                $qb->orWhere('m.foodName LIKE :food' . $i)
-                    ->setParameter('food' . $i, '%' . $food[$i] . '%');
+                $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food[$i] . '%');
                 $i++;
             }
-            $result = $qb->distinct('id')->getQuery()->getResult();
-            return $result;
-        } else {
-            $result = $qb->orderBy('r.avgRating', 'DESC')
-                ->getQuery()
-                ->getResult();
-            return $result;
         }
+        return $qb->getQuery();
     }
 
     /**
      * @param $foodName
-     * @return mixed
+     * @return \Doctrine\ORM\Query
      */
     public function findDifferent($foodName)
     {
         $qb = $this->createQueryBuilder('r')
             ->select('r')
             ->join('r.meals', 'm')
-            ->where('m.foodName IS NOT NULL');
-
+            ->where('m.foodName IS NOT NULL')
+            ->orderBy('r.avgRating', 'DESC');
         if ($foodName) {
-            $similar = $this->findSimilar($foodName);
+            $qbS = $this->findSimilar($foodName);
+            $similar = $qbS->getArrayResult();
             $formattedSimilar = array_column($similar, 'id');
-            $result = $qb->andWhere('r.id NOT IN (:similar)')
-                ->orderBy('r.avgRating', 'DESC')
-                ->setParameter('similar', $formattedSimilar)
-                ->getQuery()
-                ->getResult();
-            return $result;
-        } else {
-            $result = $qb->orderBy('r.avgRating', 'DESC')
-                ->getQuery()
-                ->getResult();
-            return $result;
+            $qb->andWhere('r.id NOT IN (:similar)')->setParameter('similar', $formattedSimilar);
         }
+        return $qb->getQuery();
     }
 
 //    /**

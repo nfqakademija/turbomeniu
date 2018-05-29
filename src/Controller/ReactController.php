@@ -88,7 +88,8 @@ class ReactController extends AbstractController
      */
     public function discoverSomethingNew(Request $request, NormalizerCallService $normalizerCallService)
     {
-        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findDifferent($request->get('foodName'));
+        $query = $this->getDoctrine()->getRepository(Restaurant::class)->findDifferent($request->get('foodName'));
+        $restaurants = $query->getResult();
 
         $normalizer = $normalizerCallService->callNormalizer();
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
@@ -104,7 +105,8 @@ class ReactController extends AbstractController
      */
     public function restaurantsYouMayLike(Request $request, NormalizerCallService $normalizerCallService)
     {
-        $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findSimilar($request->get('foodName'));
+        $query = $this->getDoctrine()->getRepository(Restaurant::class)->findSimilar($request->get('foodName'));
+        $restaurants = $query->getResult();
 
         $normalizer = $normalizerCallService->callNormalizer();
         $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
