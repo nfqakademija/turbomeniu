@@ -50,6 +50,7 @@ class App extends React.Component {
 
     componentWillMount() {
         this.getUserLocation();
+        this.getInitialData();
         this.getLocalStorage();
     }
 
@@ -91,15 +92,11 @@ class App extends React.Component {
                 this.setState({
                     center: {
                         lat: position.coords.latitude,
-                        lng: position.coords.longitude,
-                        // minLat: position.coords.latitude - 0.1,
-                        // maxLat: position.coords.latitude + 0.1,
-                        // minLng: position.coords.longitude - 0.2,
-                        // maxLng: position.coords.longitude + 0.2
+                        lng: position.coords.longitude
                     }
                 });
 
-               this.getInitialData()
+               this.getInitialData();
             }
         )
     }
