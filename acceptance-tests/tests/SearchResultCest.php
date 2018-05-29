@@ -14,6 +14,11 @@ class SearchResultCest
     }
 
     // tests
+
+    /**
+     * @param AcceptanceTester $I
+     * @throws Exception
+     */
     public function tryToTest(AcceptanceTester $I)
     {
         $I->am('New user');
