@@ -75,18 +75,17 @@ class App extends React.Component {
             })
             .then(function (myJson) {
                 console.log('getdifferent', myJson)
-                that.setState({differentRestaurants: myJson})
+                var twoRandomItems = [myJson[Math.floor(Math.random()*myJson.length)], myJson[Math.floor(Math.random()*myJson.length)]]
+                that.setState({differentRestaurants: twoRandomItems})
+                console.log(that.state.differentRestaurants, 'diff twi')
             })
 
     }
 
     getSimilar(){
         var localStorageResults = this.getLocalStorage();
-        console.log(localStorageResults, 'getsimilar');
 
         var joinedStringOfResults = localStorageResults.join(',');
-
-        console.log(joinedStringOfResults, 'getsimilar joinded strings')
 
         var that = this;
         fetch(`/similar?foodName=${joinedStringOfResults}`)
@@ -95,9 +94,13 @@ class App extends React.Component {
             })
             .then(function (myJson) {
                 console.log('getsimilar', myJson)
-                that.setState({similarRestaurants: myJson})
+                var twoRandomItems = [myJson[Math.floor(Math.random()*myJson.length)], myJson[Math.floor(Math.random()*myJson.length)]]
+                that.setState({similarRestaurants: twoRandomItems})
+                console.log(that.state.similarRestaurants, 'similar twi')
             })
 
+
+        //
     }
 
     handleClick() {
@@ -232,6 +235,8 @@ class App extends React.Component {
                         <Suggestions
                         similarRestaurants={this.state.similarRestaurants}
                         differentRestaurants={this.state.differentRestaurants}
+                        renderModal={this.renderModal}
+                        onMouseOver={this.onMouseOver}
                         />
                     </div>
 

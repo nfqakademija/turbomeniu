@@ -20,9 +20,6 @@ export default class Listings extends Component {
                 - {element.foodName} - {element.price}&euro;
             </div>)
         })
-
-
-
     }
 
 
