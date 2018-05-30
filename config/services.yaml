@@ -3,6 +3,9 @@
 parameters:
 
 services:
+    app.services.serializer_factory: ~
+    app.services.normalizer:
+        factory: 'App\Services\SerializerFactory::createNormalizer'
     app.event_listener.review_listener:
         class: App\EventListener\ReviewListener
         tags:

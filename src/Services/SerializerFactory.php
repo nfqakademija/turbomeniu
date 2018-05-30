@@ -17,13 +17,13 @@ use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
-class NormalizerCallService
+class SerializerFactory
 {
     /**
-     * @return Serializer
+     * @return ObjectNormalizer
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function callNormalizer()
+    public function createNormalizer()
     {
 //        Load annotations
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
@@ -35,6 +35,6 @@ class NormalizerCallService
         });
         $readyNormalizer = new Serializer([$dateTimeNorm, $normalizer]);
 
-        return $readyNormalizer;
+        return $normalizer;
     }
 }
