@@ -29,6 +29,5 @@ class SearchResultCest
         $I->waitForElement('.listing');
         $I->wait(30);
         $I->dontSee('Sorry your filter did not match any listing');
-        $I->canSee('Burger', '.foodFromMenu');
     }
 }
