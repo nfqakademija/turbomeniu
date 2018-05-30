@@ -20,21 +20,21 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 class SerializerFactory
 {
     /**
-     * @return ObjectNormalizer
+     * @return Serializer
      * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function createNormalizer()
+    public function buildSerializer()
     {
 //        Load annotations
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
         // Call normalizer
-        $normalizer = new ObjectNormalizer($classMetadataFactory);
+        $objectNorm = new ObjectNormalizer($classMetadataFactory);
         $dateTimeNorm = new DateTimeNormalizer();
-        $normalizer->setCircularReferenceHandler(function ($restaurant) {
+        $objectNorm->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
         });
-        $readyNormalizer = new Serializer([$dateTimeNorm, $normalizer]);
+        $serializer = new Serializer([$dateTimeNorm, $objectNorm]);
 
-        return $normalizer;
+        return $serializer;
     }
 }

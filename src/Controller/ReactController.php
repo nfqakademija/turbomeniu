@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Entity\Restaurant;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Services\NormalizerCallService;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Serializer;
 
 class ReactController extends AbstractController
 {
@@ -22,11 +22,10 @@ class ReactController extends AbstractController
      * @param $latitude
      * @param $longitude
      * @param $distance
-     * @param NormalizerCallService $normalizerCallService
+     * @param \Symfony\Component\Serializer\Serializer $serializer
      * @return JsonResponse
-     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function index($latitude, $longitude, $distance, NormalizerCallService $normalizerCallService)
+    public function index($latitude, $longitude, $distance, Serializer $serializer)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->findAllClose(
             $latitude,
@@ -34,24 +33,21 @@ class ReactController extends AbstractController
             $distance
         );
 
-        $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
+        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
      * @param $id
-     * @param NormalizerCallService $normalizerCallService
+     * @param Serializer $serializer
      * @return JsonResponse
-     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function modal($id, NormalizerCallService $normalizerCallService)
+    public function modal($id, Serializer $serializer)
     {
         $restaurant = $this->getDoctrine()->getRepository(Restaurant::class)->find($id);
 
-        $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurant, null, ['groups' => ['modal']]);
+        $normalized = $serializer->normalize($restaurant, null, ['groups' => ['modal']]);
 
         return JsonResponse::create($normalized);
     }
@@ -61,11 +57,10 @@ class ReactController extends AbstractController
      * @param $latitude
      * @param $longitude
      * @param $distance
-     * @param NormalizerCallService $normalizerCallService
+     * @param Serializer $serializer
      * @return JsonResponse
-     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function search($query, $latitude, $longitude, $distance, NormalizerCallService $normalizerCallService)
+    public function search($query, $latitude, $longitude, $distance, Serializer $serializer)
     {
         $restaurants = $this->getDoctrine()->getRepository(Restaurant::class)->searchAll(
             $query,
@@ -74,42 +69,37 @@ class ReactController extends AbstractController
             $distance
         );
 
-        $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
+        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
      * @param Request $request
-     * @param NormalizerCallService $normalizerCallService
+     * @param Serializer $serializer
      * @return JsonResponse
-     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function discoverSomethingNew(Request $request, NormalizerCallService $normalizerCallService)
+    public function discoverSomethingNew(Request $request, Serializer $serializer)
     {
         $query = $this->getDoctrine()->getRepository(Restaurant::class)->findDifferent($request->get('foodName'));
         $restaurants = $query->getResult();
 
-        $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
+        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }
 
     /**
      * @param Request $request
-     * @param NormalizerCallService $normalizerCallService
+     * @param Serializer $serializer
      * @return JsonResponse
-     * @throws \Doctrine\Common\Annotations\AnnotationException
      */
-    public function restaurantsYouMayLike(Request $request, NormalizerCallService $normalizerCallService)
+    public function restaurantsYouMayLike(Request $request, Serializer $serializer)
     {
         $query = $this->getDoctrine()->getRepository(Restaurant::class)->findSimilar($request->get('foodName'));
         $restaurants = $query->getResult();
 
-        $normalizer = $normalizerCallService->callNormalizer();
-        $normalized = $normalizer->normalize($restaurants, null, ['groups' => ['list']]);
+        $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
         return JsonResponse::create($normalized);
     }

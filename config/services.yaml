@@ -3,9 +3,8 @@
 parameters:
 
 services:
-    app.services.serializer_factory: ~
-    app.services.normalizer:
-        factory: 'App\Services\SerializerFactory::createNormalizer'
+    Symfony\Component\Serializer\Serializer:
+        factory: 'App\Services\SerializerFactory::buildSerializer'
     app.event_listener.review_listener:
         class: App\EventListener\ReviewListener
         tags:
