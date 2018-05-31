@@ -31,6 +31,8 @@ class App extends React.Component {
             mapZoom: 10,
             modalInfo: [],
             currentRestaurantId: undefined,
+            differentRestaurants: undefined,
+            similarRestaurants: undefined
 
         }
         ;
@@ -44,6 +46,8 @@ class App extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
+        this.getDifferent = this.getDifferent.bind(this);
+        this.getSimilar = this.getSimilar.bind(this);
 
     }
 
@@ -52,6 +56,51 @@ class App extends React.Component {
         this.getUserLocation();
         this.getInitialData();
         this.getLocalStorage();
+        this.getDifferent();
+        this.getSimilar();
+    }
+
+    getDifferent(){
+        var localStorageResults = this.getLocalStorage();
+        console.log(localStorageResults, 'getDifferent');
+
+        var joinedStringOfResults = localStorageResults.join(',');
+
+        console.log(joinedStringOfResults, 'getdifferenet joinded strings')
+
+        var that = this;
+        fetch(`/different?foodName=${joinedStringOfResults}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                console.log('getdifferent', myJson)
+                var twoRandomItems = [myJson[Math.floor(Math.random()*myJson.length)], myJson[Math.floor(Math.random()*myJson.length)]]
+                that.setState({differentRestaurants: twoRandomItems})
+                console.log(that.state.differentRestaurants, 'diff twi')
+            })
+
+    }
+
+    getSimilar(){
+        var localStorageResults = this.getLocalStorage();
+
+        var joinedStringOfResults = localStorageResults.join(',');
+
+        var that = this;
+        fetch(`/similar?foodName=${joinedStringOfResults}`)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                console.log('getsimilar', myJson)
+                var twoRandomItems = [myJson[Math.floor(Math.random()*myJson.length)], myJson[Math.floor(Math.random()*myJson.length)]]
+                that.setState({similarRestaurants: twoRandomItems})
+                console.log(that.state.similarRestaurants, 'similar twi')
+            })
+
+
+        //
     }
 
     handleClick() {
@@ -84,6 +133,8 @@ class App extends React.Component {
                 console.log('more than 20')
             }
         }
+
+        return JSON.parse(localStorage.getItem('TurboMeniuSearchHistory'))
     }
 
     getUserLocation(){
@@ -118,7 +169,7 @@ class App extends React.Component {
     }
 
     handleSearch(event){
-        if (this.state.searchValue){
+        if (this.state.searchValue || this.state.searchValue != ''){
 
             var that = this;
             fetch(`/search/${this.state.searchValue.toLowerCase()}/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
@@ -181,7 +232,12 @@ class App extends React.Component {
 
                 <div className="row">
                     <div className="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                        <Suggestions/>
+                        <Suggestions
+                        similarRestaurants={this.state.similarRestaurants}
+                        differentRestaurants={this.state.differentRestaurants}
+                        renderModal={this.renderModal}
+                        onMouseOver={this.onMouseOver}
+                        />
                     </div>
 
                     <Modal show={this.state.isOpen}

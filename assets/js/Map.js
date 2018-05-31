@@ -31,7 +31,7 @@ class Map extends Component {
         };
         this.zoom = 13;
         this.loopMapComponents = this.loopMapComponents.bind(this);
-        this.getBounds = this.getBounds.bind(this);
+        // this.getBounds = this.getBounds.bind(this);
     }
 
     componentWillMount(){
@@ -39,21 +39,21 @@ class Map extends Component {
     }
 
     //todo bounds function
-    getBounds(){
-        const {listingsData} = this.props;
-        console.log(listingsData[1].latitude, 'getbounds');
-
-        let maxLatitude = listingsData.forEach(function(listing){
-            var maxLat = 0;
-            if (listing.latitude > maxLat) {
-                maxLat = listing.latitude
-            }
-            return maxLat;
-        })
-
-        console.log(maxLatitude, 'MapmaxLatitude')
-
-    }
+    // getBounds(){
+    //     const {listingsData} = this.props;
+    //     console.log(listingsData[1].latitude, 'getbounds');
+    //
+    //     let maxLatitude = listingsData.forEach(function(listing){
+    //         var maxLat = 0;
+    //         if (listing.latitude > maxLat) {
+    //             maxLat = listing.latitude
+    //         }
+    //         return maxLat;
+    //     })
+    //
+    //     console.log(maxLatitude, 'MapmaxLatitude')
+    //
+    // }
 
     loopMapComponents() {
         const {listingsData} = this.props;

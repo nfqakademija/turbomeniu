@@ -20,9 +20,6 @@ export default class Listings extends Component {
                 - {element.foodName} - {element.price}&euro;
             </div>)
         })
-
-
-
     }
 
 
@@ -55,19 +52,6 @@ export default class Listings extends Component {
                                     <img src={listing.logo} alt=""/>
                                 </div>
                             </div>
-
-                            {/*<div className="extra row">*/}
-                                {/*<div className="col">*/}
-                                    {/*<ul>*/}
-                                        {/*<li><i className="fa fa-cutlery"*/}
-                                               {/*aria-hidden="true"></i> {listing.restaurant_type}</li>*/}
-                                        {/*<li><i className="fas fa-lemon"></i> {listing.food_type}</li>*/}
-                                        {/*<li><a href={listing.facebook_link} target="blank"><i*/}
-                                            {/*className="fab fa-facebook-square"></i></a></li>*/}
-                                    {/*</ul>*/}
-                                {/*</div>*/}
-
-                            {/*</div>*/}
 
                         </div>
 
