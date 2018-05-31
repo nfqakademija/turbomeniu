@@ -29,7 +29,7 @@ export default class Listings extends Component {
         if (listingsData === undefined || listingsData.length === 0) {
             return (
                 <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
                 <div className="loading">
                     Sorry your filter did not match any listing
                 </div>
@@ -39,7 +39,7 @@ export default class Listings extends Component {
         } else if (listingsData === 'loading' ) {
             return (
                 <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
                     <div className="loading">Restaurants loading</div>
                 </div>
                 </div>)
