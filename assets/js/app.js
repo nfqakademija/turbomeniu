@@ -42,12 +42,11 @@ class App extends React.Component {
         this.renderModal = this.renderModal.bind(this);
         this.getInitialData = this.getInitialData.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
-        this.getLocalStorage = this.getLocalStorage.bind(this);
+
         this.handleClick = this.handleClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
-        this.getDifferent = this.getDifferent.bind(this);
-        this.getSimilar = this.getSimilar.bind(this);
+
 
     }
 
@@ -55,53 +54,10 @@ class App extends React.Component {
     componentWillMount() {
         this.getUserLocation();
         this.getInitialData();
-        this.getLocalStorage();
-        this.getDifferent();
-        this.getSimilar();
-    }
-
-    getDifferent(){
-        var localStorageResults = this.getLocalStorage();
-        console.log(localStorageResults, 'getDifferent');
-
-        var joinedStringOfResults = localStorageResults.join(',');
-
-        console.log(joinedStringOfResults, 'getdifferenet joinded strings')
-
-        var that = this;
-        fetch(`/different?foodName=${joinedStringOfResults}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                console.log('getdifferent', myJson)
-                var twoRandomItems = [myJson[Math.floor(Math.random()*myJson.length)], myJson[Math.floor(Math.random()*myJson.length)]]
-                that.setState({differentRestaurants: twoRandomItems})
-                console.log(that.state.differentRestaurants, 'diff twi')
-            })
 
     }
 
-    getSimilar(){
-        var localStorageResults = this.getLocalStorage();
 
-        var joinedStringOfResults = localStorageResults.join(',');
-
-        var that = this;
-        fetch(`/similar?foodName=${joinedStringOfResults}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                console.log('getsimilar', myJson)
-                var twoRandomItems = [myJson[Math.floor(Math.random()*myJson.length)], myJson[Math.floor(Math.random()*myJson.length)]]
-                that.setState({similarRestaurants: twoRandomItems})
-                console.log(that.state.similarRestaurants, 'similar twi')
-            })
-
-
-        //
-    }
 
     handleClick() {
         this.setState(prevState => ({
@@ -114,28 +70,7 @@ class App extends React.Component {
         this.getInitialData();
     }
 
-    getLocalStorage(){
-        console.log(localStorage, "localstorage");
 
-        if (localStorage.TurboMeniuSearchHistory === undefined){
-            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify([]))
-        } else {
-            var tempArray = JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
-
-            if(tempArray.length >20){
-                var diff = tempArray.length - 20;
-
-                for (var i=0; i<diff; i++){
-                    tempArray.shift();
-                }
-                localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempArray));
-
-                console.log('more than 20')
-            }
-        }
-
-        return JSON.parse(localStorage.getItem('TurboMeniuSearchHistory'))
-    }
 
     getUserLocation(){
         navigator.geolocation.getCurrentPosition(
