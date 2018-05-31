@@ -100,10 +100,10 @@ class RestaurantRepository extends ServiceEntityRepository
                 $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food[$i] . '%');
                 $i++;
             }
-            return $qb->getQuery();
         } else {
-            return $qb->orWhere('m.foodName IS NOT NULL')->getQuery();
+            $qb->orWhere('m.foodName IS NOT NULL');
         }
+        return $qb->getQuery();
     }
 
     /**
