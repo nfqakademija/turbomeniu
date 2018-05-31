@@ -98,7 +98,7 @@ class RestaurantRepository extends ServiceEntityRepository
             $pastFood = explode(',', $foodName);
             $i = 0;
             foreach ($pastFood as $food) {
-                $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food[$i] . '%');
+                $qb->orWhere('m.foodName LIKE :food' . $i)->setParameter('food' . $i, '%' . $food . '%');
                 $i++;
             }
         } else {
