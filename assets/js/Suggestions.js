@@ -150,6 +150,7 @@ export default class Suggestions extends Component {
                                         <div className="listing" onClick={this.props.renderModal}
                                              restaurantid={this.state.similarRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
+                                            <div className="coloredBorder">
                                             <div className="row restName">
                                                 <div className="col">
                                                     <strong>{this.state.similarRestaurants[0].name}</strong>
@@ -170,6 +171,7 @@ export default class Suggestions extends Component {
                                                     {this.loopMeals(this.state.similarRestaurants[0].meals)}
                                                 </div>
                                             </div>
+                                            </div>
                                         </div>
                                     </div>
                                     {/*second suggestion similar*/}
@@ -177,6 +179,7 @@ export default class Suggestions extends Component {
                                         <div className="listing" onClick={this.props.renderModal}
                                              restaurantid={this.state.similarRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
+                                            <div className="coloredBorder">
                                             <div className="row restName">
                                                 <div className="col">
                                                     <strong>{this.state.similarRestaurants[1].name}</strong>
@@ -196,6 +199,7 @@ export default class Suggestions extends Component {
                                                 <div className="col-8">
                                                     {this.loopMeals(this.state.similarRestaurants[1].meals)}
                                                 </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -217,6 +221,7 @@ export default class Suggestions extends Component {
                                         <div className="listing" onClick={this.props.renderModal}
                                              restaurantid={this.state.differentRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
+                                            <div className="coloredBorder">
                                             <div className="row restName">
                                                 <div className="col">
                                                     <strong>{this.state.differentRestaurants[0].name}</strong>
@@ -237,6 +242,7 @@ export default class Suggestions extends Component {
                                                     {this.loopMeals(this.state.differentRestaurants[0].meals)}
                                                 </div>
                                             </div>
+                                            </div>
                                         </div>
                                     </div>
                                     {/*second suggestion different*/}
@@ -244,6 +250,7 @@ export default class Suggestions extends Component {
                                         <div className="listing" onClick={this.props.renderModal}
                                              restaurantid={this.state.differentRestaurants[1].id}
                                              onMouseOver={this.props.onMouseOver}>
+                                            <div className="coloredBorder">
                                             <div className="row restName">
                                                 <div className="col">
                                                     <strong>{this.state.differentRestaurants[1].name}</strong>
@@ -263,6 +270,7 @@ export default class Suggestions extends Component {
                                                 <div className="col-8">
                                                     {this.loopMeals(this.state.differentRestaurants[1].meals)}
                                                 </div>
+                                            </div>
                                             </div>
                                         </div>
                                     </div>

@@ -27,15 +27,28 @@ export default class Listings extends Component {
         const {listingsData} = this.props;
 
         if (listingsData === undefined || listingsData.length === 0) {
-            return (<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                Sorry your filter did not match any listing</div>)
+            return (
+                <div className="row">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                <div className="loading">
+                    Sorry your filter did not match any listing
+                </div>
+
+                </div>
+                </div>)
         } else if (listingsData === 'loading' ) {
-            return (<div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                Restaurants loading</div>)
+            return (
+                <div className="row">
+                <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div className="loading">Restaurants loading</div>
+                </div>
+                </div>)
         } else {
         return listingsData.map((listing, index) => {
             return (<div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" key={index}>
                 <div className="listing" onClick={this.props.renderModal} restaurantid={listing.id} onMouseOver={this.props.onMouseOver}>
+
+                    <div className="coloredBorder">
                     <div className="row restName">
                         <div className="col">
                             <strong>{listing.name}</strong>
@@ -58,6 +71,8 @@ export default class Listings extends Component {
                         <div className="col-8">
                             {this.loopMeals(listing.meals)}
                         </div>
+                    </div>
+
                     </div>
                 </div>
             </div>)

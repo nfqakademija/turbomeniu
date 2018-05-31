@@ -81,8 +81,7 @@ class App extends React.Component {
                         lng: position.coords.longitude
                     }
                 });
-
-               this.getInitialData();
+                this.getInitialData();
             }
         )
     }

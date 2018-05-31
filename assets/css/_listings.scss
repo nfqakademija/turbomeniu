@@ -6,9 +6,26 @@
   border-radius: 5px;
 }
 
+.loading {
+  background: white;
+  padding: 10px 15px 10px 15px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  margin-right: 15px;
+  width: 1000%;
+  border-radius: 5px;
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.5rem;
 
-.listings{
+}
 
+
+.coloredBorder{
+  height: 100%;
+  width: 100%;
+  padding: 8px;
+  border: solid 1px #FC5C7D90;
+  border-radius: 5px;
 
 }
 
