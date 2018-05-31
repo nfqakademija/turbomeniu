@@ -29,8 +29,8 @@ class RestaurantRepository extends ServiceEntityRepository
     {
         $parameters = ['latitude' => $latitude, 'longitude' => $longitude, 'distance' => $distance];
         $qb = $this->createQueryBuilder('r')
-            ->select('r')
             ->join('r.meals', 'm')
+            ->select('partial r.{id,name,logo,avgRating,latitude,longitude}, partial m.{id,foodName,price}')
             ->where('m.foodName IS NOT NULL')
             ->addSelect(
                 '( 3959 * acos(cos(radians( :latitude ))' .
@@ -63,7 +63,7 @@ class RestaurantRepository extends ServiceEntityRepository
             'query' => '%' . $query . '%'
         ];
         $qb = $this->createQueryBuilder('r')
-            ->select('r')
+            ->select('partial r.{id,name,logo,avgRating,latitude,longitude}, partial m.{id,foodName,price}')
             ->join('r.meals', 'm')
             ->where('r.name LIKE :query')
             ->orWhere('m.foodName LIKE :query')
@@ -90,6 +90,7 @@ class RestaurantRepository extends ServiceEntityRepository
     public function findSimilar($foodName)
     {
         $qb = $this->createQueryBuilder('r')
+            ->select('partial r.{id,name,logo,avgRating,latitude,longitude}, partial m.{id,foodName,price}')
             ->join('r.meals', 'm')
             ->orderBy('r.avgRating', 'DESC')
             ->distinct('id');
@@ -113,7 +114,7 @@ class RestaurantRepository extends ServiceEntityRepository
     public function findDifferent($foodName)
     {
         $qb = $this->createQueryBuilder('r')
-            ->select('r')
+            ->select('partial r.{id,name,logo,avgRating,latitude,longitude}, partial m.{id,foodName,price}')
             ->join('r.meals', 'm')
             ->where('m.foodName IS NOT NULL')
             ->orderBy('r.avgRating', 'DESC');
