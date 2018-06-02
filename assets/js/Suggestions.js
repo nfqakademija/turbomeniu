@@ -146,7 +146,7 @@ export default class Suggestions extends Component {
                                 <div className="row">
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
-                                             restaurantid={this.state.similarRestaurants[0].id}
+                                             id={this.state.similarRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
                                             <div className="row">
@@ -198,7 +198,7 @@ export default class Suggestions extends Component {
                                     {/*second suggestion similar*/}
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
-                                             restaurantid={this.state.similarRestaurants[0].id}
+                                             id={this.state.similarRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
                                             <div className="row">
@@ -263,7 +263,7 @@ export default class Suggestions extends Component {
                                 <div className="row">
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
-                                             restaurantid={this.state.differentRestaurants[0].id}
+                                             id={this.state.differentRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
                                             <div className="row">
@@ -315,7 +315,7 @@ export default class Suggestions extends Component {
                                     {/*second suggestion different*/}
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
-                                             restaurantid={this.state.differentRestaurants[1].id}
+                                             id={this.state.differentRestaurants[1].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
                                             <div className="row">

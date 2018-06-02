@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
-import { fitBounds } from 'google-map-react/utils';
 
 const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x userIcon"></i>{text}</div>;
-const Restaurant = ({ text }) => <div><i className="fas fa-utensils 2x"></i>{text}</div>;
+const Restaurant = ({ text, listingid, onmouseover, rendermodal}) => <div className="mapComponent" id={ listingid } onMouseOver={onmouseover} onClick={rendermodal}><i className="fas fa-utensils 2x"></i>{text} {listingid}</div>;
 
 class Map extends Component {
     constructor() {
         super();
 
         this.state = {
-
-
         };
 
         this.defaultCenter = {
@@ -40,7 +37,12 @@ class Map extends Component {
                 lng={listing.longitude}
                 text={listing.name}
                 key={index}
-            />)
+                listingid={listing.id}
+                onmouseover={this.props.onMouseOver}
+                rendermodal={this.props.renderModal}
+            />
+
+                )
                })
                 }
 

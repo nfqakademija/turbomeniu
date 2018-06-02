@@ -34,6 +34,7 @@
   padding: 8px;
   border: solid 1px #FC5C7D90;
   border-radius: 5px;
+  background: white;
 
 }
 
@@ -70,5 +71,9 @@
   li {
     list-style-type: none;
   }
+}
+
+.hoveredElement {
+  background-color: #FC5C7D90;
 }
 

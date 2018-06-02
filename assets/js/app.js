@@ -46,6 +46,7 @@ class App extends React.Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
+        this.onMouseOut = this.onMouseOut.bind(this);
 
 
     }
@@ -147,9 +148,17 @@ class App extends React.Component {
     }
 
     onMouseOver(event) {
-        var restaurantId = event.currentTarget.getAttribute("restaurantid");
+        // var restaurantId = event.currentTarget.getAttribute("restaurantid");
+        var restaurantId = event.currentTarget.id;
         this.setState({currentRestaurantId: restaurantId});
+        console.log(this.state.currentRestaurantId)
+
+        document.getElementById(restaurantId).classList.add("hoveredElement")
     }
+
+    onMouseOut(){
+    document.getElementById(this.state.currentRestaurantId).classList.remove("hoveredElement")
+}
 
     renderModal() {
 
@@ -196,7 +205,9 @@ class App extends React.Component {
 
                     <Modal show={this.state.isOpen}
                            onClose={this.renderModal}
-                           modalInfo={this.state.modalInfo}/>
+                           modalInfo={this.state.modalInfo}
+
+                    />
                     </div>
                     <div className="row">
 
@@ -216,6 +227,7 @@ class App extends React.Component {
                             listingsData={this.state.filteredData}
                             renderModal={this.renderModal}
                             onMouseOver={this.onMouseOver}
+                            onMouseOut={this.onMouseOut}
                         />
                     </div>
 
@@ -223,6 +235,8 @@ class App extends React.Component {
                         <Map listingsData={this.state.filteredData}
                              center={this.state.center}
                              isToggleOn={this.state.isToggleOn}
+                             onMouseOver={this.onMouseOver}
+                             renderModal={this.renderModal}
                         />
                     </div>
                 </div>
