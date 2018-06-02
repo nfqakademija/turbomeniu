@@ -30,8 +30,8 @@ export default class Suggestions extends Component {
         } else {
             var tempArray = JSON.parse(localStorage.getItem("TurboMeniuSearchHistory"))
 
-            if (tempArray.length > 20) {
-                var diff = tempArray.length - 20;
+            if (tempArray.length > 7) {
+                var diff = tempArray.length - 7;
 
                 for (var i = 0; i < diff; i++) {
                     tempArray.shift();
@@ -62,9 +62,16 @@ export default class Suggestions extends Component {
             .then(function (myJson) {
                 console.log('getdifferent', myJson)
                 var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
-                that.setState({differentRestaurants: twoRandomItems})
+
+                if(twoRandomItems[0] === undefined){
+                    that.setState({differentRestaurants: undefined})
+                } else {that.setState({differentRestaurants: twoRandomItems})}
+
+
                 console.log(that.state.differentRestaurants, 'diff twi')
             })
+
+
 
     }
 

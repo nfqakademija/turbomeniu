@@ -42,7 +42,7 @@ class App extends React.Component {
         this.renderModal = this.renderModal.bind(this);
         this.getInitialData = this.getInitialData.bind(this);
         this.onMouseOver = this.onMouseOver.bind(this);
-
+        this.dataStoring = this.dataStoring.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
@@ -66,8 +66,11 @@ class App extends React.Component {
     }
 
     clearSearch(){
-        this.setState({searchValue: ""});
+
+
+        this.setState({searchValue: ''});
         this.getInitialData();
+
     }
 
 
@@ -102,6 +105,26 @@ class App extends React.Component {
         this.setState({searchValue: event.target.value});
     }
 
+    dataStoring(searchValue){
+
+        var tempStorage = [];
+
+        if (localStorage.TurboMeniuSearchHistory === "") {
+            tempStorage = [];
+            tempStorage.push(searchValue)
+            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempStorage));
+        } else {
+
+            if (searchValue === '')
+            {return}
+
+            tempStorage = JSON.parse(localStorage.TurboMeniuSearchHistory);
+            tempStorage.push(searchValue)
+            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempStorage));
+        }
+    }
+
+
     handleSearch(event){
         if (this.state.searchValue || this.state.searchValue != ''){
 
@@ -118,16 +141,8 @@ class App extends React.Component {
             this.getInitialData();
         }
 
-        var tempStorage = [];
-        if (localStorage.TurboMeniuSearchHistory === "") {
-            tempStorage = [];
-            tempStorage.push(this.state.searchValue)
-            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempStorage));
-        } else {
-            tempStorage = JSON.parse(localStorage.TurboMeniuSearchHistory);
-            tempStorage.push(this.state.searchValue)
-            localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempStorage));
-            }
+        this.dataStoring(this.state.searchValue);
+
 
         event.preventDefault();
          event.stopPropagation()
@@ -141,17 +156,28 @@ class App extends React.Component {
     }
 
     renderModal() {
-        var that = this
-        fetch(`/modal/${this.state.currentRestaurantId}`)
-            .then(function (response) {
-                return response.json();
-            })
-            .then(function (myJson) {
-                that.setState({modalInfo: myJson,
-                    isOpen: !that.state.isOpen});
 
-                console.log(that.state.modalInfo, 'modalinfo')
-            })
+            var that = this
+            fetch(`/modal/${this.state.currentRestaurantId}`)
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (myJson) {
+                    that.setState({modalInfo: myJson,
+                        isOpen: !that.state.isOpen});
+
+                    console.log(that.state.modalInfo, 'modalinfo')
+                })
+
+
+
+
+        if (this.state.isOpen === true){
+            document.body.style.overflowY="visible";
+        } else if (this.state.isOpen === false){
+            document.body.style.overflowY="hidden"
+        }
+
     }
 
     render() {

@@ -10,13 +10,12 @@ export default class Modal extends Component {
     }
 
     loopMeals(restaurant) {
- var meals = restaurant;
+ var elements = restaurant;
 
 
-        return meals.map((meal, index) =>{
-            return ( <div key={index}>
-
-                {meal.foodName} - {meal.price}
+        return elements.map((element, index) =>{
+            return ( <div className="foodFromMenu" key={index}>
+                - {element.foodName} - {element.price}&euro;
             </div>)
         })
     }
@@ -61,7 +60,7 @@ export default class Modal extends Component {
             return null;
         }
 
-        return (<div className="backdropStyle" >
+        return (<div id="modal" className="backdropStyle" >
 
                 <div className="modalStyle" >
                     <div className="modal-header col-12">
