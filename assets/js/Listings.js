@@ -29,7 +29,7 @@ export default class Listings extends Component {
         if (listingsData === undefined || listingsData.length === 0) {
             return (
                 <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                <div className="col-12">
                 <div className="loading">
                     Sorry your filter did not match any listing
                 </div>
@@ -39,8 +39,8 @@ export default class Listings extends Component {
         } else if (listingsData === 'loading' ) {
             return (
                 <div className="row">
-                <div className="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
-                    <div className="loading">Restaurants loading</div>
+                <div className="col-12">
+                    <div className="loading">Restaurants loading <i className="fas fa-spinner fa-spin"></i></div>
                 </div>
                 </div>)
         } else {
@@ -49,16 +49,40 @@ export default class Listings extends Component {
                 <div className="listing" onClick={this.props.renderModal} restaurantid={listing.id} onMouseOver={this.props.onMouseOver}>
 
                     <div className="coloredBorder">
-                    <div className="row restName">
-                        <div className="col">
+                    <div className="row">
+                        <div className="col-8 restName">
                             <strong>{listing.name}</strong>
+                        </div>
+
+                        <div className="col-4 rating">
+                            {(() => {switch(listing.avgRating){
+                                case 0:
+                                    return <div><i className="far fa-star-half"></i></div>;
+                                    break;
+                                case 1:
+                                    return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                    break;
+                                case 2:
+                                    return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                    break;
+                                case 3:
+                                    return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                    break;
+                                case 4:
+                                    return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                    break;
+                                case 5:
+                                    return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                    break;
+                            }
+                            })()}
                         </div>
 
                     </div>
 
                     <div className="row">
 
-                        <div className="col-4 col-md-3 col-lg-4 col-xl-4">
+                        <div className="col-4 col-xs-12 col-md-3 col-lg-4 col-xl-4">
 
                             <div className="listingImg row">
                                 <div className="col">
@@ -68,7 +92,7 @@ export default class Listings extends Component {
 
                         </div>
 
-                        <div className="col-8">
+                        <div className="col-xs-12 col-8">
                             {this.loopMeals(listing.meals)}
                         </div>
                     </div>

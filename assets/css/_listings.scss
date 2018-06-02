@@ -12,13 +12,21 @@
   margin-bottom: 20px;
   margin-left: 15px;
   margin-right: 15px;
-  width: 1000%;
+  width: 100%;
   border-radius: 5px;
   font-family: 'Amatic SC', cursive;
   font-size: 1.5rem;
 
 }
 
+.rating {
+  padding-top: 8px;
+}
+
+
+.fa-star{
+  color: #FC5C7D90;
+}
 
 .coloredBorder{
   height: 100%;

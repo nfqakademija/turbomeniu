@@ -23,8 +23,6 @@ export default class Suggestions extends Component {
     }
 
     getLocalStorage() {
-        console.log(localStorage, "localstorage");
-
         if (localStorage.TurboMeniuSearchHistory === undefined) {
             localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify([]))
         } else {
@@ -37,8 +35,6 @@ export default class Suggestions extends Component {
                     tempArray.shift();
                 }
                 localStorage.setItem('TurboMeniuSearchHistory', JSON.stringify(tempArray));
-
-                console.log('more than 20')
             }
         }
 
@@ -60,15 +56,11 @@ export default class Suggestions extends Component {
                 return response.json();
             })
             .then(function (myJson) {
-                console.log('getdifferent', myJson)
                 var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
 
                 if(twoRandomItems[0] === undefined){
                     that.setState({differentRestaurants: undefined})
                 } else {that.setState({differentRestaurants: twoRandomItems})}
-
-
-                console.log(that.state.differentRestaurants, 'diff twi')
             })
 
 
@@ -86,10 +78,8 @@ export default class Suggestions extends Component {
                 return response.json();
             })
             .then(function (myJson) {
-                console.log('getsimilar', myJson)
                 var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
                 that.setState({similarRestaurants: twoRandomItems})
-                console.log(that.state.similarRestaurants, 'similar twi')
             })
     }
 
@@ -119,8 +109,9 @@ export default class Suggestions extends Component {
                         <div className="carousel-inner">
                             <div className="carousel-item active">
                                 <div className="row restName">
-                                    <div className="col">
-                                        <strong>We will show some suggestions shortly</strong>
+                                    <div className="col-12">
+                                        <strong>We will show some suggestions shortly <i
+                                            className="fas fa-spinner fa-spin"></i></strong>
                                     </div>
                                 </div>
                             </div>
@@ -158,11 +149,34 @@ export default class Suggestions extends Component {
                                              restaurantid={this.state.similarRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
-                                            <div className="row restName">
-                                                <div className="col">
+                                            <div className="row">
+                                                <div className="col-8 restName">
                                                     <strong>{this.state.similarRestaurants[0].name}</strong>
                                                 </div>
 
+                                                <div className="col-4 rating">
+                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                        case 0:
+                                                            return <div><i className="far fa-star-half"></i></div>;
+                                                            break;
+                                                        case 1:
+                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 2:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 3:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 4:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 5:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                            break;
+                                                    }
+                                                    })()}
+                                                </div>
                                             </div>
 
                                             <div className="row">
@@ -187,11 +201,34 @@ export default class Suggestions extends Component {
                                              restaurantid={this.state.similarRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
-                                            <div className="row restName">
-                                                <div className="col">
+                                            <div className="row">
+                                                <div className="col-8 restName">
                                                     <strong>{this.state.similarRestaurants[1].name}</strong>
                                                 </div>
 
+                                                <div className="col-4 rating">
+                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                        case 0:
+                                                            return <div><i className="far fa-star-half"></i></div>;
+                                                            break;
+                                                        case 1:
+                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 2:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 3:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 4:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 5:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                            break;
+                                                    }
+                                                    })()}
+                                                </div>
                                             </div>
 
                                             <div className="row">
@@ -229,11 +266,34 @@ export default class Suggestions extends Component {
                                              restaurantid={this.state.differentRestaurants[0].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
-                                            <div className="row restName">
-                                                <div className="col">
+                                            <div className="row">
+                                                <div className="col-8 restName">
                                                     <strong>{this.state.differentRestaurants[0].name}</strong>
                                                 </div>
 
+                                                <div className="col-4 rating">
+                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                        case 0:
+                                                            return <div><i className="far fa-star-half"></i></div>;
+                                                            break;
+                                                        case 1:
+                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 2:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 3:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 4:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 5:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                            break;
+                                                    }
+                                                    })()}
+                                                </div>
                                             </div>
 
                                             <div className="row">
@@ -258,11 +318,33 @@ export default class Suggestions extends Component {
                                              restaurantid={this.state.differentRestaurants[1].id}
                                              onMouseOver={this.props.onMouseOver}>
                                             <div className="coloredBorder">
-                                            <div className="row restName">
-                                                <div className="col">
+                                            <div className="row">
+                                                <div className="col-8 restName">
                                                     <strong>{this.state.differentRestaurants[1].name}</strong>
                                                 </div>
-
+                                                <div className="col-4 rating">
+                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                        case 0:
+                                                            return <div><i className="far fa-star-half"></i></div>;
+                                                            break;
+                                                        case 1:
+                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 2:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 3:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 4:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                            break;
+                                                        case 5:
+                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                            break;
+                                                    }
+                                                    })()}
+                                                </div>
                                             </div>
 
                                             <div className="row">

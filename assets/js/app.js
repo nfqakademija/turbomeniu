@@ -96,7 +96,6 @@ class App extends React.Component {
                 return response.json();
             })
             .then(function (myJson) {
-                console.log(myJson)
                 that.setState({filteredData: myJson})
             })
     }
@@ -134,7 +133,6 @@ class App extends React.Component {
                     return response.json();
                 })
                 .then(function (myJson) {
-                    console.log(myJson)
                     that.setState({filteredData: myJson})
                 })
         } else if (!this.state.searchValue){
@@ -151,8 +149,6 @@ class App extends React.Component {
     onMouseOver(event) {
         var restaurantId = event.currentTarget.getAttribute("restaurantid");
         this.setState({currentRestaurantId: restaurantId});
-
-        console.log(this.state.currentRestaurantId)
     }
 
     renderModal() {
@@ -165,8 +161,6 @@ class App extends React.Component {
                 .then(function (myJson) {
                     that.setState({modalInfo: myJson,
                         isOpen: !that.state.isOpen});
-
-                    console.log(that.state.modalInfo, 'modalinfo')
                 })
 
 

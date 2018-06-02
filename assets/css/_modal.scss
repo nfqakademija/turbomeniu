@@ -7,8 +7,9 @@
   background: -webkit-linear-gradient(to right, #6A82FB90, #FC5C7D90);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #6A82FB90, #FC5C7D90);
   //background-color: rgba(0,0,0,0.3);
-  padding: 50px;
+  padding: 30px;
   z-index: 1031;
+  overflow-y: auto;
 }
 
 .modalStyle {
@@ -19,16 +20,51 @@
   margin: 0 auto;
   padding: 30px;
   z-index: 1032;
+
 }
 
-.modal-header {
+.modalheader {
   color: black;
   text-align: right;
 }
 
 .reviewDiv {
   overflow-y: scroll;
-  max-height: 400px;
+  max-height: 280px;
+}
 
+.fa-times, .fa-at, .fa-phone, .fa-globe{
+  color: #FC5C7D90;
+}
 
+.restaurantInfo {
+  margin-bottom: 5px;
+}
+
+.extra {
+  padding-top: 10px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem;
+}
+
+.modalRestaurantMenu, .listingImg {
+  margin-bottom: 15px;
+}
+
+.reviewName {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.reviewDate{
+  padding-top:13px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.9rem;
+
+}
+
+.reviewComment{
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1rem;
 }
