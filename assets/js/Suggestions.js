@@ -149,7 +149,7 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.similarRestaurants[0].id} lat={this.state.similarRestaurants[0].latitude} lng={this.state.similarRestaurants[0].longitude}
-                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
+                                             onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
@@ -201,7 +201,7 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.similarRestaurants[1].id} lat={this.state.similarRestaurants[1].latitude} lng={this.state.similarRestaurants[1].longitude}
-                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
+                                             onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
@@ -266,7 +266,7 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.differentRestaurants[0].id} lat={this.state.differentRestaurants[0].latitude} lng={this.state.differentRestaurants[0].longitude}
-                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
+                                             onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
@@ -318,7 +318,7 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.differentRestaurants[1].id} lat={this.state.differentRestaurants[1].latitude} lng={this.state.differentRestaurants[1].longitude}
-                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
+                                             onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
