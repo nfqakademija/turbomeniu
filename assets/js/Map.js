@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x userIcon"></i>{text}</div>;
-const Restaurant = ({ text, listingid, onmouseover, rendermodal, onmouseout}) => <div className="mapComponent" id={ listingid } onMouseOver={onmouseover} onClick={rendermodal} onMouseOut={onmouseout}><i className="fas fa-utensils 2x"></i>{text} {listingid}</div>;
+const Restaurant = ({ text, listingid, onmouseovermap, rendermodal, onmouseout}) => <div className="mapComponent" id={listingid} onMouseOver={onmouseovermap} onClick={rendermodal} onMouseOut={onmouseout}><i className="fas fa-map-marker-alt 20x"></i></div>;
 
 class Map extends Component {
     constructor() {
@@ -15,7 +15,7 @@ class Map extends Component {
             lat: 54.89,
             lng: 23.90
         };
-        this.zoom = 10;
+        this.zoom = 13;
         this.loopMapComponents = this.loopMapComponents.bind(this);
 
     }
@@ -38,7 +38,7 @@ class Map extends Component {
                 text={listing.name}
                 key={index}
                 listingid={listing.id}
-                onmouseover={this.props.onMouseOverMap}
+                onmouseovermap={this.props.onMouseOverMap}
                 rendermodal={this.props.renderModal}
                 onmouseout={this.props.onMouseOut}
             />
@@ -60,8 +60,8 @@ class Map extends Component {
                 >
 
                     <UserLocation
-                        lat={this.props.center.lat}
-                        lng={this.props.center.lng}
+                        lat={this.props.userLocation.lat}
+                        lng={this.props.userLocation.lng}
                         text={'You are here'}
                     />
 {this.loopMapComponents()}

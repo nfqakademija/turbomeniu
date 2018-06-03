@@ -23,10 +23,10 @@ class App extends React.Component {
             center: {
                 lat: 54.898521,
                 lng: 23.903597,
-                // minLat: undefined,
-                // maxLat: undefined,
-                // minLng: undefined,
-                // maxLng: undefined
+            },
+            userLocation: {
+                lat: 54.898521,
+                lng: 23.903597,
             },
             mapZoom: 10,
             modalInfo: [],
@@ -47,7 +47,7 @@ class App extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
         this.onMouseOut = this.onMouseOut.bind(this);
-        this.onMouseOverMap = this.onMouseOver.bind(this);
+        this.onMouseOverMap = this.onMouseOverMap.bind(this);
 
 
     }
@@ -86,6 +86,13 @@ class App extends React.Component {
                         lng: position.coords.longitude
                     }
                 });
+                this.setState({
+                    userLocation: {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                });
+
                 this.getInitialData();
             }
         )
@@ -152,18 +159,29 @@ class App extends React.Component {
 
         var restaurantId = event.currentTarget.id;
         this.setState({currentRestaurantId: restaurantId});
-        console.log(this.state.currentRestaurantId)
+        console.log(this.state.currentRestaurantId);
 
         document.getElementById(restaurantId).classList.add("hoveredElement");
+
+        document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.remove("fa-map-marker-alt");
+        document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.add("fa-map-marker");
+
+        var lat = Number(document.getElementById(restaurantId).getAttribute("lat"));
+        var lng = Number(document.getElementById(restaurantId).getAttribute("lng"));
+
+        this.setState({center: {lat: lat, lng: lng}});
 
     }
 
     onMouseOverMap(event){
         var restaurantId = event.currentTarget.id;
         this.setState({currentRestaurantId: restaurantId});
-        console.log(this.state.currentRestaurantId)
+        console.log(this.state.currentRestaurantId);
 
-        document.getElementById(restaurantId).classList.add("hoveredElement")
+        document.getElementById(restaurantId).classList.add("hoveredElement");
+
+        document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.remove("fa-map-marker-alt");
+        document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.add("fa-map-marker");
 
         $('html,body').animate({
                 scrollTop: $(`#${restaurantId}`).offset().top},
@@ -175,6 +193,9 @@ class App extends React.Component {
 
     onMouseOut(){
     document.getElementById(this.state.currentRestaurantId).classList.remove("hoveredElement")
+        document.getElementsByClassName("mapComponent").namedItem(this.state.currentRestaurantId).firstChild.classList.remove("fa-map-marker");
+        document.getElementsByClassName("mapComponent").namedItem(this.state.currentRestaurantId).firstChild.classList.add("fa-map-marker-alt");
+        this.getUserLocation();
 }
 
     renderModal() {
@@ -252,6 +273,7 @@ class App extends React.Component {
                     <div className={this.state.isToggleOn ? 'fixedMap col-xs-12  d-none d-sm-block col-sm-4 col-md-4 col-lg-4 col-xl-4 map' : 'fixedMap col-xs-12  col-sm-4 col-md-4 col-lg-4 col-xl-4 map'}>
                         <Map listingsData={this.state.filteredData}
                              center={this.state.center}
+                             userLocation={this.state.userLocation}
                              isToggleOn={this.state.isToggleOn}
                              onMouseOverMap={this.onMouseOverMap}
                              renderModal={this.renderModal}
