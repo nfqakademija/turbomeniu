@@ -147,7 +147,7 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.similarRestaurants[0].id}
-                                             onMouseOver={this.props.onMouseOver}>
+                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
@@ -198,8 +198,8 @@ export default class Suggestions extends Component {
                                     {/*second suggestion similar*/}
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
-                                             id={this.state.similarRestaurants[0].id}
-                                             onMouseOver={this.props.onMouseOver}>
+                                             id={this.state.similarRestaurants[1].id}
+                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
@@ -207,7 +207,7 @@ export default class Suggestions extends Component {
                                                 </div>
 
                                                 <div className="col-4 rating">
-                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                    {(() => {switch(this.state.similarRestaurants[1].avgRating){
                                                         case 0:
                                                             return <div><i className="far fa-star-half"></i></div>;
                                                             break;
@@ -264,7 +264,7 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.differentRestaurants[0].id}
-                                             onMouseOver={this.props.onMouseOver}>
+                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
@@ -272,7 +272,7 @@ export default class Suggestions extends Component {
                                                 </div>
 
                                                 <div className="col-4 rating">
-                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                    {(() => {switch(this.state.differentRestaurants[0].avgRating){
                                                         case 0:
                                                             return <div><i className="far fa-star-half"></i></div>;
                                                             break;
@@ -316,14 +316,14 @@ export default class Suggestions extends Component {
                                     <div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                         <div className="listing" onClick={this.props.renderModal}
                                              id={this.state.differentRestaurants[1].id}
-                                             onMouseOver={this.props.onMouseOver}>
+                                             onMouseOver={this.props.onMouseOver} onMouseOut={this.props.onMouseOut}>
                                             <div className="coloredBorder">
                                             <div className="row">
                                                 <div className="col-8 restName">
                                                     <strong>{this.state.differentRestaurants[1].name}</strong>
                                                 </div>
                                                 <div className="col-4 rating">
-                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                    {(() => {switch(this.state.similarRestaurants[1].avgRating){
                                                         case 0:
                                                             return <div><i className="far fa-star-half"></i></div>;
                                                             break;

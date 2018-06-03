@@ -13,7 +13,7 @@ export default class Header extends Component {
                     <a className="navbar-brand col-auto mr-0" href="#"><i className="fas fa-utensils fa-1x"></i> TURBOMENIU</a>
 
                     <form className="input-group py-1 px-2 px-md-3" onSubmit={this.props.handleSearch}>
-                        <input className="form-control form-control-dark my-2" type="text" placeholder="Search here..."
+                        <input className="form-control form-control-dark my-2 searchbar" type="text" placeholder="Search here..."
                                aria-label="Search" value={this.props.searchValue} onChange={this.props.search}/>
                             <div className="input-group-append">
                                 <button className="btn btn-outline-light my-2 searchbutton" type="submit"><i

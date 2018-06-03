@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x userIcon"></i>{text}</div>;
-const Restaurant = ({ text, listingid, onmouseover, rendermodal}) => <div className="mapComponent" id={ listingid } onMouseOver={onmouseover} onClick={rendermodal}><i className="fas fa-utensils 2x"></i>{text} {listingid}</div>;
+const Restaurant = ({ text, listingid, onmouseover, rendermodal, onmouseout}) => <div className="mapComponent" id={ listingid } onMouseOver={onmouseover} onClick={rendermodal} onMouseOut={onmouseout}><i className="fas fa-utensils 2x"></i>{text} {listingid}</div>;
 
 class Map extends Component {
     constructor() {
@@ -38,8 +38,9 @@ class Map extends Component {
                 text={listing.name}
                 key={index}
                 listingid={listing.id}
-                onmouseover={this.props.onMouseOver}
+                onmouseover={this.props.onMouseOverMap}
                 rendermodal={this.props.renderModal}
+                onmouseout={this.props.onMouseOut}
             />
 
                 )

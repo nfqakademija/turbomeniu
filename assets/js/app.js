@@ -47,6 +47,7 @@ class App extends React.Component {
         this.handleSearch = this.handleSearch.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
         this.onMouseOut = this.onMouseOut.bind(this);
+        this.onMouseOverMap = this.onMouseOver.bind(this);
 
 
     }
@@ -148,13 +149,29 @@ class App extends React.Component {
     }
 
     onMouseOver(event) {
-        // var restaurantId = event.currentTarget.getAttribute("restaurantid");
+
+        var restaurantId = event.currentTarget.id;
+        this.setState({currentRestaurantId: restaurantId});
+        console.log(this.state.currentRestaurantId)
+
+        document.getElementById(restaurantId).classList.add("hoveredElement");
+
+    }
+
+    onMouseOverMap(event){
         var restaurantId = event.currentTarget.id;
         this.setState({currentRestaurantId: restaurantId});
         console.log(this.state.currentRestaurantId)
 
         document.getElementById(restaurantId).classList.add("hoveredElement")
+
+        $('html,body').animate({
+                scrollTop: $(`#${restaurantId}`).offset().top},
+            'slow');
+
     }
+
+
 
     onMouseOut(){
     document.getElementById(this.state.currentRestaurantId).classList.remove("hoveredElement")
@@ -200,6 +217,7 @@ class App extends React.Component {
                         differentRestaurants={this.state.differentRestaurants}
                         renderModal={this.renderModal}
                         onMouseOver={this.onMouseOver}
+                        onMouseOut={this.onMouseOut}
                         />
                     </div>
 
@@ -235,8 +253,9 @@ class App extends React.Component {
                         <Map listingsData={this.state.filteredData}
                              center={this.state.center}
                              isToggleOn={this.state.isToggleOn}
-                             onMouseOver={this.onMouseOver}
+                             onMouseOverMap={this.onMouseOverMap}
                              renderModal={this.renderModal}
+                             onMouseOut={this.onMouseOut}
                         />
                     </div>
                 </div>
