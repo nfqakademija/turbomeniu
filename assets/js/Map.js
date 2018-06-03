@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react';
 
 const UserLocation = ({ text }) => <div><i className="fas fa-street-view fa-2x userIcon"></i>{text}</div>;
-const Restaurant = ({ text, listingid, onmouseovermap, rendermodal, onmouseout}) => <div className="mapComponent" id={listingid} onMouseOver={onmouseovermap} onClick={rendermodal} onMouseOut={onmouseout}><i className="fas fa-map-marker-alt 20x"></i></div>;
+const Restaurant = ({ text, listingid, onmouseovermap, rendermodal, onmouseout}) => <div className="mapComponent" id={listingid} onMouseOver={onmouseovermap} onClick={rendermodal} onMouseLeave={onmouseout}><i className="fas fa-map-marker-alt 20x"></i></div>;
 
 class Map extends Component {
     constructor() {
