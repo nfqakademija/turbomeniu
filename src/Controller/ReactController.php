@@ -35,7 +35,7 @@ class ReactController extends AbstractController
 
         $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
-        return JsonResponse::create($normalized);
+        return new JsonResponse($normalized);
     }
 
     /**
@@ -49,7 +49,7 @@ class ReactController extends AbstractController
 
         $normalized = $serializer->normalize($restaurant, null, ['groups' => ['modal']]);
 
-        return JsonResponse::create($normalized);
+        return new JsonResponse($normalized);
     }
 
     /**
@@ -71,7 +71,7 @@ class ReactController extends AbstractController
 
         $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
-        return JsonResponse::create($normalized);
+        return new JsonResponse($normalized);
     }
 
     /**
@@ -86,7 +86,7 @@ class ReactController extends AbstractController
 
         $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
-        return JsonResponse::create($normalized);
+        return new JsonResponse($normalized);
     }
 
     /**
@@ -101,6 +101,6 @@ class ReactController extends AbstractController
 
         $normalized = $serializer->normalize($restaurants, null, ['groups' => ['list']]);
 
-        return JsonResponse::create($normalized);
+        return new JsonResponse($normalized);
     }
 }
