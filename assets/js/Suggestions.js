@@ -44,11 +44,8 @@ export default class Suggestions extends Component {
 
     getDifferent() {
         var localStorageResults = this.getLocalStorage();
-        console.log(localStorageResults, 'getDifferent');
 
         var joinedStringOfResults = localStorageResults.join(',');
-
-        console.log(joinedStringOfResults, 'getdifferenet joinded strings')
 
         var that = this;
         fetch(`/different?foodName=${joinedStringOfResults}`)
@@ -79,7 +76,6 @@ export default class Suggestions extends Component {
                 return response.json();
             })
 
-            //todo perdaryti kad imtu pirmus du elementus o ne randominius
             .then(function (myJson) {
                 // var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
                 // that.setState({similarRestaurants: twoRandomItems})
