@@ -16,7 +16,17 @@
 }
 
 .mapComponent {
+  height: 10px;
   cursor: pointer;
   color: #FC5C7D90;
+}
+
+.mapComponentHovered {
+  size: 20px;
+  color: rgba(159, 0, 255, 0.56) !important;
+
+  i{
+    size: 20px;
+  }
 }
 

@@ -17,6 +17,7 @@ class Map extends Component {
         };
         this.zoom = 13;
         this.loopMapComponents = this.loopMapComponents.bind(this);
+        this.getMapInfo = this.getMapInfo.bind(this);
 
     }
 
@@ -46,7 +47,9 @@ class Map extends Component {
                 )
                })
                 }
-
+getMapInfo(){
+        console.log(GoogleMapReact.getBounds(), 'rasau')
+}
 
 
     render() {
@@ -57,6 +60,7 @@ class Map extends Component {
                                 bootstrapURLKeys={{ key: 'AIzaSyDM7BLuRsCEe1pt_vwfbbVslNd7gWQbj14' }}
                     center={this.props.center}
                     defaultZoom={this.zoom}
+                                centerchanged={this.getMapInfo}
                 >
 
                     <UserLocation

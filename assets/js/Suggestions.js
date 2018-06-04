@@ -58,11 +58,12 @@ export default class Suggestions extends Component {
             .then(function (myJson) {
                 var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
 
-                if(twoRandomItems[0] === undefined){
+                if (twoRandomItems[0] === undefined) {
                     that.setState({differentRestaurants: undefined})
-                } else {that.setState({differentRestaurants: twoRandomItems})}
+                } else {
+                    that.setState({differentRestaurants: myJson})
+                }
             })
-
 
 
     }
@@ -80,8 +81,10 @@ export default class Suggestions extends Component {
 
             //todo perdaryti kad imtu pirmus du elementus o ne randominius
             .then(function (myJson) {
-                var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
-                that.setState({similarRestaurants: twoRandomItems})
+                // var twoRandomItems = [myJson[Math.floor(Math.random() * myJson.length)], myJson[Math.floor(Math.random() * myJson.length)]]
+                // that.setState({similarRestaurants: twoRandomItems})
+
+                that.setState({similarRestaurants: myJson})
             })
     }
 
@@ -101,6 +104,7 @@ export default class Suggestions extends Component {
     render() {
         if (this.state.similarRestaurants === undefined || this.state.differentRestaurants === undefined) {
             return (
+
                 <div className="carousel-element">
                     <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                         <ol className="carousel-indicators">
@@ -151,49 +155,49 @@ export default class Suggestions extends Component {
                                              id={this.state.similarRestaurants[0].id} lat={this.state.similarRestaurants[0].latitude} lng={this.state.similarRestaurants[0].longitude}
                                              onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
-                                            <div className="row">
-                                                <div className="col-8 restName">
-                                                    <strong>{this.state.similarRestaurants[0].name}</strong>
-                                                </div>
+                                                <div className="row">
+                                                    <div className="col-8 restName">
+                                                        <strong>{this.state.similarRestaurants[0].name}</strong>
+                                                    </div>
 
-                                                <div className="col-4 rating">
-                                                    {(() => {switch(this.state.similarRestaurants[0].avgRating){
-                                                        case 0:
-                                                            return <div><i className="far fa-star-half"></i></div>;
-                                                            break;
-                                                        case 1:
-                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 2:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 3:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 4:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 5:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
-                                                            break;
-                                                    }
-                                                    })()}
-                                                </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="col-4 col-md-3 col-lg-4 col-xl-4">
-                                                    <div className="listingImg row">
-                                                        <div className="col">
-                                                            <img src={this.state.similarRestaurants[0].logo} alt=""/>
-                                                        </div>
+                                                    <div className="col-4 rating">
+                                                        {(() => {switch(this.state.similarRestaurants[0].avgRating){
+                                                            case 0:
+                                                                return <div><i className="far fa-star-half"></i></div>;
+                                                                break;
+                                                            case 1:
+                                                                return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 2:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 3:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 4:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 5:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                                break;
+                                                        }
+                                                        })()}
                                                     </div>
                                                 </div>
 
-                                                <div className="col-8">
-                                                    {this.loopMeals(this.state.similarRestaurants[0].meals)}
+                                                <div className="row">
+                                                    <div className="col-4 col-md-3 col-lg-4 col-xl-4">
+                                                        <div className="listingImg row">
+                                                            <div className="col">
+                                                                <img src={this.state.similarRestaurants[0].logo} alt=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-8">
+                                                        {this.loopMeals(this.state.similarRestaurants[0].meals)}
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -203,49 +207,49 @@ export default class Suggestions extends Component {
                                              id={this.state.similarRestaurants[1].id} lat={this.state.similarRestaurants[1].latitude} lng={this.state.similarRestaurants[1].longitude}
                                              onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
-                                            <div className="row">
-                                                <div className="col-8 restName">
-                                                    <strong>{this.state.similarRestaurants[1].name}</strong>
-                                                </div>
+                                                <div className="row">
+                                                    <div className="col-8 restName">
+                                                        <strong>{this.state.similarRestaurants[1].name}</strong>
+                                                    </div>
 
-                                                <div className="col-4 rating">
-                                                    {(() => {switch(this.state.similarRestaurants[1].avgRating){
-                                                        case 0:
-                                                            return <div><i className="far fa-star-half"></i></div>;
-                                                            break;
-                                                        case 1:
-                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 2:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 3:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 4:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 5:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
-                                                            break;
-                                                    }
-                                                    })()}
-                                                </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="col-4 col-md-3 col-lg-4 col-xl-4">
-                                                    <div className="listingImg row">
-                                                        <div className="col">
-                                                            <img src={this.state.similarRestaurants[1].logo} alt=""/>
-                                                        </div>
+                                                    <div className="col-4 rating">
+                                                        {(() => {switch(this.state.similarRestaurants[1].avgRating){
+                                                            case 0:
+                                                                return <div><i className="far fa-star-half"></i></div>;
+                                                                break;
+                                                            case 1:
+                                                                return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 2:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 3:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 4:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 5:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                                break;
+                                                        }
+                                                        })()}
                                                     </div>
                                                 </div>
 
-                                                <div className="col-8">
-                                                    {this.loopMeals(this.state.similarRestaurants[1].meals)}
+                                                <div className="row">
+                                                    <div className="col-4 col-md-3 col-lg-4 col-xl-4">
+                                                        <div className="listingImg row">
+                                                            <div className="col">
+                                                                <img src={this.state.similarRestaurants[1].logo} alt=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-8">
+                                                        {this.loopMeals(this.state.similarRestaurants[1].meals)}
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -268,49 +272,49 @@ export default class Suggestions extends Component {
                                              id={this.state.differentRestaurants[0].id} lat={this.state.differentRestaurants[0].latitude} lng={this.state.differentRestaurants[0].longitude}
                                              onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
-                                            <div className="row">
-                                                <div className="col-8 restName">
-                                                    <strong>{this.state.differentRestaurants[0].name}</strong>
-                                                </div>
+                                                <div className="row">
+                                                    <div className="col-8 restName">
+                                                        <strong>{this.state.differentRestaurants[0].name}</strong>
+                                                    </div>
 
-                                                <div className="col-4 rating">
-                                                    {(() => {switch(this.state.differentRestaurants[0].avgRating){
-                                                        case 0:
-                                                            return <div><i className="far fa-star-half"></i></div>;
-                                                            break;
-                                                        case 1:
-                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 2:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 3:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 4:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 5:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
-                                                            break;
-                                                    }
-                                                    })()}
-                                                </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="col-4 col-md-3 col-lg-4 col-xl-4">
-                                                    <div className="listingImg row">
-                                                        <div className="col">
-                                                            <img src={this.state.differentRestaurants[0].logo} alt=""/>
-                                                        </div>
+                                                    <div className="col-4 rating">
+                                                        {(() => {switch(this.state.differentRestaurants[0].avgRating){
+                                                            case 0:
+                                                                return <div><i className="far fa-star-half"></i></div>;
+                                                                break;
+                                                            case 1:
+                                                                return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 2:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 3:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 4:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 5:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                                break;
+                                                        }
+                                                        })()}
                                                     </div>
                                                 </div>
 
-                                                <div className="col-8">
-                                                    {this.loopMeals(this.state.differentRestaurants[0].meals)}
+                                                <div className="row">
+                                                    <div className="col-4 col-md-3 col-lg-4 col-xl-4">
+                                                        <div className="listingImg row">
+                                                            <div className="col">
+                                                                <img src={this.state.differentRestaurants[0].logo} alt=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-8">
+                                                        {this.loopMeals(this.state.differentRestaurants[0].meals)}
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -320,48 +324,48 @@ export default class Suggestions extends Component {
                                              id={this.state.differentRestaurants[1].id} lat={this.state.differentRestaurants[1].latitude} lng={this.state.differentRestaurants[1].longitude}
                                              onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
                                             <div className="coloredBorder">
-                                            <div className="row">
-                                                <div className="col-8 restName">
-                                                    <strong>{this.state.differentRestaurants[1].name}</strong>
-                                                </div>
-                                                <div className="col-4 rating">
-                                                    {(() => {switch(this.state.similarRestaurants[1].avgRating){
-                                                        case 0:
-                                                            return <div><i className="far fa-star-half"></i></div>;
-                                                            break;
-                                                        case 1:
-                                                            return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 2:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 3:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 4:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
-                                                            break;
-                                                        case 5:
-                                                            return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
-                                                            break;
-                                                    }
-                                                    })()}
-                                                </div>
-                                            </div>
-
-                                            <div className="row">
-                                                <div className="col-4 col-md-3 col-lg-4 col-xl-4">
-                                                    <div className="listingImg row">
-                                                        <div className="col">
-                                                            <img src={this.state.differentRestaurants[1].logo} alt=""/>
-                                                        </div>
+                                                <div className="row">
+                                                    <div className="col-8 restName">
+                                                        <strong>{this.state.differentRestaurants[1].name}</strong>
+                                                    </div>
+                                                    <div className="col-4 rating">
+                                                        {(() => {switch(this.state.similarRestaurants[1].avgRating){
+                                                            case 0:
+                                                                return <div><i className="far fa-star-half"></i></div>;
+                                                                break;
+                                                            case 1:
+                                                                return <div><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 2:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 3:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 4:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star"></i></div>;
+                                                                break;
+                                                            case 5:
+                                                                return <div><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="far fa-star checked"></i></div>
+                                                                break;
+                                                        }
+                                                        })()}
                                                     </div>
                                                 </div>
 
-                                                <div className="col-8">
-                                                    {this.loopMeals(this.state.differentRestaurants[1].meals)}
+                                                <div className="row">
+                                                    <div className="col-4 col-md-3 col-lg-4 col-xl-4">
+                                                        <div className="listingImg row">
+                                                            <div className="col">
+                                                                <img src={this.state.differentRestaurants[1].logo} alt=""/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="col-8">
+                                                        {this.loopMeals(this.state.differentRestaurants[1].meals)}
+                                                    </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>
@@ -370,22 +374,29 @@ export default class Suggestions extends Component {
                             </div>
 
                         </div>
+                        <div className="row">
+                        <div className="col-xs-4 col-sm-3 col-1">
                         <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                            data-slide="prev">
-                            {/*<span className="carousel-control-prev-icon" aria-hidden="true"></span>*/}
+                            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span className="sr-only">Previous</span>
                         </a>
+                        </div>
+
+                        <div className="offset-10 offset-xs-4 offset-sm-6 col-xs-4 col-sm-3 col-1">
                         <a className="carousel-control-next" href="#carouselExampleIndicators" role="button"
                            data-slide="next">
-                            {/*<span className="carousel-control-next-icon" aria-hidden="true"></span>*/}
+                            <span className="carousel-control-next-icon" aria-hidden="true"></span>
                             <span className="sr-only">Next</span>
                         </a>
+                        </div>
+                        </div>
                     </div>
                 </div>
 
 
-            )
-        }
+                    )
+                    }
 
-    }
-}
+                    }
+                    }

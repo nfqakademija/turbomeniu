@@ -46,7 +46,7 @@ export default class Listings extends Component {
         } else {
         return listingsData.map((listing, index) => {
             return (<div className="col-xs-12 col-sm-12 col-md-12 col-lg-6 col-xl-6" key={index}>
-                <div className="listing" onClick={this.props.renderModal} lat={listing.latitude} lng={listing.longitude} id={listing.id} onMouseOver={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
+                <div className="listing" onClick={this.props.renderModal} lat={listing.latitude} lng={listing.longitude} id={listing.id} onMouseOverCapture={this.props.onMouseOver} onMouseLeave={this.props.onMouseOut}>
 
                     <div className="coloredBorder">
                     <div className="row">

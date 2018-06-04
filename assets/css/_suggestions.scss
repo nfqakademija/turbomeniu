@@ -12,3 +12,14 @@
   font-size: 1.5rem;
   padding-bottom: 10px;
 }
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: #FC5C7D90;
+  color: #FC5C7D90;
+}
+
+.carousel-control-next, .carousel-control-prev {
+ position: static !important;
+  margin: auto;
+
+}

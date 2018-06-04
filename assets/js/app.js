@@ -59,8 +59,6 @@ class App extends React.Component {
 
     }
 
-
-
     handleClick() {
         this.setState(prevState => ({
             isToggleOn: !prevState.isToggleOn
@@ -68,14 +66,9 @@ class App extends React.Component {
     }
 
     clearSearch(){
-
-
         this.setState({searchValue: ''});
         this.getInitialData();
-
     }
-
-
 
     getUserLocation(){
         navigator.geolocation.getCurrentPosition(
@@ -92,8 +85,6 @@ class App extends React.Component {
                         lng: position.coords.longitude
                     }
                 });
-
-                this.getInitialData();
             }
         )
     }
@@ -165,6 +156,7 @@ class App extends React.Component {
 
         document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.remove("fa-map-marker-alt");
         document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.add("fa-map-marker");
+        document.getElementsByClassName("mapComponent").namedItem(restaurantId).classList.add("mapComponentHovered")
 
         var lat = Number(document.getElementById(restaurantId).getAttribute("lat"));
         var lng = Number(document.getElementById(restaurantId).getAttribute("lng"));
@@ -182,9 +174,11 @@ class App extends React.Component {
 
         document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.remove("fa-map-marker-alt");
         document.getElementsByClassName("mapComponent").namedItem(restaurantId).firstChild.classList.add("fa-map-marker");
+        document.getElementsByClassName("mapComponent").namedItem(restaurantId).classList.add("mapComponentHovered")
+
 
         $('html,body').animate({
-                scrollTop: $(`#${restaurantId}`).offset().top},
+                scrollTop: $(`#${restaurantId}`).offset().top-70},
             'slow');
 
     }
@@ -195,6 +189,8 @@ class App extends React.Component {
     document.getElementById(this.state.currentRestaurantId).classList.remove("hoveredElement")
         document.getElementsByClassName("mapComponent").namedItem(this.state.currentRestaurantId).firstChild.classList.remove("fa-map-marker");
         document.getElementsByClassName("mapComponent").namedItem(this.state.currentRestaurantId).firstChild.classList.add("fa-map-marker-alt");
+        document.getElementsByClassName("mapComponent").namedItem(this.state.currentRestaurantId).classList.remove("mapComponentHovered")
+
         this.getUserLocation();
 }
 
