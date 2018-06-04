@@ -18,8 +18,23 @@
   color: #FC5C7D90;
 }
 
-.carousel-control-next, .carousel-control-prev {
- position: static !important;
+.carousel-control-next {
+  position: absolute;
+  top: 145px;
+  bottom: auto;
+  right: -57px;
   margin: auto;
-
 }
+
+.carousel-control-prev {
+  position: absolute;
+  top: 145px;
+  bottom: auto;
+  left: -57px;
+  margin: auto;
+}
+
+.carousel-element {
+  min-height: 342px;
+}
+
