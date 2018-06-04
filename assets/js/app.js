@@ -150,7 +150,6 @@ class App extends React.Component {
 
         var restaurantId = event.currentTarget.id;
         this.setState({currentRestaurantId: restaurantId});
-        console.log(this.state.currentRestaurantId);
 
         document.getElementById(restaurantId).classList.add("hoveredElement");
 
@@ -168,7 +167,6 @@ class App extends React.Component {
     onMouseOverMap(event){
         var restaurantId = event.currentTarget.id;
         this.setState({currentRestaurantId: restaurantId});
-        console.log(this.state.currentRestaurantId);
 
         document.getElementById(restaurantId).classList.add("hoveredElement");
 
