@@ -11,9 +11,7 @@ namespace App\Services;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-// Serializer groups
 use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
-// For serializer group annotations
 use Doctrine\Common\Annotations\AnnotationReader;
 use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 
@@ -25,14 +23,14 @@ class SerializerFactory
      */
     public function buildSerializer()
     {
-//        Load annotations
         $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
-        // Call normalizer
+
         $objectNorm = new ObjectNormalizer($classMetadataFactory);
         $dateTimeNorm = new DateTimeNormalizer();
         $objectNorm->setCircularReferenceHandler(function ($restaurant) {
             return $restaurant->getId();
         });
+
         $serializer = new Serializer([$dateTimeNorm, $objectNorm]);
 
         return $serializer;
