@@ -55,9 +55,22 @@ class App extends React.Component {
 
     componentWillMount() {
         this.getUserLocation();
-        this.getInitialData();
+        // this.getInitialData();
+
 
     }
+
+    // componentDidMount(){
+    //     this.getInitialData();
+    // }
+    //
+    // componentWillUpdate(nextProps, nextState) {
+    //     if (nextState.userLocation !== this.state.userLocation) {
+    //         this.getInitialData();
+    //     }
+    // }
+
+
 
     handleClick() {
         this.setState(prevState => ({
@@ -84,14 +97,14 @@ class App extends React.Component {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     }
-                });
+                }, this.getInitialData());
             }
         )
     }
 
     getInitialData(){
         var that = this;
-        fetch(`/index/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
+        fetch(`/index/${this.state.userLocation.lat}/${this.state.userLocation.lng}/${this.state.mapZoom}`)
             .then(function (response) {
                 return response.json();
             })
@@ -128,7 +141,7 @@ class App extends React.Component {
         if (this.state.searchValue || this.state.searchValue != ''){
 
             var that = this;
-            fetch(`/search/${this.state.searchValue.toLowerCase()}/${this.state.center.lat}/${this.state.center.lng}/${this.state.mapZoom}`)
+            fetch(`/search/${this.state.searchValue.toLowerCase()}/${this.state.userLocation.lat}/${this.state.userLocation.lng}/${this.state.mapZoom}`)
                 .then(function (response) {
                     return response.json();
                 })
